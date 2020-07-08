@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Ayews&#39; blog</title>
+  <title>A Homepage | Ayews&#39; blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="保研废物">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ayews&#39; blog">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="一些学习记录与偶然所知的分享。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Homepage">
+<meta property="og:url" content="http://yoursite.com/2020/07/08/hello-world/index.html">
 <meta property="og:site_name" content="Ayews&#39; blog">
-<meta property="og:description" content="保研废物">
+<meta property="og:description" content="一些学习记录与偶然所知的分享。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-08T02:51:41.193Z">
+<meta property="article:modified_time" content="2020-07-08T08:35:39.115Z">
 <meta property="article:author" content="Ayews">
 <meta property="article:tag" content="ACM">
 <meta property="article:tag" content="算法">
@@ -154,65 +156,138 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-聊一聊c关闭输入输出同步在windows环境中的实际效用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/18/%E8%81%8A%E4%B8%80%E8%81%8Ac%E5%85%B3%E9%97%AD%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%90%8C%E6%AD%A5%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E5%AE%9E%E9%99%85%E6%95%88%E7%94%A8/"> 聊一聊C++关闭输入输出同步在windows环境中的实际效用		</a>
+    <h1 class="article-title" itemprop="name">
+      A Homepage
     </h1>
   
 
         
-        <a href="/2019/03/18/%E8%81%8A%E4%B8%80%E8%81%8Ac%E5%85%B3%E9%97%AD%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%90%8C%E6%AD%A5%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E5%AE%9E%E9%99%85%E6%95%88%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-03-18T13:48:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-18</time>
+        <a href="/2020/07/08/hello-world/" class="archive-article-date">
+  	<time datetime="2020-07-08T02:51:41.193Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz… <a href="http://www.ayews.com/wp-content/uploads/2019/03/TIM截图20190318212218.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318212218-146x300.png" alt=""></a> 偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样。 我首先重定向了输入输出，两行代码。</p>
-<blockquote>
-<p>freopen(“input.txt”,”r”,stdin); freopen(“output.txt”,”w”,stdout);</p>
-</blockquote>
-<p>input.txt是输入数据，output.txt是输出数据，我先往input里写入了10^7的数据，然后开始单个输入的测试。 首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间都在4s左右； 然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在10-11s间徘徊； 最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16s左右； 接着我进行了一次读取两个数据的测试。 首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间仍然都在4s左右； 然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在11s左右； 最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16-17s间徘徊； 可以看出，在windows下，即使关闭了输入输出同步，cin的效率仍然远远低于scanf… 但是我这里用的都是mingw编译的，不知道msvc编译出来的程序效率几何，也许大佬说的是对的，只是我无法求证。 另外可以知道hdu的oj环境使用的编译器是mingw包里的。。属实坑人。 <a href="http://www.ayews.com/wp-content/uploads/2019/03/TIM截图20190318214644.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318214644-300x54.png" alt=""></a></p>
+        <p>一些学习记录与偶然所知的分享。</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/18/%E8%81%8A%E4%B8%80%E8%81%8Ac%E5%85%B3%E9%97%AD%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%90%8C%E6%AD%A5%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E5%AE%9E%E9%99%85%E6%95%88%E7%94%A8/">展开全文 >></a>
-        </p>
-      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/08/hello-world/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/02/%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"> 多源最短路		</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -232,708 +307,14 @@
 
 
 
-
-  
-    <article id="post-咕咕咕（" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/22/%E5%92%95%E5%92%95%E5%92%95%EF%BC%88/"> 咕咕咕（		</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/22/%E5%92%95%E5%92%95%E5%92%95%EF%BC%88/" class="archive-article-date">
-  	<time datetime="2019-02-22T09:17:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>由于种种事宜，这段时间博客一直没有更新。如果你之前有看我的博客，那我向你致歉，这学期争取高产。 今天打开博客时忽然发现前端的板娘消失不见了，折腾了一番发现是主题更新，导致原有的文件全部被替换，于是我又自行加入了live2d脚本代码。关于如何在网站前端添加板娘，这个我一定会写一篇指导。由于时间已久，我要稍加整理。虽然有可能会咕，但我保证一定会写。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">碎碎念</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/22/%E5%92%95%E5%92%95%E5%92%95%EF%BC%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-最小生成树浅谈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/01/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%B5%85%E8%B0%88/"> 最小生成树浅谈		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/01/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%B5%85%E8%B0%88/" class="archive-article-date">
-  	<time datetime="2018-12-01T15:56:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>博客搬迁后就一直没更新，正好这两天在写最小生成树，就顺便写点东西。 首先先贴一下我参考的两篇博客: 1.<a href="https://blog.csdn.net/luoshixian099/article/details/51908175" target="_blank" rel="noopener">算法导论–最小生成树（Kruskal和Prim算法）</a> 2.<a href="https://blog.csdn.net/qq_35644234/article/details/59106779" target="_blank" rel="noopener">数据结构–最小生成树详解</a> 关于最小生成树的话现在比较多的是两个算法，一个是prim算法，即由点开始寻找最小代价边，直至联通所有点；另一个是kruskal算法，即由最小代价边开始依次选择符合条件的边，直至联通全图。 至于两种算法的思路我这里就不多赘述了，上面的两个帖子已经讲的很生动形象了，我主要讲代码实现，因为理解是一回事，实现是另一回事。 首先要考虑的是如何接收输入，也就是如何存边的信息。边有起点与终点，这里我采用的是邻接矩阵（二维数组）来存放边的信息。具体的方式就是首先将所有边的权重初始化为一个极大值（INT_MAX)，然后读入边时把对应的权重修改为读入的值即可。这样的话我们就可以通过查看邻接矩阵某位置的值是不是INT_MAX来判定该位置指代的边是否存在。代码如下: <code>void init_graph() { cout &lt;&lt; &quot;Enter the number of vertex and edge:&quot;; cin &gt;&gt; vertex_count &gt;&gt; edge_count; int a,b,w; for(int i = 1;i &lt;= vertex_count;i++) { for(int j = 1;j &lt;= vertex_count;j++) weight[i][j] = INT_MAX; } cout &lt;&lt; &quot;Enter each edge&#39;s start point, end point and weigh:&quot;; for(int i = 0;i &lt; edge_count;i++) { cin &gt;&gt; a &gt;&gt; b &gt;&gt; w; weight[a][b] = w; weight[b][a] = w; } }</code> 这里提一下，我的顶点是从1开始计数的，因此weigh[0][0]是没被用到的。 由于编辑器原因，代码缩进存在问题，各位凑合看吧。 搞完输入，下面就可以先写prim算法了。首先我们要知道prim算法的原理是从一个起始点开始，每次连接最小代价边。这里我们可以用一个close_edge数组来表示当前已有点到其他顶点的路径权值。若不存在路径，则值为INT_MAX。每次添加一条边时，即多了一个新的顶点，这时我们只要将close_edge数组更新一下即可。代码如下: <code>typedef struct close_edge{ int pre; int weigh; }Close_edge; void prim(int start) { if(start &lt; 1 || start &gt; vertex_count) { cout &lt;&lt; &quot;\nInvalid input.&quot;&lt;&lt; endl; return; } cout &lt;&lt; &quot;\nPrim&#39;s algorithm:&quot; &lt;&lt; endl; close_edge = new Close_edge[vertex_count+1]; for(int i = 1;i &lt;= vertex_count;i++) close_edge[i].weigh = INT_MAX; for(int i = 1;i &lt;= vertex_count;i++) { if(i!=start) { close_edge[i].weigh = weight[start][i]; close_edge[i].pre = start; } } close_edge[start].weigh = 0; cout &lt;&lt; &quot;The start point:&quot; &lt;&lt; start &lt;&lt; endl; for(int i = 2;i &lt;= vertex_count;i++) { int min_cost = INT_MAX; int idx; for(int j = 1;j &lt;= vertex_count;j++) { if(close_edge[j].weigh &lt; min_cost &amp;&amp; close_edge[j].weigh != 0){ min_cost = close_edge[j].weigh; idx = j; } } close_edge[idx].weigh = 0; cout &lt;&lt; &quot;Operation &quot; &lt;&lt; i-1 &lt;&lt; &quot;:&quot; &lt;&lt; endl; cout &lt;&lt; &quot;Start at:&quot; &lt;&lt; close_edge[idx].pre &lt;&lt; &quot;;\tEnd at:&quot; &lt;&lt; idx &lt;&lt; &quot;;\tCost:&quot; &lt;&lt; min_cost &lt;&lt; endl; //edge.push_back({i,idx}); for(int j = 1;j &lt;= vertex_count;j++) { if(close_edge[j].weigh &gt; weight[idx][j]){ close_edge[j].weigh = weight[idx][j]; close_edge[j].pre = idx; } } } delete close_edge; }</code> 可以看出算法是接收一个输入的起点值，然后用起点到其他点路径的权重更新close_edge数组，由此我们就能找到第一个最小代价边（即到起点权值最小的一条边），从而加入一个新顶点。当顶点被加入时，将数组该位置的值置为0，表示已加入。然后，通过新加入的顶点，更新close_edge数组。 可以看出我这里的colse_edge是一个自定义结构体，结构体中还有个pre变量。这个变量是用来存储加入的最小代价边的起点，方便输出。因为每次添加的最小代价边，不一定是上一个顶点所带来的。 下面就是kruskal算法。 首先我们要知道该算法的原理，是将边按权重排序，依次添加满足条件的边，直至所有顶点联通。需要满足的条件，即添加的边的起点与终点不连通。这里我们可以假定所用顶点原先都是孤立的，每次加边时，我们可以把边的终点加入起点所在的图，由此他们就连通了。我代码中用的是vector来存放这样的关系，因为它较好理解，判定是否联通有多种方法，例如并查集，这里不赘述。 代码如下: <code>typedef struct Edge{ int x,y,v; }Edge; bool cmp(Edge a,Edge b) { return a.v &lt; b.v; } void kruskal() { cout &lt;&lt; &quot;\nKruskal&#39;s algorithm:&quot; &lt;&lt; endl; edge = new Edge[edge_count]; int cnt = 0; for (int i = 1; i &lt;= vertex_count;i++) { for (int j = 1; j &lt; i; j++) { if (weight[i][j]!=INT_MAX) { edge[cnt].x = i; edge[cnt].y = j; edge[cnt].v = weight[i][j]; cnt++; } } } sort(edge,edge+edge_count,cmp); //for(unsigned i = 0;i &lt; edge_count;i++) //cout &lt;&lt; edge[i].x &lt;&lt; &quot; &quot; &lt;&lt; edge[i].y &lt;&lt; &quot; &quot; &lt;&lt; edge[i].v &lt;&lt; endl; vector tree[vertex_count]; for(int i = 0;i &lt; vertex_count;i++) tree[i].push_back(i+1); //for(int i = 0;i &lt; vertex_count;i++) //cout &lt;&lt; *tree[i].begin() &lt;&lt; endl; cnt = 0; for(int k = 0;k &lt; edge_count;k++) { int x = edge[k].x,y = edge[k].y; int idx_x = INT_MAX,idx_y = INT_MAX; for(int i = 0;i &lt; vertex_count;i++) { for(unsigned j = 0;j &lt; tree[i].size();j++) { if(tree[i][j] == x){ idx_x = i; break; } } for(unsigned j = 0;j &lt; tree[i].size();j++) { if(tree[i][j] == y){ idx_y = i; break; } } } if(idx_x!=idx_y) { for(unsigned i = 0;i &lt; tree[idx_y].size();i++) tree[idx_x].push_back(tree[idx_y][i]); tree[idx_y].clear(); cout &lt;&lt; &quot;Operation &quot; &lt;&lt; ++cnt &lt;&lt; &quot;:&quot; &lt;&lt; endl; cout &lt;&lt; &quot;Start at:&quot; &lt;&lt; x &lt;&lt; &quot;;\tEnd at:&quot; &lt;&lt; y &lt;&lt; &quot;;\tCost:&quot; &lt;&lt; edge[k].v &lt;&lt; endl; //cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; edge[k].v &lt;&lt; endl; } } }</code> 首先我是通过weigh数组得到了所有的边，然后通过自定义的比较函数对边进行排序。接着我初始化了顶点图，每个点一开始都属于不同的图。每次加边时，判定边的起点与终点是否属于同一个图，如果不是，则将终点所在图与起点所在图合并，并输出该边。这样依次对所有的边进行一次遍历，在输出合法的情况下就能得到最小生成树了。 另外，最近发现了一个不错的代码展示网站，这里我就把全部源码发在这个网站上了，贴上链接: <a href="https://paste.ubuntu.com/p/xhxyszCT5P/" target="_blank" rel="noopener">最小生成树</a> 全部源码可以通过这个访问，看的也舒服。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/01/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%B5%85%E8%B0%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-博客搬迁相关事宜" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/02/%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%BF%81%E7%9B%B8%E5%85%B3%E4%BA%8B%E5%AE%9C/"> 博客搬迁相关事宜		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/02/%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%BF%81%E7%9B%B8%E5%85%B3%E4%BA%8B%E5%AE%9C/" class="archive-article-date">
-  	<time datetime="2018-11-02T10:15:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>稍微折腾了一下，现在是把博客搬到主机壳上了，这里我就有必要吹一下主机壳了(真香) 本来咸鱼如我，这辈子都不会搬迁博客的 结果昨天在wyx的强烈安利下，我还是无法避免的对主机壳动了心，于是回去就着手搬站 虽然博客很小，但我是第一次搬，期间遇到了一些问题，大部分自己解决了，但有个无法处理的问题 我寻求wyx的帮助，他让我发工单，我就尝试着发了一个工单，结果秒回 <a href="http://www.ayews.com/wp-content/uploads/2018/11/61B82F9155698811FDE2C30C35D8B5D3.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/11/61B82F9155698811FDE2C30C35D8B5D3-300x197.jpg" alt=""></a> 然后问题就解决了(???) 然后我今天就准备充钱买个虚拟主机，结果操作失误了，冲到了另一个服务上。本来我都准备就当什么也没有发生，再冲100了，然后我突发奇想:要不发个工单吧 然后就收到了p2 (还是秒回) <a href="http://www.ayews.com/wp-content/uploads/2018/11/1B4075559D583C3D4C1F1193D4D19D78.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/11/1B4075559D583C3D4C1F1193D4D19D78-300x187.jpg" alt=""></a> 真的，且不谈主机壳的东西质量如何，就这个工单，我吹爆，而且主机壳这个模式还真的不错，用了它的话基本上只需要专心做网站就可以了，其他的都不用管。 重点是这玩意还不需要备案。我相信你也心动了。 好了就吹到这里，现在说说集体的搬迁过程。 主机壳是给了一块存储空间与ftp地址、账号和密码，另外还有一个数据库的使用权限，有这些就足够我们搭网站了。事实上如果用主机壳的服务，只要把wordpress包解压到主机壳给的存储空间里，然后再直接打开主机壳给的次级域名，然后就可以直接打开wordpress的配置页面了。我们只需要填好数据库名，密码以及ftp密码，word就能自动配置好了，然后博客就可以直接用了。所以用主机壳提供的虚拟主机，搭网站会变得异常简单，只需要上传一下文件就可以了。 我先是通过phpmyadmin把之前的wordpress数据库扒了下来，然后上传到新虚拟主机的数据库时出了点问题，已解决。然后就是登陆到ftp，把网站文件上传上去。一开始我用的win10自带的ftp，然而我发现速度实在难以接受…后面我用了xftp进行上传，然后上传完毕后又出了问题，网页显示建立数据库连接失败。这里我检查了一下wp-config文件，并没有发现问题。我索性直接删除了config文件，重新配置wordpress。这里说一下就是wordpress包一开始解压是没有wp-config文件的，我们配置好了之后才会有这个文件，来使网站跑起来。我删除这个文件再打开网页，便能重新进入wordpress配置页面。输入相关信息，提交以下，博客就能跑起来了。 下面估计很长一段时间博客都不会搬迁了吧 ( 笑</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/02/%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%BF%81%E7%9B%B8%E5%85%B3%E4%BA%8B%E5%AE%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我眼中的算法-写给通信协会新生的话" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/29/%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95-%E5%86%99%E7%BB%99%E9%80%9A%E4%BF%A1%E5%8D%8F%E4%BC%9A%E6%96%B0%E7%94%9F%E7%9A%84%E8%AF%9D/"> 我眼中的算法-写给通信协会新生的话		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/29/%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95-%E5%86%99%E7%BB%99%E9%80%9A%E4%BF%A1%E5%8D%8F%E4%BC%9A%E6%96%B0%E7%94%9F%E7%9A%84%E8%AF%9D/" class="archive-article-date">
-  	<time datetime="2018-09-29T08:51:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本篇文章是主要是针对通信协会里有意愿加入算法学习小组的新生而写的，同时也包括其他任何有意愿学习编程/算法的新生/老生。 一直没好好总结自己学的这些东西，归结下来还是基本跟算法相关，我也算做个总结。 先声明一点，本篇文章若无特指，所有C语言皆指C/C++，我现在主要使用C++。 首先我引用一篇文章，算是抛玉引砖了。 <a href="http://115.com/104849/T1300276.html" target="_blank" rel="noopener">算法的力量，李开复聊算法的重要性</a> 个人觉得这篇文章写的很不错，提到了很多实际的例子，很有说服力。尤其是针对计算机运行速度越来越快，是否还有必要学习算法这一问题的阐述。下面就是我的砖头部分了。 窃以为，广义的说，算法就是解决问题的方法。一个问题可能会有多种解法，而我认为，我们学习算法的目的，就是优化现有的解决方法，或者选择更好的方法去解决问题。打个比方，给你一列数，现在要你得到这列数中最大的一个数。解决方案有两个，A方案为先将这列数排序，再得到最大值；B方案为直接遍历这列数，找到第一大的数。很明显，方案A相比方案B做了更多的工作。而在这列数的个数相当大的情况下，A方案消耗的资源将会远远多于B方案。这时候算法的作用就凸显出来了。要说时下计算机方面什么最火，莫过于人工智能/大数据分析了，想必各位也有所耳闻。而这一块的研究，计算量是十分庞大的，一般的计量单位根本无法衡量。学习算法，有一定的算法基础，对以后从事这方面研究有着莫大的好处。 我们再具体一些，本科阶段学习算法到底是学些什么？事实上都是基础的东西，工程，实际开发方面的东西很少，或者说完全不用。更多的，靠的是数学，逻辑这些方面的知识，比如线代/离散/数据结构这些，都是大学开设的课程。这也就意味着学习算法很大程度上只能靠本科阶段，就业后再考虑学习算法，很难。考虑到就业/实习/保研，学习的黄金阶段只是在大一至大三间，实际上大三开始就已经晚了，因为这时候学习算法的收益，不如学习实际开发。所以对于新生来说，大一一年，学好算法，打好基础，对以后的工作大有脾益。回到正题，到底学些什么，主要还是学基础的方法。比如之前提到的选择数列中一个最大的数，又比如如何更快的将一个数列排序/查找其中的一个值。更多的，给你N个点，M条路径，假设通过第i个路径要收取Vi元，要求你得到两个点之间的最小耗费路径，诸如这样的题目，通过它们学习处理问题的方法，大致就是这样。 说说我自己的学习经历吧。我最开始接触计算机知识，是在去年8月。那时候偶然间得到了一个学长的指导，他引导我去看一个关于C语言的网课。我就是从那时开始，接触到这方面的东西。暑假并没有学到多少东西，可能比各位还要菜。到十月底计协干事招新面试时，我清楚的记得我说的是学到了结构体，事实上还没有学到，那时候我就被学长打击了，说我自学速度太慢。实际上我现在回想起来，以一个新生的角度去看的话，学到这个程度已经非常不容易了。按照我的观点，初学编程都会有一个自闭期（特指C语言），在这段时间里你会天天遇到各种Bugs使你无法把程序跑起来，程序还会各种莫名崩溃。我曾经因为一个中文逗号卡了半小时，也曾因为if中用单等于号，无视warning而debug一晚上。我跟你们说这些不是为了卖惨，事实上每个学习C语言的人都会经历这样的时期。我持有一个观点，学C语言的过程，实际上就是踩坑的过程。什么时候你把坑都踩光了，你就精通C语言了。书上（红书）的东西就那么多，更多的东西还是需要你去动手。这里插一句话，不要用红书（谈教授编写）入门。至于为什么我这里不多赘述，各位可以点击我给的两个链接吃吃瓜。 <a href="http://tieba.baidu.com/p/2843103544" target="_blank" rel="noopener">【C语言】千万别看谭浩强的书——写给那些真正想学好C语言的人</a> <a href="https://www.cnblogs.com/pmer/category/532409.html" target="_blank" rel="noopener">谭浩强《C程序设计》中的各种错误</a> 至于到底该用什么书，C我推荐C Primer Plus，C++我推荐C++ Primer Plus。 回到正题，我10月底是结构体水平，现在想来也挺有意思的。这里我又想到了一点，新生们应该都会问，怎样才能学好编程。这是个很有意思的问题，我给出的答案是多敲，敲多了感觉自然就有了。我在学习编程的初期，时不时去计蒜客（一个oj）刷题。虽然都是很基础的题，但是确实是为我做了一些积累，可以说我的基础就是那时候打下来的。说实话，看再多书还是不如动手敲来的实在。另外，像计蒜客这样的oj平台，网上非常多，我是十分建议你们有空时去刷一刷的，对自己很有好处，我也在考虑要不要给你们推一些题什么的，还在想。现在我们计协竞赛部也在筹备一个oj平台，希望能把它用上。这里多说一句，编程=基础，学完编程再搞算法。 大一上学期我基本就是这样的了，视频+做题。11月中旬是蓝桥杯校赛，我算是运气好拿了优秀奖，就获得了蓝桥杯省赛的资格。之后一直到现在，我基本上就保持着周六去东区与学长们刷题的习惯，当然以后可能就要带你们一起了。算法的学习到底还是要多做题，多练。事实上蓝桥杯是真的简单，我没有任何贬低它的意思，但实际上它的难度相比ACM，不是弱了一点点。我们平时都叫它暴力杯，意思是暴力就可以写出绝大部分题。所以参与这种比赛，投入产出比高，很适合大一/大二的同学去搞。只要你有编程基础，马上就可以去搞。 我的经历基本就是这样，现在就水水网赛勉强维持生活这样子。对于你们来说，我真诚希望你们大一能打好编程，算法的基础。我知道你们大都0基础，不要怕，只要你肯学，大二混成我这样简单极了。学编程，学算法真的是很令人自闭的事，所以坚持很重要。关于编程基础的话，计协国庆后会开编程基础的培训，我来讲。培训相当于带着你们一些，当然主要还是靠你们自学，我们只是引导，解惑，答疑。我们大概有一个月多点的时间补一补基础，11月中旬就是校赛，算是你们在大学里将要经历的第一场学术竞赛，希望你们能有所收获。校赛是兼蓝桥杯预选赛，获奖即可参加省赛。 另外有一件事就是有人可能有疑问，就是我同时在计协跟通信协会的事情。这个解释起来不太好解释，我直接说结果，总结下来一句话，今年计协通信不分家，都是自己人。我在通信这边带学习小组，其实也很头疼，不知道该怎么带，有一些新生私聊我想加入学习小组，但0基础的话是没法入手的。我现在的想法，还是先通过计协那边的培训帮你们拉一拉基础，后面再考虑算法的事情，我们一步一步来。 最后推一下我自学时看的视频。 <a href="https://study.163.com/course/courseMain.htm?courseId=1003425004" target="_blank" rel="noopener">老九零基础学编程系列之C语言</a> <a href="https://study.163.com/course/courseMain.htm?courseId=1003701011" target="_blank" rel="noopener">老九零基础学编程系列之C++入门</a> 我建议还是先看C，看完C考虑C++，看你们怎么想了。工具的话主要还是CodeBlocks，16.01/17.12都可以。另外还有一些使用的小工具，以后我会推给你们。 最后再赘述一下，算法这条路真的不好走（事实上没什么路是好走的）。如果想搞，请坚持，一定要坚持下去。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Just CA/AOC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/29/%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95-%E5%86%99%E7%BB%99%E9%80%9A%E4%BF%A1%E5%8D%8F%E4%BC%9A%E6%96%B0%E7%94%9F%E7%9A%84%E8%AF%9D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-用简单的方法打印一个五角星" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/29/%E7%94%A8%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E4%BA%94%E8%A7%92%E6%98%9F/"> 用简单的方法打印一个五角星		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/29/%E7%94%A8%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E4%BA%94%E8%A7%92%E6%98%9F/" class="archive-article-date">
-  	<time datetime="2018-09-29T08:33:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>用了简单的python库。</p>
-<p>import turtle            //导入所需工具<br>turtle.forward(100)        //让箭头画出一条长100个单位的直线<br>turtle.right(144)        //让箭头向右转144度<br>turtle.forward(100)        //继续重复四次<br>turtle.right(144)<br>turtle.forward(100)<br>turtle.right(144)<br>turtle.forward(100)<br>turtle.right(144)<br>turtle.forward(100)</p>
-<p>turtle是用到的工具库，这个库主要用来画图。 最后放下效果图。 <a href="http://www.ayews.com/wp-content/uploads/2018/09/111.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/09/111-300x142.png" alt=""></a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/29/%E7%94%A8%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E4%BA%94%E8%A7%92%E6%98%9F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-acm-icpc-2018-焦作赛区网络预赛-g-give-candies" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/"> ACM-ICPC 2018 焦作赛区网络预赛 G. Give Candies		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/" class="archive-article-date">
-  	<time datetime="2018-09-25T11:12:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>There are N children in kindergarten. Miss Li bought them N candies. To make the process more interesting, Miss Li comes up with the rule: All the children line up according to their student number (1…N)(1…N), and each time a child is invited, Miss Li randomly gives him some candies (at least one). The process goes on until there is no candy. Miss Li wants to know how many possible different distribution results are there. Input The first line contains an integer T, the number of test case. The next T lines, each contains an integer N. 1≤T≤100 1≤N≤10^100000 Output For each test case output the number of possible results (mod 1000000007). 样例输入 1 4 样例输出 8 题目来源 ACM-ICPC 2018 焦作赛区网络预赛 AC代码</p>
-<p>#include &lt;bits/stdc++.h&gt;</p>
-<p>#define ll long long<br>#define rep(i,a,n) for(int i=a;i&lt;n;i++)<br>#define per(i,a,n) for(int i=n-1;i&gt;=a;i–)</p>
-<p>const int N = 100000+10;<br>const int mo = 1000000007;</p>
-<p>using namespace std;</p>
-<p>ll Mode(ll a, ll b, ll mode)<br>{<br>    ll sum = 1;<br>    while (b) {<br>        if (b &amp; 1) {<br>            sum = (sum * a) % mode;<br>            b–;<br>        }<br>        b /= 2;<br>        a = a * a % mode;<br>    }<br>    return sum;<br>}</p>
-<p>int main()<br>{<br>    ios::sync_with_stdio(false);<br>    int T;<br>    cin &gt;&gt; T;<br>    while(T–)<br>    {<br>        string s;<br>        cin &gt;&gt; s;<br>        ll tmp = 0;<br>        rep(i,0,s.size())<br>        {<br>            tmp *= 10;<br>            tmp += (s[i]-‘0’);<br>            tmp%=(mo-1);<br>        }<br>        ll ret = Mode(2,tmp-1,mo);<br>        cout &lt;&lt; ret &lt;&lt; endl;<br>    }<br>    return 0;<br>}</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-acm-icpc-2018-徐州赛区网络预赛-h-ryuji-doesnt-want-to-study" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/"> ACM-ICPC 2018 徐州赛区网络预赛 H. Ryuji doesn&#39;t want to study		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/" class="archive-article-date">
-  	<time datetime="2018-09-23T07:46:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Ryuji is not a good student, and he doesn’t want to study. But there are n books he should learn, each book has its knowledge a[i]. Unfortunately, the longer he learns, the fewer he gets. That means, if he reads books from ll to rr, he will get a[l] * L + a[l+1] *(L-1) + …… + a[r-1] *2 + a[r]（L is the length of [ l， r ] that equals to r−l+1). Now Ryuji has q questions, you should answer him: 1. If the question type is 1, you should answer how much knowledge he will get after he reads books [ l, r ]. 2. If the question type is 2, Ryuji will change the ith book’s knowledge to a new value. Input First line contains two integers n and q (n, q≤100000). The next line contains n integers represent a[i](a[i]≤1e9) . Then in next qq line each line contains three integers a, b, c, if a = 1， it means question type is 1, and b, c represents [ l, r ]. if a =2 , it means question type is 2 , and b, c means Ryuji changes the bth book’ knowledge to c. Output For each question, output one line with one integer represent the answer. 样例输入 5 3 1 2 3 4 5 1 1 3 2 5 0 1 4 5 样例输出 10 8 题目来源 ACM-ICPC 2018 徐州赛区网络预赛 <a href="https://nanti.jisuanke.com/t/31460" target="_blank" rel="noopener">原题链接</a> * 通过特殊构造线段树解决，核心是通过维护三个线段树，构造阶梯和 * 树1存放基础线段树数据，即子节点值的和 * 树2存放阶梯处理后的数据，即“ a[l] * L + a[l+1] *(L-1) + …… + a[r-1] *2 + a[r]” * 树3存放节点中存储的区间长度，即L-R，合并子节点时会用到 AC代码</p>
-<p>#include <iostream><br>#include <algorithm><br>#define rep(i,a,n) for(int i=a;i&lt;n;i++)<br>#define per(i,a,n) for(int i=n-1;i&gt;=a;i–)<br>const int MAXN = 100010;<br>using namespace std;<br>long long sum[MAXN&lt;&lt;2];    //存储阶梯处理后的结果<br>long long add[MAXN&lt;&lt;2];    //存储处理前的结果（子节点和）<br>int cnt[MAXN&lt;&lt;2];    //存储当前节点中存储区间的长度<br>long long _sum;<br>void pushup(int o){<br>    cnt[o] = cnt[o&lt;&lt;1] + cnt[o&lt;&lt;1|1];    //更新当前节点存储区间长度<br>    add[o] = add[o&lt;&lt;1] + add[o&lt;&lt;1|1];    //更新子节点和<br>    sum[o] = add[o&lt;&lt;1]*cnt[o&lt;&lt;1|1]+sum[o&lt;&lt;1]+sum[o&lt;&lt;1|1]; //更新阶梯和<br>}<br>void build(int o,int l,int r){<br>    //左开右闭<br>    if(l==r-1){<br>         cin &gt;&gt; add[o];<br>        cnt[o] = 1;<br>        sum[o] = add[o];<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        build(o&lt;&lt;1,l,mid);<br>        build(o&lt;&lt;1|1,mid,r); pushup(o); //更新存储信息<br>    }<br>    }<br>void update(int o,int l,int r,int p,int v){ if(l==r-1){<br>    //更新根节点信息<br>    add[o] = v;<br>    sum[o] = v;<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        if(p&lt;mid) update(o&lt;&lt;1,l,mid,p,v);<br>        else update(o&lt;&lt;1|1,mid,r,p,v);<br>        pushup(o);<br>    }<br>}<br>void query(int o,int l,int r,int L,int R){<br>    if(L&lt;=l&amp;&amp;r&lt;=R){<br>        //已知L&lt;=l,这里可以想象成l为左端点，l&lt;r&lt;R，那么r到R之间还有R-r的长度，因此将o表示的这一区间加上R-r个子节点和（add[o]）<br>    _sum += sum[o] + (R-r)*add[o];<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        if(L&lt;mid)<br>            query(o&lt;&lt;1,l,mid,L,R);<br>        if(R&gt;mid)<br>            query(o&lt;&lt;1|1,mid,r,L,R);<br>    }<br>} </p>
-<p>int main(){ ios::sync_with_stdio(false); int n,q; cin&gt;&gt;n&gt;&gt;q;<br>    build(1,0,n);<br>    rep(i,0,q){<br>        int a,b,c;<br>        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        if(a==2){<br>            update(1,0,n,b-1,c);<br>        }else{<br>            _sum = 0;<br>            query(1,0,n,b-1,c);<br>            cout&lt;&lt;_sum&lt;&lt;endl;<br>        }<br>    }<br>    return 0;<br>}</p>
-<p>虽然是一道签到题，但对线段树的深入学习有一定帮助，这里先丢这。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-实现一个简单的内存池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/"> 实现一个简单的内存池		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/" class="archive-article-date">
-  	<time datetime="2018-08-28T11:18:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是我最近在自己的算法书上看到的，感觉比较有意思，扒一下。 至于内存池是个什么东西，我的理解就是每次申请内存时，提供内存的东西。本来我们申请内存是向系统申请，实现一个内存池，意思就是事先向系统申请好内存，之后每次申请内存，都从这一块事先申请的内存分配。 先定义几个东西: 1.ElementType 意为要使用的数据类型 2.InitMemoryPool 意为初始化内存池 3.NewElement 意为为一个新变量分配内存 4.InitElement 意为初始化一个变量 5.DeleteElement 意为释放该变量的内存 核心思路是维护一个空闲队列，事先申请好内存，将地址存入队列。每次初始化变量时便从队列头取出一块地址，销毁时即将该地址重新加入队列。 下面是具体代码：</p>
-<p>const int N = 1e5;<br>typedef struct ElementType{<br>    int i;</p>
-<p>}ElementType;<br>queue FreeQueue;</p>
-<p>ElementType Ele[N];</p>
-<p>void InitMemoryPool(){<br>    for(int i = 0;i &lt; N;i++)<br>        FreeQueue.push(&amp;Ele[i]);<br>}<br>void InitElement(ElementType* Element)<br>{<br>    //初始化变量操作<br>}</p>
-<p>ElementType* NewElement()<br>{<br>    ElementType* Element = FreeQueue.front();<br>    InitElement(Element);<br>    FreeQueue.pop();<br>    return Element;<br>}</p>
-<p>void DeleteElement(ElementType* Element)<br>{<br>    FreeQueue.push(Element);<br>} </p>
-<p>这写的算是某种模板吧，用起来也挺简单的。虽然目前阶段用到的不会多，但我觉得还是有必要了解一下内存池这个东西。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-写给计算机科学与技术专业新生的一些东西（1）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/05/%E5%86%99%E7%BB%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF%E4%B8%93%E4%B8%9A%E6%96%B0%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%881%EF%BC%89/"> 写给计算机科学与技术专业新生的一些东西（1）		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/05/%E5%86%99%E7%BB%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF%E4%B8%93%E4%B8%9A%E6%96%B0%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%881%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2018-08-05T06:05:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本来很早就应该写了，鸽到现在… 这篇文章主要为新生讲一下计算机科学与技术专业大一的课程安排。 首先是计算机行业的形势…这里先贴一篇文，题为 <strong>中国的程序员是否已经饱和了？</strong> <a href="https://user.qzone.qq.com/3292054308/blog/1506346137" target="_blank" rel="noopener">https://user.qzone.qq.com/3292054308/blog/1506346137</a> 文章是去年的了，发布在学校软件协会公众号上。文章里的程序员可以推广开来，计算机行业从业人员都在此范围内。软件协会公众号里还有些别的文章也很有意思，这里再贴一篇。 <a href="https://mp.weixin.qq.com/s?__biz=MzUxNzE2NDg5Ng==&mid=2247483734&idx=1&sn=a3dd7a63b8a8067697fa2fbca4fcf988&chksm=f99d1b59ceea924f42e08753942e1e3317369561f108d3c252b619bc726a43723b2c883fed60&mpshare=1&scene=22&srcid=0903mb8CIfNoeecLSNVyBOto#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzUxNzE2NDg5Ng==&amp;mid=2247483734&amp;idx=1&amp;sn=a3dd7a63b8a8067697fa2fbca4fcf988&amp;chksm=f99d1b59ceea924f42e08753942e1e3317369561f108d3c252b619bc726a43723b2c883fed60&amp;mpshare=1&amp;scene=22&amp;srcid=0903mb8CIfNoeecLSNVyBOto#rd</a> 这篇是他分享出来的。虽说是去年的文，现在看来依旧受用。 事实上计算机行业的发展大家有目共睹，计算机产业是未来产业，前景之好是毋庸置疑的。对于我们本科生来说，毕业后出来找个六七千的工作是小菜一碟，月入上万的很多，因此我不是很推荐新生们去考虑转专业以及深蓝选拔考试。每年我们学院基本上都是只有转进来的，转出去的很少很少。当然也可以选择考研，看学习方向。 我这里主要讲关于计科专业的课程，其他的专业我不是很了解，不多言。 计科的话大一还算轻松，课不多，上学期主要是高等数学1/C语言/大学英语1，基本上没什么压力，空闲时间很多。下学期的话主要是高等数学2/大学物理1/大学英语2，以及近代史/马原，还是比较轻松的，主要讲一下上学期的课。 首先是高数，重中之重，一定要好好学。后面无论是什么课，都或多或少的跟它沾上关系。而且，数学水平在某种程度上，也决定了你以后能走到的高度。这是理论基础，一定要重视。事实上我们学校的课程也很水，考试很容易过。只要上课认真听，考前稍微复习复习就可以过了。当然我还是希望你们能学的深一些，积极参加高数竞赛这些活动。 接着是C语言，相当于是本专业专业相关的第一门课，也是最基础的课。C语言学好了，后面的C++/Java，数据结构这些，都不会难，如果C没学好，后面的课基本上是没法学的。学好C语言，对深入学习编程也有莫大的好处，这里不多赘述，引用一篇文章，有兴趣的同学可以看看。 <a href="https://www.zhihu.com/question/49294784/answer/116205654" target="_blank" rel="noopener">https://www.zhihu.com/question/49294784/answer/116205654</a> 至于如何学好C语言，我也没什么好办法，只能告诉你们多敲。我个人觉得C语言的学习，实质上是一个试错的过程。那些错误只有你自己去犯了，乃至犯了很多次，你才能学到东西，获得提升。本身这门课没多少知识点，无非 输入输出/变量与数据类型/运算符及其优先级/条件分支与循环结构/数组及多维数组/指针/函数，以及最后的文件输入输出。总结下来学校教的课程里就这么多东西，都很简单，如果你肯花功夫的话。另外推一个网课，之前我已经提到过很多次了。 <a href="http://study.163.com/course/introduction.htm?courseId=1003425004" target="_blank" rel="noopener">http://study.163.com/course/introduction.htm?courseId=1003425004</a> 环境的搭建我博客里有写，贴一下链接。 <a href="http://www.ayews.com/?p=234" target="_blank" rel="noopener">http://www.ayews.com/?p=234</a> 暑假里希望各位能提前预习一下这部分的知识，否则很可能第一节课就懵逼，后面更是学不下去了。 大学英语的话很简单，靠高中水平混混就行了。 上学期我们专业还会开设一门课，叫计算机导论，个人感觉用处不大，并不能收获多少东西，当然基础不好的同学还是有必要听一听的，好对计算机有一个答题的认识。 其他的就是一些副/水课了，专业相关性不大，比如思修/体育/职业规划之类的，随便水一水就行了。 学校教的课程就这么多要说的，重点是高数/C语言，希望你们能够重视。事实上我们大一的课真的是很轻松了，相对其他学校来说的话。我们线代/离散/概率论这些课都放到大二去学了，很多学校大一就上掉了，因此大一的空闲时间是很多的。我希望你们在休息的同时，去多接触一点别的东西。学校能给的东西就这么多，更多的东西需要你们自己去挖掘。 关于课外的东西，写在下一篇文章里。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Just CA/AOC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/05/%E5%86%99%E7%BB%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF%E4%B8%93%E4%B8%9A%E6%96%B0%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%881%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -956,8 +337,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
