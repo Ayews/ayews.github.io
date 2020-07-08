@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Ayews&#39; blog</title>
+  <title>Wordpress搬迁至Hexo | Ayews&#39; blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="菜鸡">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ayews&#39; blog">
-<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+  <meta name="description" content="前段时间KosWu跟我聊了有关把博客搬迁至github的事情，当时看了一下相关的东西，但搁置了，今天花了一下午完成了搬迁的工作，写一篇文章记录一下搬迁过程。本文中操作环境为win10。 1. 准备工作在开始搭建hexo前，我们需要做一些准备工作。首先我们得创建好博客的Repositories，然后装好node.js，git这两个软件。 1.1 在Github上创建博客仓库这部分参考了知乎上的一篇文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wordpress搬迁至Hexo">
+<meta property="og:url" content="http://yoursite.com/2020/07/08/Wordpress%E6%90%AC%E8%BF%81%E8%87%B3Hexo/index.html">
 <meta property="og:site_name" content="Ayews&#39; blog">
-<meta property="og:description" content="菜鸡">
+<meta property="og:description" content="前段时间KosWu跟我聊了有关把博客搬迁至github的事情，当时看了一下相关的东西，但搁置了，今天花了一下午完成了搬迁的工作，写一篇文章记录一下搬迁过程。本文中操作环境为win10。 1. 准备工作在开始搭建hexo前，我们需要做一些准备工作。首先我们得创建好博客的Repositories，然后装好node.js，git这两个软件。 1.1 在Github上创建博客仓库这部分参考了知乎上的一篇文">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-08T12:43:34.000Z">
+<meta property="article:modified_time" content="2020-07-08T14:09:52.396Z">
 <meta property="article:author" content="Ayews">
-<meta property="article:tag" content="ACM">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="技术随笔">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Ayews&#39; blog" type="application/atom+xml">
@@ -148,123 +149,98 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-每日一题-3-27" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Wordpress搬迁至Hexo" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-27/"> 每日一题 3.27		</a>
+    <h1 class="article-title" itemprop="name">
+      Wordpress搬迁至Hexo
     </h1>
   
 
         
-        <a href="/2018/03/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-27/" class="archive-article-date">
-  	<time datetime="2018-03-27T14:51:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-27</time>
+        <a href="/2020/07/08/Wordpress%E6%90%AC%E8%BF%81%E8%87%B3Hexo/" class="archive-article-date">
+  	<time datetime="2020-07-08T12:43:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>编写函数（方法），功能。求出1~100之间能够被3或7整除，不能够同时被3和7整除的数字的个数。</p>
-<p>（语言不限，需提交可复制编译的代码，请严格按照编码规范编写）。</p>
-<p>C实现:</p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int main(){</p>
-<pre><code>printf(&quot;%d&quot;,100/3+100/7-100/21\*2);
+        <p>前段时间KosWu跟我聊了有关把博客搬迁至github的事情，当时看了一下相关的东西，但搁置了，今天花了一下午完成了搬迁的工作，写一篇文章记录一下搬迁过程。<br>本文中操作环境为win10。</p>
+<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2><p>在开始搭建hexo前，我们需要做一些准备工作。首先我们得创建好博客的Repositories，然后装好node.js，git这两个软件。</p>
+<h3 id="1-1-在Github上创建博客仓库"><a href="#1-1-在Github上创建博客仓库" class="headerlink" title="1.1 在Github上创建博客仓库"></a>1.1 在Github上创建博客仓库</h3><p>这部分参考了知乎上的一篇文章。<br><a href="https://zhuanlan.zhihu.com/p/28321740" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/28321740</a><br>不涉及什么技术性的东西，按照文章中所说一步一步完成即可。<br>需要注意的是仓库名称一定得是用户名.github.io ，否则后面会出错  </p>
+<h2 id="1-2-安装环境"><a href="#1-2-安装环境" class="headerlink" title="1.2. 安装环境"></a>1.2. 安装环境</h2><p>安装git，node.js。其中node.js为hexo所依赖的，git为我们部署hexo并push到博客仓库中所需要用到的工具。下文中的代码除特别提及外，均为在git bash中输入的代码。</p>
+<h2 id="2-配置SSH-key"><a href="#2-配置SSH-key" class="headerlink" title="2 配置SSH key"></a>2 配置SSH key</h2><p>从本地向github提交代码需要身份认证，简单的用户名密码验证不够安全，建议使用SSH key来解决本地和服务器的连接问题。</p>
+<h3 id="2-1-检查本地SSH密钥"><a href="#2-1-检查本地SSH密钥" class="headerlink" title="2.1 检查本地SSH密钥"></a>2.1 检查本地SSH密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~&#x2F;. ssh #检查本机已存在的ssh密钥</span><br></pre></td></tr></table></figure>
+<p>如果提示：No such file or directory 说明你是第一次使用git。<br>我这里是照着上面参考的博客来做的，但这行代码在我本地提示bash: cd: too many arguments，未能返回结果。只是这对下面的工作不构成影响。</p>
+<h3 id="2-2-生成新密钥并提交至github"><a href="#2-2-生成新密钥并提交至github" class="headerlink" title="2.2 生成新密钥并提交至github"></a>2.2 生成新密钥并提交至github</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure>
+<p>然后会出现一些提示信息，一共三条，可以直接回车跳过，之后就会显示正在生成密钥。生成的文件在用户目录下，路径为用户文件夹.ssh\id_rsa.pub，.ssh为隐藏文件夹，须在文件资源管理器中启用显示隐藏的项目选项。我们通过文本编辑器打开这个密钥文件，复制其中的内容，随后打开github主页，在个人设置-SSH and GPG keys -&gt; New SSH key，将复制的内容粘贴到key中，标题随便写，保存。</p>
+<h3 id="2-3-检查是否配置成功"><a href="#2-3-检查是否配置成功" class="headerlink" title="2.3 检查是否配置成功"></a>2.3 检查是否配置成功</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com # 注意邮箱地址不用改</span><br></pre></td></tr></table></figure>
+<p>如果提示Are you sure you want to continue connecting (yes/no)?，输入yes，然后会看到：</p>
+<pre><code>Hi liuxianan! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</code></pre><p>看到这个信息说明SSH已配置成功。</p>
+<p>然后需要配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;liuxianan&quot;&#x2F;&#x2F; 你的github用户名，非昵称</span><br><span class="line">git config --global user.email  &quot;xxx@qq.com&quot;&#x2F;&#x2F; 填写你的github注册邮箱</span><br></pre></td></tr></table></figure>
+<p>这两个配置是干嘛的我也不知道，反正没什么坏处。</p>
+<h2 id="3-部署本地hexo"><a href="#3-部署本地hexo" class="headerlink" title="3 部署本地hexo"></a>3 部署本地hexo</h2><h3 id="3-1-安装hexo"><a href="#3-1-安装hexo" class="headerlink" title="3.1 安装hexo"></a>3.1 安装hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-部署hexo"><a href="#3-2-部署hexo" class="headerlink" title="3.2 部署hexo"></a>3.2 部署hexo</h3><p>在电脑上新建一个文件夹作为hexo的工作目录，存放有关博客的代码与相关文件，我放在了用户路径下的文档中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;Documents&#x2F;hexo</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p>当前目录就将作为hexo的工作根目录。<br>hexo会往这个文件夹中部署一些文件。</p>
+<h3 id="3-3-生成静态文件，执行本地预览"><a href="#3-3-生成静态文件，执行本地预览" class="headerlink" title="3.3 生成静态文件，执行本地预览"></a>3.3 生成静态文件，执行本地预览</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>生成静态文件，执行后hexo会在public文件夹中生成html文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>开启本地预览服务，打开浏览器访问 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 即可看到内容，很多人会碰到浏览器一直在转圈但是就是加载不出来的问题，一般情况下是因为端口占用的缘故，因为4000这个端口太常见了，解决端口冲突问题请参考这篇文章：<a href="http://blog.liuxianan.com/windows-port-bind.html" target="_blank" rel="noopener">http://blog.liuxianan.com/windows-port-bind.html</a><br>在调试本地博客内容时，可以通过这条指令反复查看预览效果，需要注意的是每次预览前都需要先执行hexo g来重新生成文件。<br>加载出来后我们就可以看到博客现在的预览了，是默认主题，我们可以稍后更换。</p>
+<h2 id="4-更换博客主题"><a href="#4-更换博客主题" class="headerlink" title="4. 更换博客主题"></a>4. 更换博客主题</h2><p>在进行wordpress内容搬迁前，我们可以先更换自己想要的主题。hexo官方给了一些博客主题：<br><a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a><br>点击图片可以查看使用该主题生成的网页，点击图片下方蓝色的文字可以进入相对应的github仓库页面，一般在README.md中作者会给出下载方法，与hexo相关插件依赖，及需要对hexo根目录配置文件做出的改动。<br>我使用的主题为hexo-theme-yilia，首先我们在hexo工作根目录下下载这个主题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;litten&#x2F;hexo-theme-yilia.git themes&#x2F;yilia</span><br></pre></td></tr></table></figure>
+<p>下载后的主题保存在hexo根目录/themes中。下面我们要对hexo根目录配置文件作出改动，以指定使用的主题。<br>在hexo根目录下找到_config.yml，将其中的theme: landscape替换成theme: yilia，这样就能指定使用的主题为yilia了。<br>对主题我们可以进行一定的自定义改动，有些主题的作者在README.md里就有所提及，我们可以在themes/yilia中找到_config.yml文件，然后用记事本打开，对其中的内容做出我们想要的修改。<br>需要注意的是这里的_config.yml与根目录下的不同，这里的用来配置主题相关属性，而根目录下的用来配置博客标题、使用的主题、git相关信息与其他属性等。<br>这里我还有一点要说的，yilia的作者保留了一份博客备份，地址为：<a href="https://github.com/litten/BlogBackup" target="_blank" rel="noopener">https://github.com/litten/BlogBackup</a><br>我根据他对默认配置文件的修改，对我本地的主题配置文件做出了想要的改动，这里要特别注意每个属性值的冒号后面都必须跟一个空格，再接对应值。<br>另外，如果在修改过程中出现了无论怎样都无法生成静态文件的情况，可以用hexo clean清理一下本地文件，然后再重新生成。</p>
+<h2 id="5-将WordPress文件迁移至Hexo"><a href="#5-将WordPress文件迁移至Hexo" class="headerlink" title="5. 将WordPress文件迁移至Hexo"></a>5. 将WordPress文件迁移至Hexo</h2><h3 id="5-1-准备工作"><a href="#5-1-准备工作" class="headerlink" title="5.1 准备工作"></a>5.1 准备工作</h3><p>我们首先需要下载一个hexo插件，以完成迁移工作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-migrator-wordpress --save</span><br></pre></td></tr></table></figure>
+<p>然后我们需要将WordPress中的文章导出出来，这里我们可以借助WP仪表盘中的功能完成这一工作。<br>在 WordPress 仪表盘中导出数据(“Tools” → “Export” → “WordPress”)，可参考WP支持页面：<br><a href="https://wordpress.com/support/export/" target="_blank" rel="noopener">https://wordpress.com/support/export/</a><br>选择自己想导出的内容即可。</p>
+<h3 id="5-2-进行迁移"><a href="#5-2-进行迁移" class="headerlink" title="5.2 进行迁移"></a>5.2 进行迁移</h3><p>插件安装完成后，执行下列命令来迁移所有文章。source 可以是 WordPress 导出的文件路径或网址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo migrate wordpress &lt;source&gt;</span><br></pre></td></tr></table></figure>
+<p>我这里直接将导出的内容放到了hexo工作根目录，所以直接将&lt;source&gt;替换成文件名即可。<br>随后hexo工作根目录\source_posts中便会出现提取出的文章，包含原格式信息。<br>迁移后，再执行hexo g生成时可能会报错，我的本地对一篇文章的.md文件报错，没能找到原因，可能是由于代码中的转义符导致的错误，我删除了这篇文章，之后完成了静态生成。这里如果报错的话建议尝试只保留文章相关的md文件，删除其他页面、图片、媒体等的md文件。</p>
+<h2 id="6-提交到github"><a href="#6-提交到github" class="headerlink" title="6. 提交到github"></a>6. 提交到github</h2><p>提交到github前需要我们完成三项工作，第一项是完成本地与github的连接，即前文提到的SSH配置；第二项是完成_config.yml中有关deploy的部分。如果你前面打开过这个文件，应该已经发现了deploy似乎没写完，下面是需要我们来补充的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:GitHub用户名&#x2F;用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>第三项是安装push相关的插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>完成这三项工作后，我们就可以执行hexo d命令来提交更改了。</p>
+<h2 id="7-参考"><a href="#7-参考" class="headerlink" title="7. 参考"></a>7. 参考</h2><p><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#ssh-key" target="_blank" rel="noopener">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#ssh-key</a><br><a href="https://segmentfault.com/a/1190000005624504" target="_blank" rel="noopener">https://segmentfault.com/a/1190000005624504</a>  </p>
 
-return 0;</code></pre><p>}</p>
-<p>评语: 思路正确，有特点</p>
-<p>思路: 联想100以内3的倍数的个数，7的倍数的个数，以及21的倍数的个数这三者之间的关系。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">老九学堂每日一题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-27/">展开全文 >></a>
-        </p>
       
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于在win-10上安装运行vc6-0的探讨" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/%E5%85%B3%E4%BA%8E%E5%9C%A8win-10%E4%B8%8A%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Cvc6-0%E7%9A%84%E6%8E%A2%E8%AE%A8/"> 关于在Win 10上安装运行VC6.0的探讨		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/24/%E5%85%B3%E4%BA%8E%E5%9C%A8win-10%E4%B8%8A%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Cvc6-0%E7%9A%84%E6%8E%A2%E8%AE%A8/" class="archive-article-date">
-  	<time datetime="2018-01-23T16:11:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>ps：如果阁下用的是win7以及更早的Windows版本或者在Win10上顺利安装VC6.0并没有遇到任何编译器问题的话，可以直接略过本篇。 <strong>在搭载**</strong>Win10<strong><strong>的设备上如何安装运行</strong></strong>VC6.0<strong>**？</strong>   我姑且将这个问题称为一个世纪难题吧<img src="http://qzs.qq.com/qzone/em/e113.gif" alt="呲牙"> VC6.0无法直接在搭载Win 10的移动设备上顺利运行，这是众所周知的事实，即使通过兼容模式运行也无济于事。当然，通过某些方式可以使我们能在搭载Win 10的设备上运行VC6.0，但我相信各位一定遇到过前一次编译成功，不进行任何改动后的下一次编译失败的情况，以及其他诸多的问题。同是微软旗下的产品，为什么会有兼容性问题呢？ 我们先来看一下VC6.0的介绍： <a href="http://www.ayews.com/wp-content/uploads/2018/01/TIM图片20180520133244.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/01/TIM%E5%9B%BE%E7%89%8720180520133244-300x58.png" alt=""></a> 很官方的简介。根据介绍所说，VC6.0是一款十分强大的软件，事实也的确如此。由于与Windows系统的相关性，VC6.0一度十分流行，甚至被认为是”迄今为止最成功的程序”(2011)，即使它已经是上个世纪的产物。二十年来，VC6.0历经多次迭代，不断更新。去年，最新的VS2017发布，被称为”宇宙第一IDE”。 <strong>一个二十年前的程序，因何在今日仍被广泛的使用？</strong>   首先我们要明确一点，无论编程发展到什么时候，它的基本过程(设计-编辑-编译-调试-……)是不会变的。在这方面，VC6.0已经能满足绝大多数需求了。另一方面，到目前为止，许多编程教科书、参考书以及C语言二级考试依然采用着VC6.0的编程环境，这迫使许多人使用VC6.0来进行相关的学习、实操。此外，相比VS2017之类的软件而言，VC6.0更为轻巧，对设备的要求低，即使电脑很老依旧能够流畅运行。好用，够用，被迫用，是VC6.0至今仍被广泛应用的三个重要原因。 <strong>这么经典，又好用的一个程序，为什么**</strong>Win 10<strong>**不兼容？</strong>   个人认为这应该是微软自己的考量。office系列高低版本兼容性的缺乏我们有目共睹，VC6.0也是同样。正因为它实在是太好用了，使得很多用户不愿意去使用更新的VS系列，而这想必不是微软所希望看到的。就像微软以前曾做出的停止对xp技术支持，以及免费升级win10的行为，都是为了促使用户进行更新换代，然而用户就是不买账。在国内，xp仍然占据相当一部分份额，低版本的office仍旧大行其道。即使给用户在Win10上使用VC6.0下绊子，用户们仍然有着各种各样的方法安装运行它，真是白瞎了微软一番苦心hhhh。 <strong>可选的解决方案</strong>   1.放弃VC6.0，寻求它的替代品 我们要明确，不管这款软件如何成功，如何辉煌，它都已经是20年前的产品了，而彼时的我们大都还没出生。相对其它流行的IDE，VC6.0的确已经过时了。那么多可选的IDE，我们没必要死磕住这一款不放，很多软件都可以代替它。轻量级的比如DEV，轻巧程度比起VC6.0有过之而无不及，功能基本能满足大学学习所需，即使它在05年已经停更。更强大一点的，比如CodeBlocks，是我十分推崇的一款。从我开始接触编程到现在，cb伴我走了很长一段路。现在我打开笔记本时，经常会不自觉的点开它的图标。然而到目前为止，我使用的仍是它极小的一部分功能。我相信它仍会陪我很长的时间。至于最强大的，当然要数宇宙第一IDE–VS2017啦！完整安装文件几十个G<img src="http://qzs.qq.com/qzone/em/e144.gif" alt="坏笑"> 。但它的配置要求略高，老电脑运行它可能会比较吃力，这里需要自行斟酌。 (当然已经装好的继续用也行，只是要忍受种种问题罢了。当然没问题是最好的hhhh) 2.仍然寻求安装VC6.0 白菜方法：首先通过下面的链接下载VC6.0中文版以及需要的文件； 链接：<a href="https://pan.baidu.com/s/1bpPWjq3" target="_blank" rel="noopener">https://pan.baidu.com/s/1bpPWjq3</a> 密码：rpfq 下好后先安装，安装过程一般不会出现问题，目录可以随意； 随后解压另一个压缩包，用得到的.exe文件替换安装目录里的文件。 路径：”……\Microsoft Visual Studio\Common\MSDev98\Bin\MSDEV.EXE”; 替换完成后即可正常打开安装程序在桌面创建的快捷方式（有问题私戳）。</p>
-
-      
-
       
     </div>
     <div class="article-info article-info-index">
@@ -284,16 +260,75 @@ return 0;</code></pre><p>}</p>
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/24/%E5%85%B3%E4%BA%8E%E5%9C%A8win-10%E4%B8%8A%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8Cvc6-0%E7%9A%84%E6%8E%A2%E8%AE%A8/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/08/Wordpress%E6%90%AC%E8%BF%81%E8%87%B3Hexo/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/08/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">A Homepage</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -313,120 +348,14 @@ return 0;</code></pre><p>}</p>
 
 
 
-
-  
-    <article id="post-关于用二进制科学计数法表示float型数据的笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/25/%E5%85%B3%E4%BA%8E%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E8%A1%A8%E7%A4%BAfloat%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E7%AC%94%E8%AE%B0/"> 关于用二进制科学计数法表示float型数据的笔记		</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/25/%E5%85%B3%E4%BA%8E%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E8%A1%A8%E7%A4%BAfloat%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2017-10-25T14:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>//课堂笔记</p>
-<p>首先先说一下今天的重难点吧</p>
-<pre><code>老师讲的那个东西，我这里就把它形容为用二进制科学计数法表示float浮点数据
-
-相信大家对10进制的科学计数法都很了解，而老师给出的式子是2x×1.y，这里我们只要换一下位置，换成1.y×2x。是不是熟悉多了？10进制里1.y是属于1到10的，二进制自然是一到二。
-
-理解了这个式子的含义，下一步就是把它用float浮点数据类型表示出来，也就是存储到计算机里的形式。
-
-这里插一张图</code></pre><p><a href="http://www.ayews.com/wp-content/uploads/2018/04/psb-1.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/04/psb-1-300x36.png" alt=""></a></p>
-<pre><code>大家都清楚float数据类型占4个字节，也就是32位。而double是64位(8字节)，所以精度会更高。float数据类型这32位里第一位是表示符号，1为负，0为正。后面8位是指数位（阶码），也就是x的二进制表达(补到8位)。最后是小数位（尾数），也就是y的二进制表达(补到23位)。double型数据里的x,y分别为11位，52位。其实如果不看符号位，把x，y倒过来，就是我们熟知的科学计数法形式了。
-
-我们给出一个浮点型数据：129.96(＞1)
-
-首先分离出一个2的最大次幂，也就是128，2的7次幂，x=7，也就是00000111。怎么理解呢，可以想成是把原数的整数部分拿出来化为二进制，然后取最高位。
-
-剩下的1.96，就是2的7次方乘以0.y。
-
-先把1拿出来。这里把y化为二进制，具体方法老师上课有讲，就是乘以2然后有一取1，没1取0。取的位数为23-x。具体过程不赘述，最后的结果为1.11110101...(小数点后取23-x位)。最后根据之前拿出来的2的幂次，向左移动小数点。类比到10进制科学计数法很好理解，10的指数为几则往左移几位。
-
-但这里的x还不是最终的x，还得加128。个人认为这是防止原数小于1，x为负的情况(即保证x为正)。
-
-原数＞0，符号位为0。
-
-最后结果为：0 10000111 00000011111010111000010
-
-我们在给一个例子：0.073(＜1)
-
-这里的x就为负数了，一个一个顺：2的-1次幂，2的-2...  有2的-4次幂，0.0625。剩下0.0105，一样的方法，乘以二一次一次乘。这里的x为-4，我们就取23+4=27位。最后结果为.000000010101100...我们再把小数点往右移4位，得到.00010101100...(应该是23位)。
-
-符号为正取0，x=-4+128=124也就是01111100。
-
-最终结果：0 01111100 00010101100000010000010
-
-最后在挂两个链接，有兴趣的同学们可以瞅瞅： 1.原码，补码，反码详解 [http://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html](http://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html%C2%A0) ;
-
-2.float浮点数的二进制存储方式及转换 [http://blog.csdn.net/rayxp/article/details/40855665](http://blog.csdn.net/rayxp/article/details/40855665) 有问题请在评论区留言，一起交流学习。上面只是一个大一新生的一些不成熟的总结跟猜想假设。</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/25/%E5%85%B3%E4%BA%8E%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E8%A1%A8%E7%A4%BAfloat%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -449,8 +378,8 @@ return 0;</code></pre><p>}</p>
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
