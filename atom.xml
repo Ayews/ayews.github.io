@@ -157,9 +157,9 @@
     
     
     
-      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
-    
       <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
     
   </entry>
   
@@ -271,15 +271,15 @@
     <link href="http://yoursite.com/2019/03/19/%E4%BD%9C%E6%96%87%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%81/"/>
     <id>http://yoursite.com/2019/03/19/%E4%BD%9C%E6%96%87%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%81/</id>
     <published>2019-03-19T12:26:24.000Z</published>
-    <updated>2020-07-08T08:15:26.106Z</updated>
+    <updated>2020-07-08T14:28:06.199Z</updated>
     
-    <content type="html"><![CDATA[<p>今天写作文时突发奇想，试图通过python写一个脚本来控制键盘输入，以此跳过批改网的禁止粘贴（相当于物理外挂），然后查了点东西，折腾了一番，算是弄好了。代码很短，但要配置一些东西。 首先要运行python脚本，我们需要安装python环境，这里我直接引用别人写好的教程了。 <a href="https://www.cnblogs.com/huangbiquan/p/7784533.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangbiquan/p/7784533.html</a> 安装过程比较简单，不多说了。为了更方便地使用python，最好是配置一下环境变量，这样我们就可以直接在命令行中调用python。 下面是具体代码</p><blockquote><p>import time from pynput.keyboard import Key, Controller keyboard = Controller() time.sleep(5) with open(‘format.txt’, ‘r’) as f: format = f.read() keyboard.type(format)</p></blockquote><p>可以看出很简单，第一行是导入time库，以此来延时键盘输入；第二行是导入我们需要的控制键盘输入的库，这里如果之前没用过pynput库，则需要安装一下：</p><blockquote><p>python -m pip install pynput</p></blockquote><p>然后就是将控制器转给keyboard，并休眠5秒以等待用户操作。然后打开文本文件，读取其中文字，最后通过键盘打出来。 将代码保存进一个txt文件，然后将扩展名改为.py，最后新建一个txt文件来存储想要通过键盘输入的文字，这里注意文字文件要与脚本文件放置在同一目录下。 通过命令行运行脚本，脚本启动后将输入切换到目标文本框，稍等几秒就完事了。</p>]]></content>
+    <content type="html"><![CDATA[<p>今天写作文时突发奇想，试图通过python写一个脚本来控制键盘输入，以此跳过批改网的禁止粘贴（相当于物理外挂），然后查了点东西，折腾了一番，算是弄好了。代码很短，但要配置一些东西。<br>首先要运行python脚本，我们需要安装python环境，这里我直接引用别人写好的教程了。<br><a href="https://www.cnblogs.com/huangbiquan/p/7784533.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangbiquan/p/7784533.html</a><br>安装过程比较简单，不多说了。为了更方便地使用python，最好是配置一下环境变量，这样我们就可以直接在命令行中调用python。 下面是具体代码  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import time from pynput.keyboard</span><br><span class="line">import Key, Controller</span><br><span class="line">keyboard &#x3D; Controller()</span><br><span class="line">time.sleep(5)</span><br><span class="line">with open(&#39;format.txt&#39;, &#39;r&#39;) as f: </span><br><span class="line">format &#x3D; f.read() </span><br><span class="line">keyboard.type(format)</span><br></pre></td></tr></table></figure><p>可以看出很简单，第一行是导入time库，以此来延时键盘输入；第二行是导入我们需要的控制键盘输入的库，这里如果之前没用过pynput库，则需要安装一下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install pynput</span><br></pre></td></tr></table></figure><p>然后就是将控制器转给keyboard，并休眠5秒以等待用户操作。然后打开文本文件，读取其中文字，最后通过键盘打出来。<br>将代码保存进一个txt文件，然后将扩展名改为.py，最后新建一个txt文件来存储想要通过键盘输入的文字，这里注意文字文件要与脚本文件放置在同一目录下。 通过命令行运行脚本，脚本启动后将输入切换到目标文本框，稍等几秒就完事了。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;今天写作文时突发奇想，试图通过python写一个脚本来控制键盘输入，以此跳过批改网的禁止粘贴（相当于物理外挂），然后查了点东西，折腾了一番，算是弄好了。代码很短，但要配置一些东西。 首先要运行python脚本，我们需要安装python环境，这里我直接引用别人写好的教程了。 
+        &lt;p&gt;今天写作文时突发奇想，试图通过python写一个脚本来控制键盘输入，以此跳过批改网的禁止粘贴（相当于物理外挂），然后查了点东西，折腾了一番，算是弄好了。代码很短，但要配置一些东西。&lt;br&gt;首先要运行python脚本，我们需要安装python环境，这里我直接引用别人写好的教程
       
     
     </summary>
@@ -456,9 +456,9 @@
     
     
     
-      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
-    
       <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
     
   </entry>
   
