@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-08T02:51:41.193Z</updated>
+  <updated>2020-07-08T08:15:26.138Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,28 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2020/07/08/hello-world/"/>
-    <id>http://yoursite.com/2020/07/08/hello-world/</id>
-    <published>2020-07-08T02:51:41.193Z</published>
-    <updated>2020-07-08T02:51:41.193Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title> 多源最短路		</title>
@@ -508,6 +486,30 @@
     
     
       <category term="Just CA/AOC" scheme="http://yoursite.com/tags/Just-CA-AOC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 关于在博客中插入视频的一些问题		</title>
+    <link href="http://yoursite.com/2018/08/04/%E5%85%B3%E4%BA%8E%E5%9C%A8%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2018/08/04/%E5%85%B3%E4%BA%8E%E5%9C%A8%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</id>
+    <published>2018-08-04T14:57:26.000Z</published>
+    <updated>2020-07-08T08:15:26.042Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近协会招新，需要用博客(wordpress)来放一个视频，于是了解了一下相关的东西。这篇文章主要是关于两个问题的解决，一个是上传文件大小限制，一个是MP4编码的问题。我们从头开始看。 我是听了别人的建议用Elementor编辑器去插入视频，但实际上WordPress本身是支持插入视频的，直接添加媒体就行了，不过功能较为单一。如果采用Elementor的话，会有很多拓展功能。 安装这个插件很简单，在仪表盘里的插件项搜一下，第一个就是。 新建文章，点击 使用Elementor编辑 <a href="http://www.ayews.com/wp-content/uploads/2018/08/TIM截图20180804224246.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/08/TIM%E6%88%AA%E5%9B%BE20180804224246.png" alt=""></a> 会跳到另一个页面，可以直接对显示的页面进行操作，这里我们说一下添加视频的方法。 <a href="http://www.ayews.com/wp-content/uploads/2018/08/TIM图片20180804224441.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/08/TIM%E5%9B%BE%E7%89%8720180804224441-300x254.png" alt=""></a> 将视频框拖动至右边的方框，左边会跳转到控制页面。 <a href="http://www.ayews.com/wp-content/uploads/2018/08/TIM图片20180804224601.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/08/TIM%E5%9B%BE%E7%89%8720180804224601-101x300.png" alt=""></a> source是视频源，可以外链也可以用本地的视频，选Self Hosted就可以了。下面是一些拓展功能，可以自己点。 这里我们会遇到一个问题…wordpress默认上传文件限制是2m，这肯定是不够的，我们需要改一下服务器端的配置。 <a href="https://baijiahao.baidu.com/s?id=1568973295581599&wfr=spider&for=pc&qq-pf-to=pcqq.c2c" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1568973295581599&amp;wfr=spider&amp;for=pc&amp;qq-pf-to=pcqq.c2c</a> 这个链接上有详细的方法，但我是直接在服务器上改的，实际上改两个参数就好了。 设置好，我们就可以上传视频了，传好后可以看到预览。点击控制界面底部的更新按钮，更改会被执行。 有可能会发现视频只有声音没有画面，我是遇到了这个问题，纠结了很久，最后发现还是视频编码的问题。 <a href="https://www.yaxi.net/2017-06-16/1455.html" target="_blank" rel="noopener">https://www.yaxi.net/2017-06-16/1455.html</a> wordpress默认是支持mp4的，我试了下，其他的如avi，flv之类的都不支持。我们用格式工厂把视频的编码转换一下在上传，就可以正常播放了。 <a href="http://www.ayews.com/wp-content/uploads/2018/08/TIM图片20180804225520.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/08/TIM%E5%9B%BE%E7%89%8720180804225520-300x219.png" alt=""></a> 这是具体的配置页面。 <a href="http://www.ayews.com/?p=263" target="_blank" rel="noopener">http://www.ayews.com/?p=263</a> 这是做好后的视频页面。 有问题私我交流。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近协会招新，需要用博客(wordpress)来放一个视频，于是了解了一下相关的东西。这篇文章主要是关于两个问题的解决，一个是上传文件大小限制，一个是MP4编码的问题。我们从头开始看。 我是听了别人的建议用Elementor编辑器去插入视频，但实际上WordPress本身是
+      
+    
+    </summary>
+    
+    
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

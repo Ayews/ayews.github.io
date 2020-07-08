@@ -156,86 +156,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-java考核作业-制作一个五子棋游戏" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/01/java%E8%80%83%E6%A0%B8%E4%BD%9C%E4%B8%9A-%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E4%BA%94%E5%AD%90%E6%A3%8B%E6%B8%B8%E6%88%8F/"> Java考核作业  制作一个五子棋游戏		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/01/java%E8%80%83%E6%A0%B8%E4%BD%9C%E4%B8%9A-%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E4%BA%94%E5%AD%90%E6%A3%8B%E6%B8%B8%E6%88%8F/" class="archive-article-date">
-  	<time datetime="2018-06-01T10:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是Java课的最后一个任务了，贴下要求: 内容： 使用Java GUI设计实现一个五子棋对弈程序，至少完成如下基本功能。可以发挥自己想象，添加更多功能。</p>
-<ol>
-<li>绘制15*15的标准棋盘</li>
-<li>使用鼠标黑白棋轮流落子</li>
-<li>当某一方有五子相连时，自动判胜。</li>
-</ol>
-<p>4.尽量使用面向对象的设计思想，多定义类和对象   老师上课讲的时候给我们展示了一下效果图，目标程序由几个窗体组成，能够实现鼠标落子以及判定胜负，另外还有落子时间限制，落子统计。 我先是从CSDN上找了个现成的，拷下来后发现存在代码残缺，逻辑混乱，有很多较为严重的Bug，debug了很久。他的思路大致是先定义一个接口存放所有要用到的常量，比如棋盘尺寸，一格的大小，每格的落子状态等。落子状态通过一个二维数组表示。随后，定义了鼠标监听器，通过外部类重写了触发事件，即点击时在目标位置画椭圆，接着从这个位置开始，进行判断。判断另外写了一个类，若判定结束，则打开一个新窗口显示结束信息。他判断的逻辑较为合理，但代码亢长，封装较差。接口的设计较为巧妙，通过它可以实现对所有静态变量的访问与游戏组件状态的修改。考虑到使用静态方法类可能会更加方便，有意实施。这里放一下他代码的地址:<a href="https://blog.csdn.net/ruangongshi/article/details/52171211" target="_blank" rel="noopener">https://blog.csdn.net/ruangongshi/article/details/52171211</a> 随后便是对现有代码的优化与升级。首先我修改了他监听器里的错误逻辑:原代码中鼠标点击时改变该位置的点击状态，但横纵相反，显示也相反，所以看起来一致，但程序更改的是相反位置的状态，因此点击相反位置时不会触发事件。随后我对主界面做了改动，在棋盘上部添加了一个panel，并将右边的panel做了修改。考虑到需要在监听器里修改这两个panel的状态，故将所有需要跨类调用的部件都加入到接口中，同时设置为静态。 原代码中当一方胜利时，会跳出一个新的窗体以显示游戏结果，不会更改原窗体的状态，故游戏只能执行一次。考虑到这点，我对右panel做了补充。我先是添加了“开始游戏”按钮，然后设置监听事件，这时候考虑到需设立标记变量isStarted表示游戏是否开始。点击按钮，检查标记状态。若为假，设为真并将按钮文本设置为“重新开始”；若为真，则表示游戏需重新开始，考虑到需添加将窗体状态初始化的方法，这里添加一个clear方法，并在监听事件里调用以还原状态。随后我添加了一个“退出游戏”按钮，较为简单，直接调用dispose方法。 考虑到游戏未开始与游戏结束情况下鼠标点击棋盘不应触发事件，故添加标记变量isEnded并在监听事件前添加if判断，同时更新“开始游戏”按钮监听事件。 下面便是游戏状态的显示与实时更新，我想的是通过在顶部panel与右panel中设置label的方式显示。将这些label放在接口中，并在主类或者接口中对他们进行初始化。在鼠标点击事件中同时添加对他们的更新。 对于组件状态的更改，原代码的逻辑是设置一个全局变量num以表示总落子数+1，初始为1，通过它来判断落子方。我对它进行了优化，在得到落子方的同时得到当前回合，黑子数，白子数。鼠标点击事件中先获取位置，随后通过位置得到点击的点在棋盘上的位置。接着修改目标位置的状态，即更新二维数组的值。这里顺便提一下，更新的值直接用num赋值，在判定此位置的棋子颜色时则通过让这个值对2取模的方式得到。当然也可以先让num对2取模，在放入数组，这里不再多说。最后通过获取到的位置画椭圆。画椭圆是通过监听器中的graphics对象，该对象的获取则是通过传入的棋盘panel。 接着便是对Judge类的升级，设置游戏结束后的行为。我移除了新建窗口的行为，改为修改顶部panel中的文本，同时将isEnded设为真。 然后我在顶部panel左侧与右panel底部添加了背景图片，方法来自外部引用。 最后我添加了一个按钮用于打开网页，指向我的博客，也就是这篇文章，方法来自外部引用。 效果图: <a href="http://www.ayews.com/wp-content/uploads/2018/06/1.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/1-300x265.png" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/06/2.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/2-300x265.png" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/06/3.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/3-300x265.png" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/06/4.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/4-300x265.png" alt=""></a> 关于背景的添加，简单说下。我是找了一张木板图，尺寸大于窗体就行。在初始化窗体时添加背景图片，同时画上棋盘线。 接口:  主控制类（继承自JPanel）:  监听器类:  判断类:  github地址:<a href="https://github.com/Ayews/GoBangGame_simple" target="_blank" rel="noopener">https://github.com/Ayews/GoBangGame_simple</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/01/java%E8%80%83%E6%A0%B8%E4%BD%9C%E4%B8%9A-%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E4%BA%94%E5%AD%90%E6%A3%8B%E6%B8%B8%E6%88%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-java实验4-gui程序设计" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1064,6 +984,69 @@ phpinfo();
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/04/16/%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%9C%8B%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cropped-7d613109d75abbc8-jpg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/14/cropped-7d613109d75abbc8-jpg/"> cropped-7d613109d75abbc8.jpg		</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/14/cropped-7d613109d75abbc8-jpg/" class="archive-article-date">
+  	<time datetime="2018-04-14T07:51:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://97.64.38.169/wp-content/uploads/2018/04/cropped-7d613109d75abbc8.jpg" target="_blank" rel="noopener">http://97.64.38.169/wp-content/uploads/2018/04/cropped-7d613109d75abbc8.jpg</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/14/cropped-7d613109d75abbc8-jpg/">展开全文 >></a>
         </p>
       
 
