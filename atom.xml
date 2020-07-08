@@ -508,9 +508,9 @@
     
     
     
-      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
-    
       <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
