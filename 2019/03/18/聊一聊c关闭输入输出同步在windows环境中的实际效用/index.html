@@ -8,21 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title> 聊一聊C++关闭输入输出同步在windows环境中的实际效用		 | Ayews&#39; blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz…  偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样">
+  <meta name="description" content="偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz…偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样。我">
 <meta property="og:type" content="article">
 <meta property="og:title" content=" 聊一聊C++关闭输入输出同步在windows环境中的实际效用		">
 <meta property="og:url" content="http://yoursite.com/2019/03/18/%E8%81%8A%E4%B8%80%E8%81%8Ac%E5%85%B3%E9%97%AD%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%90%8C%E6%AD%A5%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E5%AE%9E%E9%99%85%E6%95%88%E7%94%A8/index.html">
 <meta property="og:site_name" content="Ayews&#39; blog">
-<meta property="og:description" content="偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz…  偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样">
+<meta property="og:description" content="偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz…偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样。我">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318212218-146x300.png">
-<meta property="og:image" content="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318214644-300x54.png">
 <meta property="article:published_time" content="2019-03-18T13:48:41.000Z">
-<meta property="article:modified_time" content="2020-07-08T08:15:26.098Z">
+<meta property="article:modified_time" content="2020-07-08T12:16:57.726Z">
 <meta property="article:author" content="Ayews">
 <meta property="article:tag" content="技术随笔">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318212218-146x300.png">
   
     <link rel="alternative" href="/atom.xml" title="Ayews&#39; blog" type="application/atom+xml">
   
@@ -85,11 +82,11 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/ayews" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="qq" target="_blank" href="tencent://message/?uin=395636332&Site=Sambow&Menu=yes" title="qq"><i class="icon-qq"></i></a>
 		        
 					<a class="weibo" target="_blank" href="https://weibo.com/u/5842117806" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="3zhihu" target="_blank" href="#" title="3zhihu"><i class="icon-3zhihu"></i></a>
 		        
 			</div>
 		</nav>
@@ -124,11 +121,11 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/ayews" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="qq" target="_blank" href="tencent://message/?uin=395636332&Site=Sambow&Menu=yes" title="qq"><i class="icon-qq"></i></a>
 			        
 						<a class="weibo" target="_blank" href="https://weibo.com/u/5842117806" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="3zhihu" target="_blank" href="#" title="3zhihu"><i class="icon-3zhihu"></i></a>
 			        
 				</div>
 			</nav>
@@ -172,11 +169,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz… <a href="http://www.ayews.com/wp-content/uploads/2019/03/TIM截图20190318212218.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318212218-146x300.png" alt=""></a> 偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样。 我首先重定向了输入输出，两行代码。</p>
+        <p>偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz…<br>偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样。<br>我首先重定向了输入输出，两行代码。</p>
 <blockquote>
 <p>freopen(“input.txt”,”r”,stdin); freopen(“output.txt”,”w”,stdout);</p>
 </blockquote>
-<p>input.txt是输入数据，output.txt是输出数据，我先往input里写入了10^7的数据，然后开始单个输入的测试。 首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间都在4s左右； 然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在10-11s间徘徊； 最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16s左右； 接着我进行了一次读取两个数据的测试。 首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间仍然都在4s左右； 然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在11s左右； 最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16-17s间徘徊； 可以看出，在windows下，即使关闭了输入输出同步，cin的效率仍然远远低于scanf… 但是我这里用的都是mingw编译的，不知道msvc编译出来的程序效率几何，也许大佬说的是对的，只是我无法求证。 另外可以知道hdu的oj环境使用的编译器是mingw包里的。。属实坑人。 <a href="http://www.ayews.com/wp-content/uploads/2019/03/TIM截图20190318214644.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318214644-300x54.png" alt=""></a></p>
+<p>input.txt是输入数据，output.txt是输出数据，我先往input里写入了10^7的数据，然后开始单个输入的测试。<br>首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间都在4s左右；<br>然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在10-11s间徘徊；<br>最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16s左右；<br>接着我进行了一次读取两个数据的测试。 首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间仍然都在4s左右；<br>然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在11s左右；<br>最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16-17s间徘徊；<br>可以看出，在windows下，即使关闭了输入输出同步，cin的效率仍然远远低于scanf…<br>但是我这里用的都是mingw编译的，不知道msvc编译出来的程序效率几何，也许大佬说的是对的，只是我无法求证。<br>另外可以知道hdu的oj环境使用的编译器是mingw包里的。。属实坑人。</p>
 
       
 
@@ -428,11 +425,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -441,10 +442,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">技术随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -464,11 +461,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
+                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
+                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
               </li>
              
               <li class="article-tag-list-item">
