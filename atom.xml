@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ayews&#39; blog</title>
+  
+  <subtitle>Always a beginner</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-07-08T02:51:41.193Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Ayews</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2020/07/08/hello-world/"/>
+    <id>http://yoursite.com/2020/07/08/hello-world/</id>
+    <published>2020-07-08T02:51:41.193Z</published>
+    <updated>2020-07-08T02:51:41.193Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title> 多源最短路		</title>
+    <link href="http://yoursite.com/2019/11/02/%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
+    <id>http://yoursite.com/2019/11/02/%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF/</id>
+    <published>2019-11-02T07:10:02.000Z</published>
+    <updated>2020-07-08T08:15:26.138Z</updated>
+    
+    <content type="html"><![CDATA[<p>上篇讲了一点到其他点的最短路，即单源最短路，但实际上dijkstra也能处理多源最短路，首先我们再看一下单源的写法。</p><p>priority_queue pq;<br>pq.push(Node(s, 0));<br>d[s] = 0;<br>while (!pq.empty())<br>{<br>    Node t = pq.top();<br>    pq.pop();</p><pre><code>if (vis\[t.id\])    continue;//printf(&quot;  %d %lld\\n&quot;,t.id,d\[t.id\]);vis\[t.id\] = true;int u = t.id, v;for (int i = first\[u\]; i != -1; i = e\[i\].next){    v = e\[i\].v;    if (d\[v\] &gt; d\[u\] + e\[i\].w)    {        d\[v\] = d\[u\] + e\[i\].w;        if (!vis\[v\])        {            pq.push(Node(v, d\[v\]));        }    }}</code></pre><p>}</p><p>可以看出，单源时我们一开始是在队列中push了起点，那么多源怎么做？我们只要把所有的起点都push进去即可。 当然还有更优美的写法，我们可以构造一个虚点，并让其与所有源点相连，权为0。这样的话我们只需要对虚点跑一边dij即可得到结果。 下面我们针对两个题讲讲实际应用。 1.Fire-Fighting Hero <a href="https://nanti.jisuanke.com/t/41349" target="_blank" rel="noopener">https://nanti.jisuanke.com/t/41349</a> 这道题基本是裸的多源最短路，我们可以构造虚点或将所有源点push进队列，然后直接跑一遍就行了。我的做法是将下标为0的位置留给虚点，然后加权为0的边，各位可以直接看代码。 <a href="https://nanti.jisuanke.com/mycode/640nj7x3lk0r2vmp/main.cpp" target="_blank" rel="noopener">https://nanti.jisuanke.com/mycode/640nj7x3lk0r2vmp/main.cpp</a> 2.<a href="https://codeforces.com/contest/1245/problem/D" target="_blank" rel="noopener">Shichikuji and Power Grid</a>(cf1245d) 题目要求是所有点要么自己建站，要么联通到其他已建站的点。这样的话我们可以将所有点的C值当作初始距离push进优先队列，具体做法是对每个点构造一个自环边，权值为C。 这道题相对前一道题有几个特殊点，首先任意两点间有边，这其实也意味着我们并不用完全建图；其次是在同一个连通块内必须要有一个点取题目中的C值，同时并不要求所有点都联通，可能会出现样例中的不建任何边的情况 不难发现，若有一个连通块，那么这个块里唯一一个建站的必然是C值最小的。因此我们可以得到贪心策略，即每次从队列中取出C值最小的边。如果这个边是自环，那么这个点必然是一个建站的点，同时也可视作加入了”供能区“。下面我们就能通过这个点来更新一遍代价。如果这个边不是自环，我们则可以将其视为中转边，尝试通过它降低其他点的代价。更新方法也略有不同，我们可以想象成是将点与”供能区“相连，自环是初始的状态，对每个点，我们可以检查是否存在别的在供能区内的点，与他的距离的代价小于自己建站代价。如果存在，则可建边，并将这条边加入到”供能区“，即加入队列。下面跑到这条边时又能通过它再更新一次代价。这样跑下来，我们就得到了每个点的最小代价。 需要注意的是每个点仅能建一次站，即需要vis标记。 <a href="https://codeforces.com/contest/1245/submission/64062549" target="_blank" rel="noopener">https://codeforces.com/contest/1245/submission/64062549</a> 结合代码食用体验更加。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;上篇讲了一点到其他点的最短路，即单源最短路，但实际上dijkstra也能处理多源最短路，首先我们再看一下单源的写法。&lt;/p&gt;
+&lt;p&gt;priority_queue pq;&lt;br&gt;pq.push(Node(s, 0));&lt;br&gt;d[s] = 0;&lt;br&gt;while (!pq.e
+      
+    
+    </summary>
+    
+    
+    
+      <category term="dijkstra" scheme="http://yoursite.com/tags/dijkstra/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 一点到其他点的最短路		</title>
+    <link href="http://yoursite.com/2019/11/02/%E4%B8%80%E7%82%B9%E5%88%B0%E5%85%B6%E4%BB%96%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
+    <id>http://yoursite.com/2019/11/02/%E4%B8%80%E7%82%B9%E5%88%B0%E5%85%B6%E4%BB%96%E7%82%B9%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF/</id>
+    <published>2019-11-02T06:40:14.000Z</published>
+    <updated>2020-07-08T08:15:26.138Z</updated>
+    
+    <content type="html"><![CDATA[<p>整理一下自己的dijkstra相关知识。从最简单的开始，首先是求一点到其他点的最短路。 最简单的方法是n^3暴力，即求出任意两点间的最短路，称为floyd算法，这里只提一下，不讲。 首先我们要知道dijkstra算法的思想。dijkstra的思想是基于贪心的，首先把起点到所有相连的点的距离存下来取一个最短的，然后利用这个最短的距离更新到其他点的距离。换句话讲，假设与起点s直接相连的若干个点中有一个点与s距离最短，这样我们就能以这个点为中转站，更新s到其他点的距离。这样遍历完所有的点，我们就完成了求最短路的操作。这个过程用代码展示则更为形象。</p><p>int v = INF,k;//k即为中转站<br>for(int i = 0;i &lt; n; i++)//n个点<br>{<br>  if(!vis[i] &amp;&amp;  dis[i]&lt;v)//每个点只访问一次，即只做一次中转站<br>  {<br>    v = dis[i];<br>    k = i;<br>  }<br>}<br>for(int i = 0;i &lt; n; i++)<br>{<br>  if(!vis[i] &amp;&amp;  dis[i]&gt;dis[k]+e[k][i] )//通过k使起点到i的距离缩短<br>  {<br>    dis[i] = dis[k] +e[k][j];<br>  }<br>}</p><p>这个写法的时间复杂度为n^2，我们可以用优先队列对其进行优化。原做法我们是每次取与s距离最短的点，然后通过这个点来做更新，实际上我们可以看成是通过新加入的边来做更新。这样想的话，我们可以维护一个优先队列，每次发生更新就把边放进去，然后通过优先队列做贪心，每次取出权值最小的边。更新方法跟原做法一样。</p><p>priority_queue pq;<br>pq.push(Node(s,0));d[s]=0;//先把起点放进去<br>while(!pq.empty())<br>{<br>  Node t=pq.top();pq.pop();</p><p>  if(vis[t.id]) continue;<br>  //printf(“ %d %lld\n”,t.id,d[t.id]);<br>  vis[t.id]=true;<br>  int u=t.id,v;<br>  for(int i=first[u];i!=-1;i=e[i].next)<br>////可以理解为以u为起点的边的集合，第一次循环会将与起点相连的边更新进来<br>  {<br>    v=e[i].v;<br>    if(d[v]&gt;d[u]+e[i].w)<br>    {<br>      d[v]=d[u]+e[i].w;<br>      if(!vis[v])<br>      {<br>        pq.push(Node(v,d[v]));<br>      }<br>    }<br>  }<br>}</p><p>这个写法的时间复杂度为nlogn，需要注意的是距离d的初始化与队列初始化，附上完整版子。 <a href="https://paste.ubuntu.com/p/wXGq2PnBb7/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/wXGq2PnBb7/</a> 洛谷模板测试：<a href="https://www.luogu.org/problemnew/solution/P4779" target="_blank" rel="noopener">https://www.luogu.org/problemnew/solution/P4779</a> 这套得配合自带的addedge才能使用，代码中加边注释掉的一行即为无向图做法。 需要注意的是这题数据有些问题，得开到我代码里写的那么大才能不re。 最后提一点，由于贪心策略，dijkstra只能处理非负权图。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;整理一下自己的dijkstra相关知识。从最简单的开始，首先是求一点到其他点的最短路。 最简单的方法是n^3暴力，即求出任意两点间的最短路，称为floyd算法，这里只提一下，不讲。 首先我们要知道dijkstra算法的思想。dijkstra的思想是基于贪心的，首先把起点到所
+      
+    
+    </summary>
+    
+    
+    
+      <category term="dijkstra" scheme="http://yoursite.com/tags/dijkstra/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 2019ICPC南京站总结		</title>
+    <link href="http://yoursite.com/2019/10/27/2019icpc%E5%8D%97%E4%BA%AC%E7%AB%99%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/10/27/2019icpc%E5%8D%97%E4%BA%AC%E7%AB%99%E6%80%BB%E7%BB%93/</id>
+    <published>2019-10-27T15:27:13.000Z</published>
+    <updated>2020-07-08T08:15:26.130Z</updated>
+    
+    <content type="html"><![CDATA[<p>说起来也有好久没写总结了，这次区域赛拿到了第一块牌，也算是一个里程碑，有必要记录一下。 这次现场赛与上次参加的一样，依旧是第一天过去，入住，去现场签到+热身，第二天正式赛+闭幕式。相较上次而言，这次我们多了许多准备，包括模板的补充，以及比赛策略等。 热身赛只过了1题，A是签到，B我当成了模拟，能写，非常复杂， 但实际上是个数位dp题，没看出来，C、D是cf原题。 热身赛我们测了一些东西，也发现了本次比赛环境的一些注意点。首先是显示屏频繁黑屏，我们判断为线接触不良，就推了推，并避免接触，有效缓解了这个情况。第二，codeblocks稳定性较差，频繁闪退，并一直出问题。但这似乎不是个别现象，而且正式赛没出现过这种情况。第三，cb的代码补全与我们之前用的相去甚远，十分不习惯，而且场地键盘…一言难尽。好在正式赛没有用到较长的模板。另外，由于是linux系统，int128可以正常使用，虽然也没用到。 当晚我们3人一起打了一场cf，算是真正的热身，效果尚可，虽然也没上多少分。当晚休息的还可以，第二天精神还不错，但早饭吃的有点多，这是个伏笔，下次一定注意。 10点正式赛开始，开始前有别的队伍在无视纪律敲模板，我们刚准备动手就听到了喊话，就没动…开局我们3人一起看的A，easy提了个假的猜测，我感觉是对的，但是数据范围太大根本写不了，而且过的人十分多，这时easy就感觉这个猜测可能是假的，如果这样写 不可能有这么多队伍这么快的过，但我感觉那个猜测就是对的，于是我寻求解法，然后easy与koswu往后读题。他们发现C可以写，于是easy上机，koswu跟他结对写C题，我在easy的数论书中查找A题相关的东西，无果，于是往后看题。这时比赛大约过了40分钟，他们C写的快完成了，有点卡，正好我感觉H题可以猜一个结论，于是我让他们打印，我花5分钟交个H。实际上结论猜对了，但没特判，这也是这场一大把队伍忽略的点。实际上我想到 特判点了，但是当时没重视，也忽略掉了。WA两发H，暂时放弃，easy与koswu继续搞C，我问他们把握大不大，他们说可，于是我看了遍题意，问了下他们的写法感觉也没问题，然后1A了。这时我们看榜，发现过题最多的依次是A-C-K，于是我们回头看A，毕竟A过的人太多了。这时我依然坚持于前面的假猜测，但这个做法已经确认不可行了。这时easy做了一个新结论，推翻了前面的假设，我转念一想，突然发现了这题正确的写法，之前完全被带到坑里了，然后A也1A，但交的有些晚，这时大约过了一个小时出头。然后开始搞K，发现K是个计算几何，于是easy与koswu拿出了模板找计算几何相关的东西，我继续看H，因为发现榜单中H仅次于K题。因为是第一次写计算几何，easy一直在调模板，koswu协助他修改一些关键点与bug，然后开始测试，样例过了，我这里H没什么进展，于是向他们问了K的题意，给他们出了两组数据，正好把easy的代码hack了，于是开始debug，改好后提交wa了一发，检查精度也没问题，于是打印下来找问题，此时机器是闲置的。这期间又发现了代码另外的一些问题，修改后发现又过不了我构造的测试数据了，于是进行修改，发现是未初始化…真是应了队名。代码中精度写的1e-12，题目要求1e-6，我提出直接交1e-12的，如果t，则有戏，果然t了，改成1e-8过了。这时大概过了两三个小时？K的debug花了我们很长的时间，好在提交不算多。在他们debug的过程中我将所有题的题面都浏览了一遍，感觉G与F是两个可能可以开的题，但发现G题无人提交，F题又过于复杂，感觉写不了。看了看榜，下面能开的题只有J与H了，J题我们三人探讨了一番，感觉写不了，此时H题已经过了100+的人了，于是我们主攻H，因为只要H过了铜就稳了，那会大概排名150左右，4题尾接近100，时间大概是封榜前半小时。easy并没有读题，我让他先完整的读一遍题再跟我们讨论。我猜的结论有两个，一种是可能情况，一种是无解情况，我跟koswu认为可能是无解那一块某些情况有解，easy认为是有解情况输出的结果不对。我们一开始探讨了无解的那一块有没有可能有解，经过一段时间的讨论，我们发现无解那一块是可以证明必定无解的，那问题只能出现有解那一块。这时koswu提出了一个新的题意理解，但我之前看过calarfation，否决了这个理解，于是又回到了开头。这时koswu提出了可能存在的特殊情况，提议做一个特判，我们加上特判就过了，这时是封榜后10分钟，然后我们做了J的尝试，无果，因为实在无从下手，后面就在挂机了。 比赛打下来，有可惜的地方，毕竟四题罚时少是可能直接银牌的。A，H过的太晚了，实际上都可以在前一小时过掉。A被假猜测坑了一小时，H由于没特判多了接近四小时的罚时…另外，如果计算几何赛前能有更充分的准备的话，我们会有更充裕的时间，K题花的时间太长了，几乎接近两个小时。 但是也有一些值得总结的东西。首先，easy从假结论中跳了出来，这十分不容易，并且之后我们找到了正确的做法；其次，虽然整体罚时还是比较高的，但实际上我们单题错误提交并不多，A、C是1A，Hwa了两发，Kwa两发t一发，总共罚时也就100，主要还是提交的太晚的原因，提交还是比较谨慎的，没有平白浪费罚时；然后，机器使用还不错，队友卡思路时，直接打印换人做其他的尝试，并没有出现等待情况；最后，也是比较重要的一点，开题开的很好，把握了所有能写的题，写不了的题基本没怎么看…实际上可能也是运气好，但我觉得这也跟我完整的看了所有题有关，当时确实只剩H能写了，是把握铜牌的关键。我们要是放弃H写了别的题而错失铜牌，真得后悔好久。 这场比赛我们也积累了不少经验，比如我就发现大赛的样例是真的出的有水平，比如H，他就一组可能，一组不可能，但又没透露出特判情况，就那种透露了一些东西，但又隐藏了一些东西需要自己去寻找。另外的话，也是对比赛策略有了更深的理解，一定不能死抓一个题，要及时换题。如果一开始我们强搞A，可能就会浪费大量的时间了。这里真的运气好，因为A的数据范围过大，我们的线性筛直接被pass了。如果给的数据不是1e9，而是1e7，我们可能就要开始套模板，wa，改模板，wa的循环了，这我觉得是这场最大的运气成分。 总体来看的话，这场有运气成分，也有实力成分。cf的训练，确实是带来了思维的提升，A与H都算是思维题，A就真的很想cf里的C，D题。另外，我们也是把握住了四道有能力过的题，过不了的题也没浪费时间。下面的时间的话，还是要继续训练，这次比赛暴露出我们计算几何的欠缺，另外cf也要继续打，锻炼思维，不然A题可能上来就看出来了。 easy一发过C是真的牛逼。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;说起来也有好久没写总结了，这次区域赛拿到了第一块牌，也算是一个里程碑，有必要记录一下。 这次现场赛与上次参加的一样，依旧是第一天过去，入住，去现场签到+热身，第二天正式赛+闭幕式。相较上次而言，这次我们多了许多准备，包括模板的补充，以及比赛策略等。 热身赛只过了1题，A是签
+      
+    
+    </summary>
+    
+    
+    
+      <category term="阶段总结" scheme="http://yoursite.com/tags/%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 关于处理长整形乘法取模的溢出问题的处理办法		</title>
+    <link href="http://yoursite.com/2019/05/24/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86%E9%95%BF%E6%95%B4%E5%BD%A2%E4%B9%98%E6%B3%95%E5%8F%96%E6%A8%A1%E7%9A%84%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/05/24/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86%E9%95%BF%E6%95%B4%E5%BD%A2%E4%B9%98%E6%B3%95%E5%8F%96%E6%A8%A1%E7%9A%84%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98%E7%9A%84%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95/</id>
+    <published>2019-05-24T14:18:52.000Z</published>
+    <updated>2020-07-08T08:15:26.130Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近看到一个快速乘法的板子，心生好奇，仔细看了看，跟快速幂的写法很像，然而却不是“快速”乘法，但却能解决乘法取模的溢出问题。 众所周知，C++中，对两个长整形进行乘法并取模，在乘法时得到的中间值有可能会超过long long的范围，从而产生数据溢出，得到不可知的结果。那么针对这种问题我们有没有解决办法呢？答案是有的。 首先我们可以先考虑一种做法：按位乘。对于两个十进制的数字a，b，我们可以将b一位一位的与a相乘，并在每次进位时，将a*10并对p取模。当然，取的模与两数乘法取的模一致。每次相乘，将得到的结果相加并进行取模。这样，便可得出a*b%p。 考虑更接近计算机的做法：将两个数视为2进制，此时算法的时间复杂度为O(log b)。笔者也不清楚这样处理与直接乘法消耗时间的优劣，但对于处理可能溢出的数据，这样的做法很有效。 贴一下代码:<a href="https://paste.ubuntu.com/p/Sc6yytkSqZ/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/Sc6yytkSqZ/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近看到一个快速乘法的板子，心生好奇，仔细看了看，跟快速幂的写法很像，然而却不是“快速”乘法，但却能解决乘法取模的溢出问题。 众所周知，C++中，对两个长整形进行乘法并取模，在乘法时得到的中间值有可能会超过long long的范围，从而产生数据溢出，得到不可知的结果。那么针
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 整数分解最大乘积问题		</title>
+    <link href="http://yoursite.com/2019/05/24/%E6%95%B4%E6%95%B0%E5%88%86%E8%A7%A3%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/05/24/%E6%95%B4%E6%95%B0%E5%88%86%E8%A7%A3%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF%E9%97%AE%E9%A2%98/</id>
+    <published>2019-05-24T13:10:46.000Z</published>
+    <updated>2020-07-08T08:15:26.122Z</updated>
+    
+    <content type="html"><![CDATA[<p>一道经典贪心题，然而我一开始没写出来…遂进行整理。 题意为给一个整数n，让你将其分解为若干个正整数的和，要求这若干个正整数的乘积最大。 一开始我一直在凭空想如何构造这个分解，没能有有效的思路，看了题解后豁然开朗，这里简单说一下。 首先假设这个序列为a1,a2…ak,我们可以得到以下几个性质: 1.a1&gt;1.若a1=1,则将a1加到ak上将使乘积更大; 2.1&lt;=a[i+1]-a[i]&lt;=2.若a[i+1]-a[i]=3，则用a[i+1]-1,a[i]+1替换a[i+1],a[i]将会使乘积更大; 3.最多只有一组不同的i,j(i&lt;j),使a[i+1]-a[i]=2,a[j+1]-a[j}=2.否则用a[i]+1,a[j+1]-1替换a[i],a[j+1]将会使乘积更大; 4.a1&lt;=3.若a1&gt;=4,则用2，a1-1,a2-1将会使乘积更大; 5.若a1=3,且存在i使a[i+1]-a[i]=2，则为了使乘积最大，i应取k-1; 由此我们可以得到具体做法：求出以2起始的最大连续自然数序列之和sum，使得sum的值不超过n， 然后分情况讨论： 设此最大序列为2、3、……、w，则： 1.若剩余值（n-sum）等于w，则最后输出序列为：3、4、……、w、w+2，即将原最大序列每项加1，再将最后剩余的一个1加到最后一项上。 2.若剩余值（n-sum）小于w，则从序列的最大项i开始，从大到小依次将每项加1，直到剩余值用完。 由此我们便得到了最大乘积。 其实这几个性质并不难分析，重要的是这样的思想，值得我去学习。 搁一下原题链接:<a href="https://nanti.jisuanke.com/t/T1238" target="_blank" rel="noopener">乘积最大的拆分</a> 最后挂一下代码:<a href="https://paste.ubuntu.com/p/hkFNMYkkxr/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/hkFNMYkkxr/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一道经典贪心题，然而我一开始没写出来…遂进行整理。 题意为给一个整数n，让你将其分解为若干个正整数的和，要求这若干个正整数的乘积最大。 一开始我一直在凭空想如何构造这个分解，没能有有效的思路，看了题解后豁然开朗，这里简单说一下。 首先假设这个序列为a1,a2…ak,我们可以
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> C++中clock函数的使用		</title>
+    <link href="http://yoursite.com/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2019-05-01T16:55:06.000Z</published>
+    <updated>2020-07-08T08:15:26.122Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在学数据结构时正好看到了这个，顺带学了一下，这里做个整理。</p><blockquote><p>clock()是C/C++中的计时函数，而与其相关的数据类型是clock_t。在MSDN中，查得对clock函数定义如下：</p><p>clock_t clock(void) ;</p><p>简单而言，就是该程序从启动到函数调用占用CPU的时间。这个函数返回从“开启这个程序进程”到“程序中调用clock()函数”时之间的CPU时钟计时单元（clock tick）数，在MSDN中称之为挂钟时间（wal-clock）；若挂钟时间不可取，则返回-1。其中clock_t是用来保存时间的数据类型。（百度百科）</p></blockquote><p>需要指出的是这里的“挂钟时间”并不是真实时间，而是“时钟打点数”，而对于一个机器而言每秒的时钟打点数是一个常数，即CLK_TCK。下面我们看一下它具体的应用：</p><p>#include <iostream><br>#include <ctime> //包含clock()函数<br>#include &lt;windows.h&gt;<br>using namespace std;</p><p>int main()<br>{<br>    clock_t start,stop;                 //clock_t是clock()函数返回的变量类型<br>    start = clock();                    //开始计时<br>    Sleep(13300);                       //调用系统api，使程序休眠13.3秒<br>    stop = clock();                     //停止计时<br>    cout &lt;&lt; CLK_TCK &lt;&lt; endl;            //输出机器每秒时钟打点数<br>    cout &lt;&lt; 1.0*(stop-start)/CLK_TCK;   //输出两次clock()返回的差值(即函数调用时间)，注意转换成double型<br>    return 0;<br>}</p><p>可以看出，程序将输出两次调用clock()中间花费的时间。通过这种方法我们可以评估不同函数的时间消耗，是个非常有效的办法。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天在学数据结构时正好看到了这个，顺带学了一下，这里做个整理。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;clock()是C/C++中的计时函数，而与其相关的数据类型是clock_t。在MSDN中，查得对clock函数定义如下：&lt;/p&gt;
+&lt;p&gt;clock_t clock(vo
+      
+    
+    </summary>
+    
+    
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 中山大学程序设计竞赛的几道题		</title>
+    <link href="http://yoursite.com/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/</id>
+    <published>2019-04-22T06:21:28.000Z</published>
+    <updated>2020-07-08T08:15:26.114Z</updated>
+    
+    <content type="html"><![CDATA[<p>找到了水文章的机会。简单说一些 B <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6512" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6512</a> <a href="https://paste.ubuntu.com/p/ZJWGCjNff6/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/ZJWGCjNff6/</a> 晚点更新</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;找到了水文章的机会。简单说一些 B &lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=6512&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://acm.hdu.edu.cn/showprobl
+      
+    
+    </summary>
+    
+    
+    
+      <category term="未分类" scheme="http://yoursite.com/tags/%E6%9C%AA%E5%88%86%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> “新智认知”杯上海高校程序设计竞赛暨第十七届上海大学程序设计春季联赛‘s problem D		</title>
+    <link href="http://yoursite.com/2019/04/02/%E6%96%B0%E6%99%BA%E8%AE%A4%E7%9F%A5%E6%9D%AF%E4%B8%8A%E6%B5%B7%E9%AB%98%E6%A0%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E6%9A%A8%E7%AC%AC%E5%8D%81%E4%B8%83%E5%B1%8A/"/>
+    <id>http://yoursite.com/2019/04/02/%E6%96%B0%E6%99%BA%E8%AE%A4%E7%9F%A5%E6%9D%AF%E4%B8%8A%E6%B5%B7%E9%AB%98%E6%A0%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E6%9A%A8%E7%AC%AC%E5%8D%81%E4%B8%83%E5%B1%8A/</id>
+    <published>2019-04-02T10:28:17.000Z</published>
+    <updated>2020-07-08T08:15:26.106Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目很长，没什么意义，就是打了一场上海大学的校赛。这次比赛是我们蓝桥杯后第一次集中训练，也是我与吴跟新队友ry的第一次配合。打下来发现ry还是tql。。。。 不说多少费话，本篇主要谈谈这场比赛的D题。先贴链接：<a href="https://ac.nowcoder.com/acm/contest/551/D" target="_blank" rel="noopener">https://ac.nowcoder.com/acm/contest/551/D</a> 个人感觉这比赛的出题人有意黑蔡队hhhhh。 这道题初看很简单，只要从原串中提取出至多94个字符，并按字典序最小输出就可以了。我一开始的想法很简单，就先遍历，弄一个数组存放目标串。每次发现新字符时便加入，发现已出现过的字符则将该字符与它上一次出现的后一位进行比较，若小则继续，若大则删除它的前一次出现。但这样的算法在处理“acdbcad”时出现了问题，原因就是我在判断是否要删除时仅考虑了一位。但若是考虑两位或者两次出现中所有的字符，输出仍然是错的，也就是这样写是无法总输出最小字典序的答案的，这里我就想错思路了。赛后整理思路后，发现这题无非就两个要求,而且人家出题人已经说的很清楚了。。。其实就是在满足所有出现过的字符都会被输出的情况下，输出字典序最小的。 然后就有了第一个正确思路：从尾向头遍历一遍，保存最后一个未出现的字符出现的位置（R）与不同的字符的数量（now）。随后要做的事便是从一个区间内不停的搜索最小的字符并删除，重复不同字符的数量次。初始情况下区间的左端点为1（L）（第一个字符），右端点为上面提到的位置（R），可以知道该位置的字符为该字符最后一次出现。这里可以考虑用线段树去存区间内的最小字符。然后便是now次循环。在每次循环中，我们都需要更新L、R的值。L值更新很简单，右移至删除字符第一次出现的位置即可。右端点需要判断是否要外扩： 1.R处位置为要删除的字符，此时R是一定要右移的； 2.R处字符之前已被删除，也要右移； 3.R处字符不是该字符最后一次出现，也要右移。 这样处理后，R处字符就一定是该字符最后一次出现的位置，这样就能保证既不会遗漏字符，又能字典序最小输出。 代码贴到Ubuntu Pastebin上:<a href="https://paste.ubuntu.com/p/ws4HT5dzxx/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/ws4HT5dzxx/</a> 随后乐乐告诉我这题的正解是单调栈，我一开始只是模糊的理解了一下，后面看了下代码，真的厉害。其实操作上跟我一开始的做法有相似，简单说下思路： 1.遍历字符串，用一个数组（num）保存每个出现的字符出现的次数； 2.对字符串再进行一次从前往后的遍历，维护一个答案数组ans，储存当前存放有效字符的个数（t）。每次循环开始时，对当前遍历到的字符（c），num[c]–； 3.若当前字符已出现过，则继续遍历； 4.若当前字符（c）未出现过，则将其与ans[t-1]进行比较，若c&lt;ans 且num[c]&gt;0，则将t-1，并将ans[t-1]置为未出现字符，重复该操作； 5.将当前字符存入ans[t]，并让t+1 各位稍行理解便懂了。这样就能保证字典序最小的字符一定在最前面，且一个字符也不会遗漏，实在是妙。 代码：<a href="https://paste.ubuntu.com/p/YvWvcW3MYt/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/YvWvcW3MYt/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;题目很长，没什么意义，就是打了一场上海大学的校赛。这次比赛是我们蓝桥杯后第一次集中训练，也是我与吴跟新队友ry的第一次配合。打下来发现ry还是tql。。。。 不说多少费话，本篇主要谈谈这场比赛的D题。先贴链接：&lt;a href=&quot;https://ac.nowcoder.com
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 作文自动机！		</title>
+    <link href="http://yoursite.com/2019/03/19/%E4%BD%9C%E6%96%87%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%81/"/>
+    <id>http://yoursite.com/2019/03/19/%E4%BD%9C%E6%96%87%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%81/</id>
+    <published>2019-03-19T12:26:24.000Z</published>
+    <updated>2020-07-08T08:15:26.106Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天写作文时突发奇想，试图通过python写一个脚本来控制键盘输入，以此跳过批改网的禁止粘贴（相当于物理外挂），然后查了点东西，折腾了一番，算是弄好了。代码很短，但要配置一些东西。 首先要运行python脚本，我们需要安装python环境，这里我直接引用别人写好的教程了。 <a href="https://www.cnblogs.com/huangbiquan/p/7784533.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangbiquan/p/7784533.html</a> 安装过程比较简单，不多说了。为了更方便地使用python，最好是配置一下环境变量，这样我们就可以直接在命令行中调用python。 下面是具体代码</p><blockquote><p>import time from pynput.keyboard import Key, Controller keyboard = Controller() time.sleep(5) with open(‘format.txt’, ‘r’) as f: format = f.read() keyboard.type(format)</p></blockquote><p>可以看出很简单，第一行是导入time库，以此来延时键盘输入；第二行是导入我们需要的控制键盘输入的库，这里如果之前没用过pynput库，则需要安装一下：</p><blockquote><p>python -m pip install pynput</p></blockquote><p>然后就是将控制器转给keyboard，并休眠5秒以等待用户操作。然后打开文本文件，读取其中文字，最后通过键盘打出来。 将代码保存进一个txt文件，然后将扩展名改为.py，最后新建一个txt文件来存储想要通过键盘输入的文字，这里注意文字文件要与脚本文件放置在同一目录下。 通过命令行运行脚本，脚本启动后将输入切换到目标文本框，稍等几秒就完事了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天写作文时突发奇想，试图通过python写一个脚本来控制键盘输入，以此跳过批改网的禁止粘贴（相当于物理外挂），然后查了点东西，折腾了一番，算是弄好了。代码很短，但要配置一些东西。 首先要运行python脚本，我们需要安装python环境，这里我直接引用别人写好的教程了。 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 聊一聊C++关闭输入输出同步在windows环境中的实际效用		</title>
+    <link href="http://yoursite.com/2019/03/18/%E8%81%8A%E4%B8%80%E8%81%8Ac%E5%85%B3%E9%97%AD%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%90%8C%E6%AD%A5%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E5%AE%9E%E9%99%85%E6%95%88%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/03/18/%E8%81%8A%E4%B8%80%E8%81%8Ac%E5%85%B3%E9%97%AD%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%90%8C%E6%AD%A5%E5%9C%A8windows%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E5%AE%9E%E9%99%85%E6%95%88%E7%94%A8/</id>
+    <published>2019-03-18T13:48:41.000Z</published>
+    <updated>2020-07-08T08:15:26.098Z</updated>
+    
+    <content type="html"><![CDATA[<p>偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz… <a href="http://www.ayews.com/wp-content/uploads/2019/03/TIM截图20190318212218.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318212218-146x300.png" alt=""></a> 偷偷截了一点聊天信息。。。我看他说的信誓旦旦，便不禁对我以前的经验产生了怀疑，因为我之前遇到过使用cin t掉，改scanf过的卡常题。所以我一直认为在windows环境下，scanf是优于关闭同步的cin的。大佬建议我自己去用电脑试试，我正好也闲着没事，于是就去做了个实验，看看在windows环境下cin与scanf的效率到底怎么样。 我首先重定向了输入输出，两行代码。</p><blockquote><p>freopen(“input.txt”,”r”,stdin); freopen(“output.txt”,”w”,stdout);</p></blockquote><p>input.txt是输入数据，output.txt是输出数据，我先往input里写入了10^7的数据，然后开始单个输入的测试。 首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间都在4s左右； 然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在10-11s间徘徊； 最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16s左右； 接着我进行了一次读取两个数据的测试。 首先是scanf，对于10^7规模的数据，5次测试scanf花费的时间仍然都在4s左右； 然后是关闭同步的cin，对于10^7规模的数据，5次测试cin花费的时间在11s左右； 最后是开着同步的cin，对于10^7规模的数据，5次测试cin花费的时间都在16-17s间徘徊； 可以看出，在windows下，即使关闭了输入输出同步，cin的效率仍然远远低于scanf… 但是我这里用的都是mingw编译的，不知道msvc编译出来的程序效率几何，也许大佬说的是对的，只是我无法求证。 另外可以知道hdu的oj环境使用的编译器是mingw包里的。。属实坑人。 <a href="http://www.ayews.com/wp-content/uploads/2019/03/TIM截图20190318214644.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2019/03/TIM%E6%88%AA%E5%9B%BE20190318214644-300x54.png" alt=""></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;偷偷摸个鱼，写这篇的动力源于在某群里与一个大佬的争论orz… &lt;a href=&quot;http://www.ayews.com/wp-content/uploads/2019/03/TIM截图20190318212218.png&quot; target=&quot;_blank&quot; rel=&quot;noo
+      
+    
+    </summary>
+    
+    
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 咕咕咕（		</title>
+    <link href="http://yoursite.com/2019/02/22/%E5%92%95%E5%92%95%E5%92%95%EF%BC%88/"/>
+    <id>http://yoursite.com/2019/02/22/%E5%92%95%E5%92%95%E5%92%95%EF%BC%88/</id>
+    <published>2019-02-22T09:17:56.000Z</published>
+    <updated>2020-07-08T08:15:26.090Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于种种事宜，这段时间博客一直没有更新。如果你之前有看我的博客，那我向你致歉，这学期争取高产。 今天打开博客时忽然发现前端的板娘消失不见了，折腾了一番发现是主题更新，导致原有的文件全部被替换，于是我又自行加入了live2d脚本代码。关于如何在网站前端添加板娘，这个我一定会写一篇指导。由于时间已久，我要稍加整理。虽然有可能会咕，但我保证一定会写。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;由于种种事宜，这段时间博客一直没有更新。如果你之前有看我的博客，那我向你致歉，这学期争取高产。 今天打开博客时忽然发现前端的板娘消失不见了，折腾了一番发现是主题更新，导致原有的文件全部被替换，于是我又自行加入了live2d脚本代码。关于如何在网站前端添加板娘，这个我一定会写
+      
+    
+    </summary>
+    
+    
+    
+      <category term="碎碎念" scheme="http://yoursite.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 最小生成树浅谈		</title>
+    <link href="http://yoursite.com/2018/12/01/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%B5%85%E8%B0%88/"/>
+    <id>http://yoursite.com/2018/12/01/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E6%B5%85%E8%B0%88/</id>
+    <published>2018-12-01T15:56:06.000Z</published>
+    <updated>2020-07-08T08:15:26.082Z</updated>
+    
+    <content type="html"><![CDATA[<p>博客搬迁后就一直没更新，正好这两天在写最小生成树，就顺便写点东西。 首先先贴一下我参考的两篇博客: 1.<a href="https://blog.csdn.net/luoshixian099/article/details/51908175" target="_blank" rel="noopener">算法导论–最小生成树（Kruskal和Prim算法）</a> 2.<a href="https://blog.csdn.net/qq_35644234/article/details/59106779" target="_blank" rel="noopener">数据结构–最小生成树详解</a> 关于最小生成树的话现在比较多的是两个算法，一个是prim算法，即由点开始寻找最小代价边，直至联通所有点；另一个是kruskal算法，即由最小代价边开始依次选择符合条件的边，直至联通全图。 至于两种算法的思路我这里就不多赘述了，上面的两个帖子已经讲的很生动形象了，我主要讲代码实现，因为理解是一回事，实现是另一回事。 首先要考虑的是如何接收输入，也就是如何存边的信息。边有起点与终点，这里我采用的是邻接矩阵（二维数组）来存放边的信息。具体的方式就是首先将所有边的权重初始化为一个极大值（INT_MAX)，然后读入边时把对应的权重修改为读入的值即可。这样的话我们就可以通过查看邻接矩阵某位置的值是不是INT_MAX来判定该位置指代的边是否存在。代码如下: <code>void init_graph() { cout &lt;&lt; &quot;Enter the number of vertex and edge:&quot;; cin &gt;&gt; vertex_count &gt;&gt; edge_count; int a,b,w; for(int i = 1;i &lt;= vertex_count;i++) { for(int j = 1;j &lt;= vertex_count;j++) weight[i][j] = INT_MAX; } cout &lt;&lt; &quot;Enter each edge&#39;s start point, end point and weigh:&quot;; for(int i = 0;i &lt; edge_count;i++) { cin &gt;&gt; a &gt;&gt; b &gt;&gt; w; weight[a][b] = w; weight[b][a] = w; } }</code> 这里提一下，我的顶点是从1开始计数的，因此weigh[0][0]是没被用到的。 由于编辑器原因，代码缩进存在问题，各位凑合看吧。 搞完输入，下面就可以先写prim算法了。首先我们要知道prim算法的原理是从一个起始点开始，每次连接最小代价边。这里我们可以用一个close_edge数组来表示当前已有点到其他顶点的路径权值。若不存在路径，则值为INT_MAX。每次添加一条边时，即多了一个新的顶点，这时我们只要将close_edge数组更新一下即可。代码如下: <code>typedef struct close_edge{ int pre; int weigh; }Close_edge; void prim(int start) { if(start &lt; 1 || start &gt; vertex_count) { cout &lt;&lt; &quot;\nInvalid input.&quot;&lt;&lt; endl; return; } cout &lt;&lt; &quot;\nPrim&#39;s algorithm:&quot; &lt;&lt; endl; close_edge = new Close_edge[vertex_count+1]; for(int i = 1;i &lt;= vertex_count;i++) close_edge[i].weigh = INT_MAX; for(int i = 1;i &lt;= vertex_count;i++) { if(i!=start) { close_edge[i].weigh = weight[start][i]; close_edge[i].pre = start; } } close_edge[start].weigh = 0; cout &lt;&lt; &quot;The start point:&quot; &lt;&lt; start &lt;&lt; endl; for(int i = 2;i &lt;= vertex_count;i++) { int min_cost = INT_MAX; int idx; for(int j = 1;j &lt;= vertex_count;j++) { if(close_edge[j].weigh &lt; min_cost &amp;&amp; close_edge[j].weigh != 0){ min_cost = close_edge[j].weigh; idx = j; } } close_edge[idx].weigh = 0; cout &lt;&lt; &quot;Operation &quot; &lt;&lt; i-1 &lt;&lt; &quot;:&quot; &lt;&lt; endl; cout &lt;&lt; &quot;Start at:&quot; &lt;&lt; close_edge[idx].pre &lt;&lt; &quot;;\tEnd at:&quot; &lt;&lt; idx &lt;&lt; &quot;;\tCost:&quot; &lt;&lt; min_cost &lt;&lt; endl; //edge.push_back({i,idx}); for(int j = 1;j &lt;= vertex_count;j++) { if(close_edge[j].weigh &gt; weight[idx][j]){ close_edge[j].weigh = weight[idx][j]; close_edge[j].pre = idx; } } } delete close_edge; }</code> 可以看出算法是接收一个输入的起点值，然后用起点到其他点路径的权重更新close_edge数组，由此我们就能找到第一个最小代价边（即到起点权值最小的一条边），从而加入一个新顶点。当顶点被加入时，将数组该位置的值置为0，表示已加入。然后，通过新加入的顶点，更新close_edge数组。 可以看出我这里的colse_edge是一个自定义结构体，结构体中还有个pre变量。这个变量是用来存储加入的最小代价边的起点，方便输出。因为每次添加的最小代价边，不一定是上一个顶点所带来的。 下面就是kruskal算法。 首先我们要知道该算法的原理，是将边按权重排序，依次添加满足条件的边，直至所有顶点联通。需要满足的条件，即添加的边的起点与终点不连通。这里我们可以假定所用顶点原先都是孤立的，每次加边时，我们可以把边的终点加入起点所在的图，由此他们就连通了。我代码中用的是vector来存放这样的关系，因为它较好理解，判定是否联通有多种方法，例如并查集，这里不赘述。 代码如下: <code>typedef struct Edge{ int x,y,v; }Edge; bool cmp(Edge a,Edge b) { return a.v &lt; b.v; } void kruskal() { cout &lt;&lt; &quot;\nKruskal&#39;s algorithm:&quot; &lt;&lt; endl; edge = new Edge[edge_count]; int cnt = 0; for (int i = 1; i &lt;= vertex_count;i++) { for (int j = 1; j &lt; i; j++) { if (weight[i][j]!=INT_MAX) { edge[cnt].x = i; edge[cnt].y = j; edge[cnt].v = weight[i][j]; cnt++; } } } sort(edge,edge+edge_count,cmp); //for(unsigned i = 0;i &lt; edge_count;i++) //cout &lt;&lt; edge[i].x &lt;&lt; &quot; &quot; &lt;&lt; edge[i].y &lt;&lt; &quot; &quot; &lt;&lt; edge[i].v &lt;&lt; endl; vector tree[vertex_count]; for(int i = 0;i &lt; vertex_count;i++) tree[i].push_back(i+1); //for(int i = 0;i &lt; vertex_count;i++) //cout &lt;&lt; *tree[i].begin() &lt;&lt; endl; cnt = 0; for(int k = 0;k &lt; edge_count;k++) { int x = edge[k].x,y = edge[k].y; int idx_x = INT_MAX,idx_y = INT_MAX; for(int i = 0;i &lt; vertex_count;i++) { for(unsigned j = 0;j &lt; tree[i].size();j++) { if(tree[i][j] == x){ idx_x = i; break; } } for(unsigned j = 0;j &lt; tree[i].size();j++) { if(tree[i][j] == y){ idx_y = i; break; } } } if(idx_x!=idx_y) { for(unsigned i = 0;i &lt; tree[idx_y].size();i++) tree[idx_x].push_back(tree[idx_y][i]); tree[idx_y].clear(); cout &lt;&lt; &quot;Operation &quot; &lt;&lt; ++cnt &lt;&lt; &quot;:&quot; &lt;&lt; endl; cout &lt;&lt; &quot;Start at:&quot; &lt;&lt; x &lt;&lt; &quot;;\tEnd at:&quot; &lt;&lt; y &lt;&lt; &quot;;\tCost:&quot; &lt;&lt; edge[k].v &lt;&lt; endl; //cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; &quot; &quot; &lt;&lt; edge[k].v &lt;&lt; endl; } } }</code> 首先我是通过weigh数组得到了所有的边，然后通过自定义的比较函数对边进行排序。接着我初始化了顶点图，每个点一开始都属于不同的图。每次加边时，判定边的起点与终点是否属于同一个图，如果不是，则将终点所在图与起点所在图合并，并输出该边。这样依次对所有的边进行一次遍历，在输出合法的情况下就能得到最小生成树了。 另外，最近发现了一个不错的代码展示网站，这里我就把全部源码发在这个网站上了，贴上链接: <a href="https://paste.ubuntu.com/p/xhxyszCT5P/" target="_blank" rel="noopener">最小生成树</a> 全部源码可以通过这个访问，看的也舒服。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;博客搬迁后就一直没更新，正好这两天在写最小生成树，就顺便写点东西。 首先先贴一下我参考的两篇博客: 1.&lt;a href=&quot;https://blog.csdn.net/luoshixian099/article/details/51908175&quot; target=&quot;_blank
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 博客搬迁相关事宜		</title>
+    <link href="http://yoursite.com/2018/11/02/%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%BF%81%E7%9B%B8%E5%85%B3%E4%BA%8B%E5%AE%9C/"/>
+    <id>http://yoursite.com/2018/11/02/%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%BF%81%E7%9B%B8%E5%85%B3%E4%BA%8B%E5%AE%9C/</id>
+    <published>2018-11-02T10:15:40.000Z</published>
+    <updated>2020-07-08T08:15:26.074Z</updated>
+    
+    <content type="html"><![CDATA[<p>稍微折腾了一下，现在是把博客搬到主机壳上了，这里我就有必要吹一下主机壳了(真香) 本来咸鱼如我，这辈子都不会搬迁博客的 结果昨天在wyx的强烈安利下，我还是无法避免的对主机壳动了心，于是回去就着手搬站 虽然博客很小，但我是第一次搬，期间遇到了一些问题，大部分自己解决了，但有个无法处理的问题 我寻求wyx的帮助，他让我发工单，我就尝试着发了一个工单，结果秒回 <a href="http://www.ayews.com/wp-content/uploads/2018/11/61B82F9155698811FDE2C30C35D8B5D3.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/11/61B82F9155698811FDE2C30C35D8B5D3-300x197.jpg" alt=""></a> 然后问题就解决了(???) 然后我今天就准备充钱买个虚拟主机，结果操作失误了，冲到了另一个服务上。本来我都准备就当什么也没有发生，再冲100了，然后我突发奇想:要不发个工单吧 然后就收到了p2 (还是秒回) <a href="http://www.ayews.com/wp-content/uploads/2018/11/1B4075559D583C3D4C1F1193D4D19D78.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/11/1B4075559D583C3D4C1F1193D4D19D78-300x187.jpg" alt=""></a> 真的，且不谈主机壳的东西质量如何，就这个工单，我吹爆，而且主机壳这个模式还真的不错，用了它的话基本上只需要专心做网站就可以了，其他的都不用管。 重点是这玩意还不需要备案。我相信你也心动了。 好了就吹到这里，现在说说集体的搬迁过程。 主机壳是给了一块存储空间与ftp地址、账号和密码，另外还有一个数据库的使用权限，有这些就足够我们搭网站了。事实上如果用主机壳的服务，只要把wordpress包解压到主机壳给的存储空间里，然后再直接打开主机壳给的次级域名，然后就可以直接打开wordpress的配置页面了。我们只需要填好数据库名，密码以及ftp密码，word就能自动配置好了，然后博客就可以直接用了。所以用主机壳提供的虚拟主机，搭网站会变得异常简单，只需要上传一下文件就可以了。 我先是通过phpmyadmin把之前的wordpress数据库扒了下来，然后上传到新虚拟主机的数据库时出了点问题，已解决。然后就是登陆到ftp，把网站文件上传上去。一开始我用的win10自带的ftp，然而我发现速度实在难以接受…后面我用了xftp进行上传，然后上传完毕后又出了问题，网页显示建立数据库连接失败。这里我检查了一下wp-config文件，并没有发现问题。我索性直接删除了config文件，重新配置wordpress。这里说一下就是wordpress包一开始解压是没有wp-config文件的，我们配置好了之后才会有这个文件，来使网站跑起来。我删除这个文件再打开网页，便能重新进入wordpress配置页面。输入相关信息，提交以下，博客就能跑起来了。 下面估计很长一段时间博客都不会搬迁了吧 ( 笑</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;稍微折腾了一下，现在是把博客搬到主机壳上了，这里我就有必要吹一下主机壳了(真香) 本来咸鱼如我，这辈子都不会搬迁博客的 结果昨天在wyx的强烈安利下，我还是无法避免的对主机壳动了心，于是回去就着手搬站 虽然博客很小，但我是第一次搬，期间遇到了一些问题，大部分自己解决了，但有
+      
+    
+    </summary>
+    
+    
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 我眼中的算法-写给通信协会新生的话		</title>
+    <link href="http://yoursite.com/2018/09/29/%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95-%E5%86%99%E7%BB%99%E9%80%9A%E4%BF%A1%E5%8D%8F%E4%BC%9A%E6%96%B0%E7%94%9F%E7%9A%84%E8%AF%9D/"/>
+    <id>http://yoursite.com/2018/09/29/%E6%88%91%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%AE%97%E6%B3%95-%E5%86%99%E7%BB%99%E9%80%9A%E4%BF%A1%E5%8D%8F%E4%BC%9A%E6%96%B0%E7%94%9F%E7%9A%84%E8%AF%9D/</id>
+    <published>2018-09-29T08:51:39.000Z</published>
+    <updated>2020-07-08T08:15:26.066Z</updated>
+    
+    <content type="html"><![CDATA[<p>本篇文章是主要是针对通信协会里有意愿加入算法学习小组的新生而写的，同时也包括其他任何有意愿学习编程/算法的新生/老生。 一直没好好总结自己学的这些东西，归结下来还是基本跟算法相关，我也算做个总结。 先声明一点，本篇文章若无特指，所有C语言皆指C/C++，我现在主要使用C++。 首先我引用一篇文章，算是抛玉引砖了。 <a href="http://115.com/104849/T1300276.html" target="_blank" rel="noopener">算法的力量，李开复聊算法的重要性</a> 个人觉得这篇文章写的很不错，提到了很多实际的例子，很有说服力。尤其是针对计算机运行速度越来越快，是否还有必要学习算法这一问题的阐述。下面就是我的砖头部分了。 窃以为，广义的说，算法就是解决问题的方法。一个问题可能会有多种解法，而我认为，我们学习算法的目的，就是优化现有的解决方法，或者选择更好的方法去解决问题。打个比方，给你一列数，现在要你得到这列数中最大的一个数。解决方案有两个，A方案为先将这列数排序，再得到最大值；B方案为直接遍历这列数，找到第一大的数。很明显，方案A相比方案B做了更多的工作。而在这列数的个数相当大的情况下，A方案消耗的资源将会远远多于B方案。这时候算法的作用就凸显出来了。要说时下计算机方面什么最火，莫过于人工智能/大数据分析了，想必各位也有所耳闻。而这一块的研究，计算量是十分庞大的，一般的计量单位根本无法衡量。学习算法，有一定的算法基础，对以后从事这方面研究有着莫大的好处。 我们再具体一些，本科阶段学习算法到底是学些什么？事实上都是基础的东西，工程，实际开发方面的东西很少，或者说完全不用。更多的，靠的是数学，逻辑这些方面的知识，比如线代/离散/数据结构这些，都是大学开设的课程。这也就意味着学习算法很大程度上只能靠本科阶段，就业后再考虑学习算法，很难。考虑到就业/实习/保研，学习的黄金阶段只是在大一至大三间，实际上大三开始就已经晚了，因为这时候学习算法的收益，不如学习实际开发。所以对于新生来说，大一一年，学好算法，打好基础，对以后的工作大有脾益。回到正题，到底学些什么，主要还是学基础的方法。比如之前提到的选择数列中一个最大的数，又比如如何更快的将一个数列排序/查找其中的一个值。更多的，给你N个点，M条路径，假设通过第i个路径要收取Vi元，要求你得到两个点之间的最小耗费路径，诸如这样的题目，通过它们学习处理问题的方法，大致就是这样。 说说我自己的学习经历吧。我最开始接触计算机知识，是在去年8月。那时候偶然间得到了一个学长的指导，他引导我去看一个关于C语言的网课。我就是从那时开始，接触到这方面的东西。暑假并没有学到多少东西，可能比各位还要菜。到十月底计协干事招新面试时，我清楚的记得我说的是学到了结构体，事实上还没有学到，那时候我就被学长打击了，说我自学速度太慢。实际上我现在回想起来，以一个新生的角度去看的话，学到这个程度已经非常不容易了。按照我的观点，初学编程都会有一个自闭期（特指C语言），在这段时间里你会天天遇到各种Bugs使你无法把程序跑起来，程序还会各种莫名崩溃。我曾经因为一个中文逗号卡了半小时，也曾因为if中用单等于号，无视warning而debug一晚上。我跟你们说这些不是为了卖惨，事实上每个学习C语言的人都会经历这样的时期。我持有一个观点，学C语言的过程，实际上就是踩坑的过程。什么时候你把坑都踩光了，你就精通C语言了。书上（红书）的东西就那么多，更多的东西还是需要你去动手。这里插一句话，不要用红书（谈教授编写）入门。至于为什么我这里不多赘述，各位可以点击我给的两个链接吃吃瓜。 <a href="http://tieba.baidu.com/p/2843103544" target="_blank" rel="noopener">【C语言】千万别看谭浩强的书——写给那些真正想学好C语言的人</a> <a href="https://www.cnblogs.com/pmer/category/532409.html" target="_blank" rel="noopener">谭浩强《C程序设计》中的各种错误</a> 至于到底该用什么书，C我推荐C Primer Plus，C++我推荐C++ Primer Plus。 回到正题，我10月底是结构体水平，现在想来也挺有意思的。这里我又想到了一点，新生们应该都会问，怎样才能学好编程。这是个很有意思的问题，我给出的答案是多敲，敲多了感觉自然就有了。我在学习编程的初期，时不时去计蒜客（一个oj）刷题。虽然都是很基础的题，但是确实是为我做了一些积累，可以说我的基础就是那时候打下来的。说实话，看再多书还是不如动手敲来的实在。另外，像计蒜客这样的oj平台，网上非常多，我是十分建议你们有空时去刷一刷的，对自己很有好处，我也在考虑要不要给你们推一些题什么的，还在想。现在我们计协竞赛部也在筹备一个oj平台，希望能把它用上。这里多说一句，编程=基础，学完编程再搞算法。 大一上学期我基本就是这样的了，视频+做题。11月中旬是蓝桥杯校赛，我算是运气好拿了优秀奖，就获得了蓝桥杯省赛的资格。之后一直到现在，我基本上就保持着周六去东区与学长们刷题的习惯，当然以后可能就要带你们一起了。算法的学习到底还是要多做题，多练。事实上蓝桥杯是真的简单，我没有任何贬低它的意思，但实际上它的难度相比ACM，不是弱了一点点。我们平时都叫它暴力杯，意思是暴力就可以写出绝大部分题。所以参与这种比赛，投入产出比高，很适合大一/大二的同学去搞。只要你有编程基础，马上就可以去搞。 我的经历基本就是这样，现在就水水网赛勉强维持生活这样子。对于你们来说，我真诚希望你们大一能打好编程，算法的基础。我知道你们大都0基础，不要怕，只要你肯学，大二混成我这样简单极了。学编程，学算法真的是很令人自闭的事，所以坚持很重要。关于编程基础的话，计协国庆后会开编程基础的培训，我来讲。培训相当于带着你们一些，当然主要还是靠你们自学，我们只是引导，解惑，答疑。我们大概有一个月多点的时间补一补基础，11月中旬就是校赛，算是你们在大学里将要经历的第一场学术竞赛，希望你们能有所收获。校赛是兼蓝桥杯预选赛，获奖即可参加省赛。 另外有一件事就是有人可能有疑问，就是我同时在计协跟通信协会的事情。这个解释起来不太好解释，我直接说结果，总结下来一句话，今年计协通信不分家，都是自己人。我在通信这边带学习小组，其实也很头疼，不知道该怎么带，有一些新生私聊我想加入学习小组，但0基础的话是没法入手的。我现在的想法，还是先通过计协那边的培训帮你们拉一拉基础，后面再考虑算法的事情，我们一步一步来。 最后推一下我自学时看的视频。 <a href="https://study.163.com/course/courseMain.htm?courseId=1003425004" target="_blank" rel="noopener">老九零基础学编程系列之C语言</a> <a href="https://study.163.com/course/courseMain.htm?courseId=1003701011" target="_blank" rel="noopener">老九零基础学编程系列之C++入门</a> 我建议还是先看C，看完C考虑C++，看你们怎么想了。工具的话主要还是CodeBlocks，16.01/17.12都可以。另外还有一些使用的小工具，以后我会推给你们。 最后再赘述一下，算法这条路真的不好走（事实上没什么路是好走的）。如果想搞，请坚持，一定要坚持下去。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本篇文章是主要是针对通信协会里有意愿加入算法学习小组的新生而写的，同时也包括其他任何有意愿学习编程/算法的新生/老生。 一直没好好总结自己学的这些东西，归结下来还是基本跟算法相关，我也算做个总结。 先声明一点，本篇文章若无特指，所有C语言皆指C/C++，我现在主要使用C++
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Just CA/AOC" scheme="http://yoursite.com/tags/Just-CA-AOC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 用简单的方法打印一个五角星		</title>
+    <link href="http://yoursite.com/2018/09/29/%E7%94%A8%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E4%BA%94%E8%A7%92%E6%98%9F/"/>
+    <id>http://yoursite.com/2018/09/29/%E7%94%A8%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%E6%89%93%E5%8D%B0%E4%B8%80%E4%B8%AA%E4%BA%94%E8%A7%92%E6%98%9F/</id>
+    <published>2018-09-29T08:33:07.000Z</published>
+    <updated>2020-07-08T08:15:26.066Z</updated>
+    
+    <content type="html"><![CDATA[<p>用了简单的python库。</p><p>import turtle            //导入所需工具<br>turtle.forward(100)        //让箭头画出一条长100个单位的直线<br>turtle.right(144)        //让箭头向右转144度<br>turtle.forward(100)        //继续重复四次<br>turtle.right(144)<br>turtle.forward(100)<br>turtle.right(144)<br>turtle.forward(100)<br>turtle.right(144)<br>turtle.forward(100)</p><p>turtle是用到的工具库，这个库主要用来画图。 最后放下效果图。 <a href="http://www.ayews.com/wp-content/uploads/2018/09/111.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/09/111-300x142.png" alt=""></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;用了简单的python库。&lt;/p&gt;
+&lt;p&gt;import turtle            //导入所需工具&lt;br&gt;turtle.forward(100)        //让箭头画出一条长100个单位的直线&lt;br&gt;turtle.right(144)        //让箭
+      
+    
+    </summary>
+    
+    
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> ACM-ICPC 2018 焦作赛区网络预赛 G. Give Candies		</title>
+    <link href="http://yoursite.com/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/"/>
+    <id>http://yoursite.com/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/</id>
+    <published>2018-09-25T11:12:04.000Z</published>
+    <updated>2020-07-08T08:15:26.058Z</updated>
+    
+    <content type="html"><![CDATA[<p>There are N children in kindergarten. Miss Li bought them N candies. To make the process more interesting, Miss Li comes up with the rule: All the children line up according to their student number (1…N)(1…N), and each time a child is invited, Miss Li randomly gives him some candies (at least one). The process goes on until there is no candy. Miss Li wants to know how many possible different distribution results are there. Input The first line contains an integer T, the number of test case. The next T lines, each contains an integer N. 1≤T≤100 1≤N≤10^100000 Output For each test case output the number of possible results (mod 1000000007). 样例输入 1 4 样例输出 8 题目来源 ACM-ICPC 2018 焦作赛区网络预赛 AC代码</p><p>#include &lt;bits/stdc++.h&gt;</p><p>#define ll long long<br>#define rep(i,a,n) for(int i=a;i&lt;n;i++)<br>#define per(i,a,n) for(int i=n-1;i&gt;=a;i–)</p><p>const int N = 100000+10;<br>const int mo = 1000000007;</p><p>using namespace std;</p><p>ll Mode(ll a, ll b, ll mode)<br>{<br>    ll sum = 1;<br>    while (b) {<br>        if (b &amp; 1) {<br>            sum = (sum * a) % mode;<br>            b–;<br>        }<br>        b /= 2;<br>        a = a * a % mode;<br>    }<br>    return sum;<br>}</p><p>int main()<br>{<br>    ios::sync_with_stdio(false);<br>    int T;<br>    cin &gt;&gt; T;<br>    while(T–)<br>    {<br>        string s;<br>        cin &gt;&gt; s;<br>        ll tmp = 0;<br>        rep(i,0,s.size())<br>        {<br>            tmp *= 10;<br>            tmp += (s[i]-‘0’);<br>            tmp%=(mo-1);<br>        }<br>        ll ret = Mode(2,tmp-1,mo);<br>        cout &lt;&lt; ret &lt;&lt; endl;<br>    }<br>    return 0;<br>}</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;There are N children in kindergarten. Miss Li bought them N candies. To make the process more interesting, Miss Li comes up with the rule
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> ACM-ICPC 2018 徐州赛区网络预赛 H. Ryuji doesn&#39;t want to study		</title>
+    <link href="http://yoursite.com/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/"/>
+    <id>http://yoursite.com/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/</id>
+    <published>2018-09-23T07:46:13.000Z</published>
+    <updated>2020-07-08T08:15:26.058Z</updated>
+    
+    <content type="html"><![CDATA[<p>Ryuji is not a good student, and he doesn’t want to study. But there are n books he should learn, each book has its knowledge a[i]. Unfortunately, the longer he learns, the fewer he gets. That means, if he reads books from ll to rr, he will get a[l] * L + a[l+1] *(L-1) + …… + a[r-1] *2 + a[r]（L is the length of [ l， r ] that equals to r−l+1). Now Ryuji has q questions, you should answer him: 1. If the question type is 1, you should answer how much knowledge he will get after he reads books [ l, r ]. 2. If the question type is 2, Ryuji will change the ith book’s knowledge to a new value. Input First line contains two integers n and q (n, q≤100000). The next line contains n integers represent a[i](a[i]≤1e9) . Then in next qq line each line contains three integers a, b, c, if a = 1， it means question type is 1, and b, c represents [ l, r ]. if a =2 , it means question type is 2 , and b, c means Ryuji changes the bth book’ knowledge to c. Output For each question, output one line with one integer represent the answer. 样例输入 5 3 1 2 3 4 5 1 1 3 2 5 0 1 4 5 样例输出 10 8 题目来源 ACM-ICPC 2018 徐州赛区网络预赛 <a href="https://nanti.jisuanke.com/t/31460" target="_blank" rel="noopener">原题链接</a> * 通过特殊构造线段树解决，核心是通过维护三个线段树，构造阶梯和 * 树1存放基础线段树数据，即子节点值的和 * 树2存放阶梯处理后的数据，即“ a[l] * L + a[l+1] *(L-1) + …… + a[r-1] *2 + a[r]” * 树3存放节点中存储的区间长度，即L-R，合并子节点时会用到 AC代码</p><p>#include <iostream><br>#include <algorithm><br>#define rep(i,a,n) for(int i=a;i&lt;n;i++)<br>#define per(i,a,n) for(int i=n-1;i&gt;=a;i–)<br>const int MAXN = 100010;<br>using namespace std;<br>long long sum[MAXN&lt;&lt;2];    //存储阶梯处理后的结果<br>long long add[MAXN&lt;&lt;2];    //存储处理前的结果（子节点和）<br>int cnt[MAXN&lt;&lt;2];    //存储当前节点中存储区间的长度<br>long long _sum;<br>void pushup(int o){<br>    cnt[o] = cnt[o&lt;&lt;1] + cnt[o&lt;&lt;1|1];    //更新当前节点存储区间长度<br>    add[o] = add[o&lt;&lt;1] + add[o&lt;&lt;1|1];    //更新子节点和<br>    sum[o] = add[o&lt;&lt;1]*cnt[o&lt;&lt;1|1]+sum[o&lt;&lt;1]+sum[o&lt;&lt;1|1]; //更新阶梯和<br>}<br>void build(int o,int l,int r){<br>    //左开右闭<br>    if(l==r-1){<br>         cin &gt;&gt; add[o];<br>        cnt[o] = 1;<br>        sum[o] = add[o];<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        build(o&lt;&lt;1,l,mid);<br>        build(o&lt;&lt;1|1,mid,r); pushup(o); //更新存储信息<br>    }<br>    }<br>void update(int o,int l,int r,int p,int v){ if(l==r-1){<br>    //更新根节点信息<br>    add[o] = v;<br>    sum[o] = v;<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        if(p&lt;mid) update(o&lt;&lt;1,l,mid,p,v);<br>        else update(o&lt;&lt;1|1,mid,r,p,v);<br>        pushup(o);<br>    }<br>}<br>void query(int o,int l,int r,int L,int R){<br>    if(L&lt;=l&amp;&amp;r&lt;=R){<br>        //已知L&lt;=l,这里可以想象成l为左端点，l&lt;r&lt;R，那么r到R之间还有R-r的长度，因此将o表示的这一区间加上R-r个子节点和（add[o]）<br>    _sum += sum[o] + (R-r)*add[o];<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        if(L&lt;mid)<br>            query(o&lt;&lt;1,l,mid,L,R);<br>        if(R&gt;mid)<br>            query(o&lt;&lt;1|1,mid,r,L,R);<br>    }<br>} </p><p>int main(){ ios::sync_with_stdio(false); int n,q; cin&gt;&gt;n&gt;&gt;q;<br>    build(1,0,n);<br>    rep(i,0,q){<br>        int a,b,c;<br>        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        if(a==2){<br>            update(1,0,n,b-1,c);<br>        }else{<br>            _sum = 0;<br>            query(1,0,n,b-1,c);<br>            cout&lt;&lt;_sum&lt;&lt;endl;<br>        }<br>    }<br>    return 0;<br>}</p><p>虽然是一道签到题，但对线段树的深入学习有一定帮助，这里先丢这。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Ryuji is not a good student, and he doesn’t want to study. But there are n books he should learn, each book has its knowledge a[i]. Unfor
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 实现一个简单的内存池		</title>
+    <link href="http://yoursite.com/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/"/>
+    <id>http://yoursite.com/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/</id>
+    <published>2018-08-28T11:18:16.000Z</published>
+    <updated>2020-07-08T08:15:26.050Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是我最近在自己的算法书上看到的，感觉比较有意思，扒一下。 至于内存池是个什么东西，我的理解就是每次申请内存时，提供内存的东西。本来我们申请内存是向系统申请，实现一个内存池，意思就是事先向系统申请好内存，之后每次申请内存，都从这一块事先申请的内存分配。 先定义几个东西: 1.ElementType 意为要使用的数据类型 2.InitMemoryPool 意为初始化内存池 3.NewElement 意为为一个新变量分配内存 4.InitElement 意为初始化一个变量 5.DeleteElement 意为释放该变量的内存 核心思路是维护一个空闲队列，事先申请好内存，将地址存入队列。每次初始化变量时便从队列头取出一块地址，销毁时即将该地址重新加入队列。 下面是具体代码：</p><p>const int N = 1e5;<br>typedef struct ElementType{<br>    int i;</p><p>}ElementType;<br>queue FreeQueue;</p><p>ElementType Ele[N];</p><p>void InitMemoryPool(){<br>    for(int i = 0;i &lt; N;i++)<br>        FreeQueue.push(&amp;Ele[i]);<br>}<br>void InitElement(ElementType* Element)<br>{<br>    //初始化变量操作<br>}</p><p>ElementType* NewElement()<br>{<br>    ElementType* Element = FreeQueue.front();<br>    InitElement(Element);<br>    FreeQueue.pop();<br>    return Element;<br>}</p><p>void DeleteElement(ElementType* Element)<br>{<br>    FreeQueue.push(Element);<br>} </p><p>这写的算是某种模板吧，用起来也挺简单的。虽然目前阶段用到的不会多，但我觉得还是有必要了解一下内存池这个东西。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这是我最近在自己的算法书上看到的，感觉比较有意思，扒一下。 至于内存池是个什么东西，我的理解就是每次申请内存时，提供内存的东西。本来我们申请内存是向系统申请，实现一个内存池，意思就是事先向系统申请好内存，之后每次申请内存，都从这一块事先申请的内存分配。 先定义几个东西: 1
+      
+    
+    </summary>
+    
+    
+    
+      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 写给计算机科学与技术专业新生的一些东西（1）		</title>
+    <link href="http://yoursite.com/2018/08/05/%E5%86%99%E7%BB%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF%E4%B8%93%E4%B8%9A%E6%96%B0%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%881%EF%BC%89/"/>
+    <id>http://yoursite.com/2018/08/05/%E5%86%99%E7%BB%99%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF%E4%B8%93%E4%B8%9A%E6%96%B0%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%EF%BC%881%EF%BC%89/</id>
+    <published>2018-08-05T06:05:09.000Z</published>
+    <updated>2020-07-08T08:15:26.050Z</updated>
+    
+    <content type="html"><![CDATA[<p>本来很早就应该写了，鸽到现在… 这篇文章主要为新生讲一下计算机科学与技术专业大一的课程安排。 首先是计算机行业的形势…这里先贴一篇文，题为 <strong>中国的程序员是否已经饱和了？</strong> <a href="https://user.qzone.qq.com/3292054308/blog/1506346137" target="_blank" rel="noopener">https://user.qzone.qq.com/3292054308/blog/1506346137</a> 文章是去年的了，发布在学校软件协会公众号上。文章里的程序员可以推广开来，计算机行业从业人员都在此范围内。软件协会公众号里还有些别的文章也很有意思，这里再贴一篇。 <a href="https://mp.weixin.qq.com/s?__biz=MzUxNzE2NDg5Ng==&mid=2247483734&idx=1&sn=a3dd7a63b8a8067697fa2fbca4fcf988&chksm=f99d1b59ceea924f42e08753942e1e3317369561f108d3c252b619bc726a43723b2c883fed60&mpshare=1&scene=22&srcid=0903mb8CIfNoeecLSNVyBOto#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzUxNzE2NDg5Ng==&amp;mid=2247483734&amp;idx=1&amp;sn=a3dd7a63b8a8067697fa2fbca4fcf988&amp;chksm=f99d1b59ceea924f42e08753942e1e3317369561f108d3c252b619bc726a43723b2c883fed60&amp;mpshare=1&amp;scene=22&amp;srcid=0903mb8CIfNoeecLSNVyBOto#rd</a> 这篇是他分享出来的。虽说是去年的文，现在看来依旧受用。 事实上计算机行业的发展大家有目共睹，计算机产业是未来产业，前景之好是毋庸置疑的。对于我们本科生来说，毕业后出来找个六七千的工作是小菜一碟，月入上万的很多，因此我不是很推荐新生们去考虑转专业以及深蓝选拔考试。每年我们学院基本上都是只有转进来的，转出去的很少很少。当然也可以选择考研，看学习方向。 我这里主要讲关于计科专业的课程，其他的专业我不是很了解，不多言。 计科的话大一还算轻松，课不多，上学期主要是高等数学1/C语言/大学英语1，基本上没什么压力，空闲时间很多。下学期的话主要是高等数学2/大学物理1/大学英语2，以及近代史/马原，还是比较轻松的，主要讲一下上学期的课。 首先是高数，重中之重，一定要好好学。后面无论是什么课，都或多或少的跟它沾上关系。而且，数学水平在某种程度上，也决定了你以后能走到的高度。这是理论基础，一定要重视。事实上我们学校的课程也很水，考试很容易过。只要上课认真听，考前稍微复习复习就可以过了。当然我还是希望你们能学的深一些，积极参加高数竞赛这些活动。 接着是C语言，相当于是本专业专业相关的第一门课，也是最基础的课。C语言学好了，后面的C++/Java，数据结构这些，都不会难，如果C没学好，后面的课基本上是没法学的。学好C语言，对深入学习编程也有莫大的好处，这里不多赘述，引用一篇文章，有兴趣的同学可以看看。 <a href="https://www.zhihu.com/question/49294784/answer/116205654" target="_blank" rel="noopener">https://www.zhihu.com/question/49294784/answer/116205654</a> 至于如何学好C语言，我也没什么好办法，只能告诉你们多敲。我个人觉得C语言的学习，实质上是一个试错的过程。那些错误只有你自己去犯了，乃至犯了很多次，你才能学到东西，获得提升。本身这门课没多少知识点，无非 输入输出/变量与数据类型/运算符及其优先级/条件分支与循环结构/数组及多维数组/指针/函数，以及最后的文件输入输出。总结下来学校教的课程里就这么多东西，都很简单，如果你肯花功夫的话。另外推一个网课，之前我已经提到过很多次了。 <a href="http://study.163.com/course/introduction.htm?courseId=1003425004" target="_blank" rel="noopener">http://study.163.com/course/introduction.htm?courseId=1003425004</a> 环境的搭建我博客里有写，贴一下链接。 <a href="http://www.ayews.com/?p=234" target="_blank" rel="noopener">http://www.ayews.com/?p=234</a> 暑假里希望各位能提前预习一下这部分的知识，否则很可能第一节课就懵逼，后面更是学不下去了。 大学英语的话很简单，靠高中水平混混就行了。 上学期我们专业还会开设一门课，叫计算机导论，个人感觉用处不大，并不能收获多少东西，当然基础不好的同学还是有必要听一听的，好对计算机有一个答题的认识。 其他的就是一些副/水课了，专业相关性不大，比如思修/体育/职业规划之类的，随便水一水就行了。 学校教的课程就这么多要说的，重点是高数/C语言，希望你们能够重视。事实上我们大一的课真的是很轻松了，相对其他学校来说的话。我们线代/离散/概率论这些课都放到大二去学了，很多学校大一就上掉了，因此大一的空闲时间是很多的。我希望你们在休息的同时，去多接触一点别的东西。学校能给的东西就这么多，更多的东西需要你们自己去挖掘。 关于课外的东西，写在下一篇文章里。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本来很早就应该写了，鸽到现在… 这篇文章主要为新生讲一下计算机科学与技术专业大一的课程安排。 首先是计算机行业的形势…这里先贴一篇文，题为 &lt;strong&gt;中国的程序员是否已经饱和了？&lt;/strong&gt; &lt;a href=&quot;https://user.qzone.qq.com/
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Just CA/AOC" scheme="http://yoursite.com/tags/Just-CA-AOC/"/>
+    
+  </entry>
+  
+</feed>
