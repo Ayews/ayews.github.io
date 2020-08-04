@@ -156,6 +156,91 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-实现一个简单的内存池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/"> 实现一个简单的内存池		</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/" class="archive-article-date">
+  	<time datetime="2018-08-28T11:18:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是我最近在自己的算法书上看到的，感觉比较有意思，扒一下。 至于内存池是个什么东西，我的理解就是每次申请内存时，提供内存的东西。本来我们申请内存是向系统申请，实现一个内存池，意思就是事先向系统申请好内存，之后每次申请内存，都从这一块事先申请的内存分配。 先定义几个东西: 1.ElementType 意为要使用的数据类型 2.InitMemoryPool 意为初始化内存池 3.NewElement 意为为一个新变量分配内存 4.InitElement 意为初始化一个变量 5.DeleteElement 意为释放该变量的内存 核心思路是维护一个空闲队列，事先申请好内存，将地址存入队列。每次初始化变量时便从队列头取出一块地址，销毁时即将该地址重新加入队列。 下面是具体代码：</p>
+<p>const int N = 1e5;<br>typedef struct ElementType{<br>    int i;</p>
+<p>}ElementType;<br>queue FreeQueue;</p>
+<p>ElementType Ele[N];</p>
+<p>void InitMemoryPool(){<br>    for(int i = 0;i &lt; N;i++)<br>        FreeQueue.push(&amp;Ele[i]);<br>}<br>void InitElement(ElementType* Element)<br>{<br>    //初始化变量操作<br>}</p>
+<p>ElementType* NewElement()<br>{<br>    ElementType* Element = FreeQueue.front();<br>    InitElement(Element);<br>    FreeQueue.pop();<br>    return Element;<br>}</p>
+<p>void DeleteElement(ElementType* Element)<br>{<br>    FreeQueue.push(Element);<br>} </p>
+<p>这写的算是某种模板吧，用起来也挺简单的。虽然目前阶段用到的不会多，但我觉得还是有必要了解一下内存池这个东西。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-写给计算机科学与技术专业新生的一些东西（1）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -878,102 +963,6 @@ phpinfo()
 
 
   
-    <article id="post-codeforces-round-486-div-3-b-substrings-sort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/04/codeforces-round-486-div-3-b-substrings-sort/"> Codeforces Round #486 (Div. 3)  B. Substrings Sort		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/04/codeforces-round-486-div-3-b-substrings-sort/" class="archive-article-date">
-  	<time datetime="2018-06-04T03:05:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>直接上题。 <a href="http://www.ayews.com/wp-content/uploads/2018/06/TIM截图20180604103710.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/TIM%E6%88%AA%E5%9B%BE20180604103710-300x166.png" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/06/TIM截图20180604103748.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/TIM%E6%88%AA%E5%9B%BE20180604103748-300x262.png" alt=""></a> 这是cf div.3 里的一道B题，意为字符串排序，子串在前。 我首先想到的是通过重载运算符来写，但考虑到潜在的”NO”情况，而且效率较低，故考虑直接插入的方法。 因为是直接插入，所以我首先考虑的是使用stl里的list。因为对list的不熟悉，一开始没写成。转而用vector，很容易就写出了代码，先贴出来。</p>
-<p>#include <iostream><br>#include <string><br>#include <vector><br>using namespace std;<br>vector vec;<br>int main(){<br>    int n;<br>    bool flag = false;<br>    cin &gt;&gt; n;<br>    string temp;<br>    cin &gt;&gt; temp;<br>    vec.push_back(temp);<br>    for(int i = 1;i &lt; n;i++)<br>    {<br>        flag = false;<br>        cin &gt;&gt; temp;<br>        if(vec[0].find(temp) != vec[0].npos){<br>            vec.insert(vec.begin(),temp);<br>            continue;<br>        }<br>        for(int j = vec.size()-1;j &gt;= 0;j–)<br>        {<br>            if(temp.find(vec[j]) != temp.npos)<br>            {<br>                if(j == i-1){<br>                    vec.push_back(temp);<br>                    flag = true;<br>                }<br>                else if(vec[j+1].find(temp) != vec[j+1].npos)<br>                {<br>                    vec.insert((vec.begin()+j+1),temp);//insert方法会自动将后面的数据移位<br>                    flag = true;<br>                }</p>
-<pre><code>        }
-        if(flag)
-                break;
-    }
-    if(!flag)
-    {
-        cout &lt;&lt; &quot;NO&quot;;
-        return 0;
-    }
-}
-cout &lt;&lt; &quot;YES&quot; &lt;&lt; endl;
-for(int i = 0;i &lt; vec.size();i++)
-    cout &lt;&lt; vec\[i\] &lt;&lt; endl;
-return 0;</code></pre><p>}</p>
-<p>主要思想在于每输入一个即寻找他能在vector中插入的位置。若查找不到，即无法排序，直接输出”NO”。这个方法的缺陷在于如果测试数据中含有大量需插入到表头的字符串，会造成大量的耗时。当然这里因为数据量很小，而且时间给的也多，所以耗时很小。 之后我写了用list的代码:</p>
-<p>#include <iostream><br>#include <vector><br>#include <string><br>#include <list><br>using namespace std;<br>list<string> l;<br>int main(){<br>    int n;<br>    bool flag = false;<br>    cin &gt;&gt; n;<br>    string temp;<br>    cin &gt;&gt; temp;<br>    l.push_back(temp);<br>    for(int i = 1;i &lt; n;i++)<br>    {<br>        flag = false;<br>        cin &gt;&gt; temp;<br>        if(l.front().find(temp) != l.front().npos){<br>            l.push_front(temp);<br>            continue;<br>        }<br>        for(list::iterator it = l.begin();it != l.end();++it)<br>        {<br>            list::iterator it1 = it;<br>            ++it1;<br>            if(temp.find(*it) != temp.npos)<br>            {<br>                if(it1 == l.end()){<br>                    l.push_back(temp);<br>                    flag = true;<br>                }<br>                else if(it1-&gt;find(temp) != it1-&gt;npos)<br>                {<br>                    l.insert(it1,temp);<br>                    flag = true;<br>                }<br>            }<br>            if(flag)<br>                    break;<br>        }<br>        if(!flag)<br>        {<br>            cout &lt;&lt; “NO”;<br>            return 0;<br>        }<br>    }<br>    cout &lt;&lt; “YES” &lt;&lt; endl;<br>    for(list::iterator it = l.begin();it != l.end();++it)<br>        cout &lt;&lt; *it &lt;&lt; endl;<br>    return 0;<br>}</p>
-<p>逻辑跟之前的vector版相差不大，查找插入位置时略微繁琐一些，但避免了vector的移位操作。提交后耗时并无明显变化，较之前的31ms只快了1ms。可能是数据量小，且常数因子比重较大导致。div.3的题给的时间与内存限制较大，数据规模也较小，还是比较容易的。 原题链接:<a href="http://codeforces.com/contest/988/problem/B" target="_blank" rel="noopener">http://codeforces.com/contest/988/problem/B</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符串</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/04/codeforces-round-486-div-3-b-substrings-sort/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1071,10 +1060,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
               </li>
              
@@ -1083,7 +1068,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串 算法题解</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1091,11 +1080,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1107,15 +1100,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">

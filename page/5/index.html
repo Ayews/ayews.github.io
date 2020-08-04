@@ -156,6 +156,158 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-wordpress搭建参考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/16/wordpress%E6%90%AD%E5%BB%BA%E5%8F%82%E8%80%83/"> Wordpress搭建参考		</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/16/wordpress%E6%90%AD%E5%BB%BA%E5%8F%82%E8%80%83/" class="archive-article-date">
+  	<time datetime="2018-04-16T15:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>把博客搭建起来也有几天了,现在才来写这篇博客,也算是有了一定的了解才下手.WordPress到底还是好用,关于网页的东西什么都不用动,只要把服务器与域名绑在一起,再把WordPress部署进服务器就行.</p>
+<p>首先需要的是一个部署centos7服务器.服务器建议选用国外的,因为国内的服务器基本都需要备案,而备案过程十分繁琐.这里我用的是搬瓦工的VPS.</p>
+<p>有了服务器之后,我们需要在服务器上部署需要的环境.首先使用root用户与主机建立对话.</p>
+<p>步骤:</p>
+<p>1.安装 Apache HTTP</p>
+<p>只需在终端中输入以下命令即可.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd</span><br></pre></td></tr></table></figure>
+<p>接下来等待安装,安装好之后启动Apache服务,键入以下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start httpd.service</span><br></pre></td></tr></table></figure>
+<p>启动完成后,直接在浏览器中输入服务器的 ip 地址，应该就可以看到 Apache 的欢迎页面了(TEST123…)</p>
+<p>如果已经绑定了域名,那么对应的域名应该也可以看到测试页面了.</p>
+<p>如果未出现测试页面,可能是服务器的80端口未打开.搬瓦工服务器不会出现这个问题,请查阅服务器提供商提供的解决方案.</p>
+<p>2.安装 MySql并新建数据库</p>
+<p>在 CentOS 7 中的 yum 源中是没有 Mysql 的，其默认数据库是 MariaDB.虽说二者并无较大差别,但这里我还是采用了Musql.<br>可以通过以下命令行进行下载安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh http:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql-community-release-el7-5.noarch.rpm  </span><br><span class="line">yum install mysql mysql-server mysql-libs mysql-server</span><br></pre></td></tr></table></figure>
+<p>将设为开机启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable mysql.service</span><br></pre></td></tr></table></figure>
+<p>重新启动服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysql.service</span><br></pre></td></tr></table></figure>
+<p>此时对安装进行测试.键入以下命令行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p>默认没有密码,直接回车.</p>
+<p>如果出现欢迎语句,则已安装成功.</p>
+<p>创建wordpress数据库:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database wordpress;</span><br></pre></td></tr></table></figure>
+<p>这样数据库就弄好了.</p>
+<p>可以修改数据库密码,参考链接:</p>
+<p><a href="https://blog.csdn.net/qq_35723367/article/details/79639970" target="_blank" rel="noopener">https://blog.csdn.net/qq_35723367/article/details/79639970</a></p>
+<p>参考博客:</p>
+<p><a href="https://blog.csdn.net/qq_35723367/article/details/79639180" target="_blank" rel="noopener">https://blog.csdn.net/qq_35723367/article/details/79639180</a></p>
+<p>3.开机默认启动 Apache 和 Mysql 服务</p>
+<p>键入以下命令行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable httpd.service  </span><br><span class="line">systemctl enable mysqld.service</span><br></pre></td></tr></table></figure>
+<p>为了确保服务可用,这里最好把两个服务都重启一下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart httpd.service  </span><br><span class="line">systemctl restart mysqld.service</span><br></pre></td></tr></table></figure>
+<p>4.安装 PHP 以及相关 PHP 组件</p>
+<p>键入命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install php  </span><br><span class="line">yum install php-mysql  </span><br><span class="line">yum install php-gd php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc</span><br></pre></td></tr></table></figure>
+<p>目前只需要这些插件.可通过洗下面的命令查看所有插件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search php-</span><br></pre></td></tr></table></figure>
+<p>5.测试 PHP 是否安装成功</p>
+<p>建立一个 info.php 文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;var&#x2F;www&#x2F;html&#x2F;info.php</span><br></pre></td></tr></table></figure>
+<p>然后输入 i 进入编辑模式，在文件中写入下面的 PHP 命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">  </span><br><span class="line">phpinfo();  </span><br><span class="line">  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>Esc,退出编辑模式,:wq 保存修改并退出,在浏览器中输入 ip 地址 /info.php,例如:123.56.183.34/info.php 回车,就可以看到 PHP 的信息了.</p>
+<p>如果浏览器显示的是刚刚输入的代码,重启Apache服务试试:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart httpd.service</span><br></pre></td></tr></table></figure>
+<p>6.安装ftp</p>
+<p>WordPress访问服务器文件需要通过一个用户,我们新建一个ftpuser用户借其使用.</p>
+<p>先安装ftp服务,键入命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd</span><br></pre></td></tr></table></figure>
+<p>新增 FTP 用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd ftpuser</span><br></pre></td></tr></table></figure>
+<p>为 ftpuser 设定密码，期间会有两次提示输入密码确认；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd ftpuser</span><br></pre></td></tr></table></figure>
+<p>设置 FTP 服务为开机自启，并重启其服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable vsftpd.service  </span><br><span class="line">systemctl restart vsftpd.service</span><br></pre></td></tr></table></figure>
+<p>7.下载 WordPress</p>
+<p>可以到 <a href="https://wordpress.org/" target="_blank" rel="noopener">https://wordpress.org/</a> 官网上去翻,或通过下面的命令下载:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;cn.wordpress.org&#x2F;wordpress-3.9-zh\_CN.zip</span><br></pre></td></tr></table></figure>
+<p>使用 unzip 来解压文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip wordpress-3.8-zh\_CN.zip</span><br></pre></td></tr></table></figure>
+<p>如果，没有 unzip 的话，通过下面命令下载:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install unzip</span><br></pre></td></tr></table></figure>
+<p>安装完毕后，再执行上面的解压命令.</p>
+<p>8.把文件复制到 /var/www/html 目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -rf wordpress&#x2F;\* &#x2F;var&#x2F;www&#x2F;html&#x2F;</span><br></pre></td></tr></table></figure>
+<p>（注：建议去看看 WordPress 的 wp-conten-sample.php 文件） </p>
+<p>注意html下最好不要有其他文件,诸如index.html之类更不能有,否则会无法进入WordPress配置页.</p>
+<p>最后,在浏览器中输入你的 ip 地址,就可以看到 WordPress 的配置页.<br>根据其提示，完成最后的配置.</p>
+<p>主机名：（填 ip 地址）<br>FTP 用户名：xxx<br>FTP 密码：xxx </p>
+<p>搭建好之后可能会涉及到文件的权限问题,最简单的方法是把整个www目录的权限改为777.虽然这样缺乏安全性,但对于个人小博客来说问题不大.键入命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 &#x2F;var&#x2F;www&#x2F;html</span><br></pre></td></tr></table></figure>
+<p>无效的话请加入-R参数.</p>
+<p>目前还未遇到其他问题,如有其它问题请联系我.</p>
+<p>全文参考博客:</p>
+<p><a href="https://blog.csdn.net/qq_35723367/article/details/79544001" target="_blank" rel="noopener">https://blog.csdn.net/qq_35723367/article/details/79544001</a></p>
+<p><a href="https://blog.csdn.net/Metropolis_cn/article/details/71374594" target="_blank" rel="noopener">https://blog.csdn.net/Metropolis_cn/article/details/71374594</a><br>—-手动分割<br>2020.7.8<br>    centos7装php时有可能会遇到冲突的情况，我当时采取了卸载已有php，更新yum库，装php7.0的措施来解决了这一问题。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/16/wordpress%E6%90%AD%E5%BB%BA%E5%8F%82%E8%80%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-关于服务器的一些小看法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -961,128 +1113,6 @@
 
 
   
-    <article id="post-每日一题-3-29" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/28/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-29/"> 每日一题 3.28		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/28/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-29/" class="archive-article-date">
-  	<time datetime="2018-03-28T05:18:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://p.qpic.cn/homework/0/hw_h_jfafqaqe/" alt=""></p>
-<p>使用C、C++、Java、前端输出菱形。</p>
-<p>要求：</p>
-<p>1、重要代码加注释。</p>
-<p>2、提交可复制编译的源码，或txt文件。</p>
-<p>3、提交后在群里@老九君说明已提交。</p>
-<p>//打印菱形</p>
-<p>//根据目标图形的特点，分两次打印完成</p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>int main(){</p>
-<pre><code>int n;                                             //设置高度
-
-scanf(&quot;%d&quot;,&amp;n);                           //输入上半个菱形的高度
-
-for(int i = 0;i &lt; n;i++){                 //打印上半个菱形
-
-    for(int j = n-1;j &gt; i;j--)              //先打印空格
-
-        printf(&quot; &quot;);
-
-    for(int k = 0;k &lt; 2\*i+1;k++)    //打印星星，个数与行数相关
-
-        printf(&quot;\*&quot;);
-
-    printf(&quot;\\n&quot;);                              //每行打印完毕时换行
-
-}
-
-for(int i = 0;i &lt; n-1;i++){             //打印下半个菱形，与上半个菱形略有不同
-
-    for(int j = 0;j &lt;= i;j++)            //先打印空格
-
-        printf(&quot; &quot;);
-
-    for(int k = 2\*n;k &gt; 2\*i+3;k--)  //打印星星，个数与行数相关
-
-        printf(&quot;\*&quot;);
-
-    printf(&quot;\\n&quot;);                             //每行打印完毕时换行
-
-}
-
-return 0;</code></pre><p>}</p>
-<p>评语: 思路清晰，注释命了，额外加5分</p>
-<p>采用了分两步打印的方式。先打印上半个菱形，再打印下半个。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">老九学堂每日一题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/28/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-29/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1180,10 +1210,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
               </li>
              
@@ -1192,7 +1218,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串 算法题解</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,11 +1230,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,15 +1250,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">碎碎念</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">

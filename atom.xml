@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-08T14:09:52.396Z</updated>
+  <updated>2020-08-04T16:21:23.832Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Manacher学习小结</title>
+    <link href="http://yoursite.com/2020/08/04/Manacher%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/"/>
+    <id>http://yoursite.com/2020/08/04/Manacher%E5%AD%A6%E4%B9%A0%E5%B0%8F%E7%BB%93/</id>
+    <published>2020-08-04T15:46:04.000Z</published>
+    <updated>2020-08-04T16:21:23.832Z</updated>
+    
+    <content type="html"><![CDATA[<p>说来惭愧，到现在才把马拉车学了，但学起来没有之前想象的那么难，理解后相当简单。  </p><h2 id="马拉车能干啥"><a href="#马拉车能干啥" class="headerlink" title="马拉车能干啥"></a>马拉车能干啥</h2><p>马拉车能够在o(n)时间内求得给定字符串的最长回文子串，同时还能得到以给定字符串的任意字符为回文中心时的回文长度。</p><h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>马拉车的核心有两点，第一点是重构字符串，在原串的开头与每个字符后添加’#’或其他字符，这样字符串的长度就变成了2*n+1，使得重构后的字符串及其<strong>任意子串</strong>的长度都可视作奇数，方便后面的处理；第二点是利用了对称性质，即：对于回文中心i,j，假设i&lt;j，那么i相对j的对称点就是2<em>j-i，我们在处理2</em>j-i这个对称中心的回文半径时，可以利用先前处理的对称中心i的回文半径，来实现处理加速，我们可以看成字符串中每个字符只会被额外访问一次，这样就使得时间复杂度降低到了o(n)。</p><h2 id="具体做法"><a href="#具体做法" class="headerlink" title="具体做法"></a>具体做法</h2><p>马拉车在实现时维护了两个变量，第一个是当前参考回文中心（即上面提到的j），第二个是此回文中心的最右回文边界，我们可以理解成j+rj，这里给一个新的定义mx。这里要注意的是此时我们操作的是重构串。具体做法是求重构串的每一个字符的回文半径，当我们处理到i时，若i&lt;mx，那么我们就可以利用前面求得的2*j-i的回文半径。不难发现，ri可直接取min(mx-i,r(2*j-i))，然后再对回文中心i进行回文半径拓展即可。当i+ri&gt;mx时，更新mx与参考回文中心j，即让i成为新的j。</p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>实现分为两块，首先是重构。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Init</span><span class="params">()</span> </span>&#123;<span class="comment">//形成新的字符串</span></span><br><span class="line">    <span class="keyword">int</span> len=<span class="built_in">strlen</span>(s);<span class="comment">//len是输入字符串的长度</span></span><br><span class="line">    s_new[<span class="number">0</span>]=<span class="string">'$'</span>;<span class="comment">//处理边界，防止越界</span></span><br><span class="line">    s_new[<span class="number">1</span>]=<span class="string">'#'</span>;</span><br><span class="line">    <span class="keyword">int</span> j=<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++) &#123;</span><br><span class="line">        s_new[j++]=s[i];</span><br><span class="line">        s_new[j++]=<span class="string">'#'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    s_new[j]=<span class="string">'\0'</span>;<span class="comment">//处理边界，防止越界（容易忘记）</span></span><br><span class="line">    <span class="keyword">return</span> j;<span class="comment">// 返回s_new的长度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在重构串的开头我添加了一个’$’，以防止后面扩展回文半径时越界。<br>第二块即为马拉车实现。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Manacher</span><span class="params">()</span> </span>&#123;<span class="comment">//返回最长回文串</span></span><br><span class="line">    <span class="keyword">int</span> len=Init(<span class="built_in">strlen</span>(s));<span class="comment">//取得新字符串的长度， 完成向s_new的转换</span></span><br><span class="line">    <span class="keyword">int</span> max_len=<span class="number">-1</span>;<span class="comment">//最长回文长度</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> mx=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=len;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;mx)</span><br><span class="line">            p[i]=min(p[<span class="number">2</span>*id-i],mx-i);<span class="comment">//上面图片就是这里的讲解</span></span><br><span class="line">        <span class="keyword">else</span> p[i]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(s_new[i-p[i]]==s_new[i+p[i]])<span class="comment">//不需边界判断，因为左有'$'，右有'\0'标记；</span></span><br><span class="line">            p[i]++;<span class="comment">//mx对此回文中点的贡献已经结束，现在是正常寻找扩大半径</span></span><br><span class="line">        <span class="keyword">if</span>(mx&lt;i+p[i]) &#123;<span class="comment">//每走移动一个回文中点，都要和mx比较，使mx是最大，提高p[i]=min(p[2*id-i],mx-i)效率</span></span><br><span class="line">            id=i;<span class="comment">//更新id</span></span><br><span class="line">            mx=i+p[i];<span class="comment">//更新mx</span></span><br><span class="line">        &#125;</span><br><span class="line">        max_len=max(max_len,p[i]<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max_len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>需要注意的是，p[i]维护的显然是回文半径，但却是重构串的回文半径，对于#a#,a位置的p为2，回文串长度为1，不难发现实际回文串长度即为p[i]-1。<br>参考:<br><a href="https://www.cnblogs.com/fan1-happy/p/11166182.html" target="_blank" rel="noopener">https://www.cnblogs.com/fan1-happy/p/11166182.html</a><br><a href="https://www.cnblogs.com/cloudplankroader/p/10988844.html" target="_blank" rel="noopener">https://www.cnblogs.com/cloudplankroader/p/10988844.html</a><br><a href="https://www.jianshu.com/p/116aa58b7d81" target="_blank" rel="noopener">https://www.jianshu.com/p/116aa58b7d81</a><br>例题：<br><a href="https://blog.csdn.net/qq_40858062/article/details/80158444" target="_blank" rel="noopener">https://blog.csdn.net/qq_40858062/article/details/80158444</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;说来惭愧，到现在才把马拉车学了，但学起来没有之前想象的那么难，理解后相当简单。  &lt;/p&gt;
+&lt;h2 id=&quot;马拉车能干啥&quot;&gt;&lt;a href=&quot;#马拉车能干啥&quot; class=&quot;headerlink&quot; title=&quot;马拉车能干啥&quot;&gt;&lt;/a&gt;马拉车能干啥&lt;/h2&gt;&lt;p&gt;马拉车能够
+      
+    
+    </summary>
+    
+    
+    
+      <category term="字符串 算法题解" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>Wordpress搬迁至Hexo</title>
@@ -485,32 +510,6 @@
       <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
     
       <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title> 实现一个简单的内存池		</title>
-    <link href="http://yoursite.com/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/"/>
-    <id>http://yoursite.com/2018/08/28/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E5%AD%98%E6%B1%A0/</id>
-    <published>2018-08-28T11:18:16.000Z</published>
-    <updated>2020-07-08T08:15:26.050Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是我最近在自己的算法书上看到的，感觉比较有意思，扒一下。 至于内存池是个什么东西，我的理解就是每次申请内存时，提供内存的东西。本来我们申请内存是向系统申请，实现一个内存池，意思就是事先向系统申请好内存，之后每次申请内存，都从这一块事先申请的内存分配。 先定义几个东西: 1.ElementType 意为要使用的数据类型 2.InitMemoryPool 意为初始化内存池 3.NewElement 意为为一个新变量分配内存 4.InitElement 意为初始化一个变量 5.DeleteElement 意为释放该变量的内存 核心思路是维护一个空闲队列，事先申请好内存，将地址存入队列。每次初始化变量时便从队列头取出一块地址，销毁时即将该地址重新加入队列。 下面是具体代码：</p><p>const int N = 1e5;<br>typedef struct ElementType{<br>    int i;</p><p>}ElementType;<br>queue FreeQueue;</p><p>ElementType Ele[N];</p><p>void InitMemoryPool(){<br>    for(int i = 0;i &lt; N;i++)<br>        FreeQueue.push(&amp;Ele[i]);<br>}<br>void InitElement(ElementType* Element)<br>{<br>    //初始化变量操作<br>}</p><p>ElementType* NewElement()<br>{<br>    ElementType* Element = FreeQueue.front();<br>    InitElement(Element);<br>    FreeQueue.pop();<br>    return Element;<br>}</p><p>void DeleteElement(ElementType* Element)<br>{<br>    FreeQueue.push(Element);<br>} </p><p>这写的算是某种模板吧，用起来也挺简单的。虽然目前阶段用到的不会多，但我觉得还是有必要了解一下内存池这个东西。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这是我最近在自己的算法书上看到的，感觉比较有意思，扒一下。 至于内存池是个什么东西，我的理解就是每次申请内存时，提供内存的东西。本来我们申请内存是向系统申请，实现一个内存池，意思就是事先向系统申请好内存，之后每次申请内存，都从这一块事先申请的内存分配。 先定义几个东西: 1
-      
-    
-    </summary>
-    
-    
-    
-      <category term="算法题解" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="技术随笔" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
