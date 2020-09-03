@@ -156,6 +156,161 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-散题-game-with-pearls" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/11/%E6%95%A3%E9%A2%98-game-with-pearls/"> [散题] Game with Pearls		</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/11/%E6%95%A3%E9%A2%98-game-with-pearls/" class="archive-article-date">
+  	<time datetime="2018-06-11T12:10:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本题为ACM-ICPC上海邀请赛的A题，我们做的重现。 源链接<a href="https://vjudge.net/contest/232683#overview" target="_blank" rel="noopener">https://vjudge.net/contest/232683#overview</a> <a href="http://www.ayews.com/wp-content/uploads/2018/06/TIM图片20180611195236.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/TIM%E5%9B%BE%E7%89%8720180611195236-300x252.png" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/06/TIM图片20180611195255.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/TIM%E5%9B%BE%E7%89%8720180611195255-300x142.png" alt=""></a> 本题意为给一串数与一个整数，尝试通过给这一串数中的数加上整数的倍数，使这串数成为自然数列。 首先我想到的方法是挨个尝试，但如果遇到换位无法处理。后面考虑将这串数放进一个集合中，用一个循环执行所需的操作。每次操作时，只要这串数中存在一个数加上所给整数的倍数能够与循环变量（即自然数-1）相同，九江这个数移出集合。最后检查集合是否为空，即可知道这串数能不能成为自然数列。 源码（C++实现）:</p>
+<p>#include <iostream><br>#include <algorithm><br>#include <set><br>using namespace std;<br>multiset<int> s;<br>int main()<br>{<br>    ios::sync_with_stdio(false);<br>    int m,n,k;<br>    cin &gt;&gt; m;<br>    while(m–)<br>    {<br>        cin &gt;&gt; n &gt;&gt; k;<br>        for(int i = 0;i &lt; n;i++)<br>        {<br>            int temp;<br>            cin &gt;&gt; temp;<br>            s.insert(temp);<br>        }<br>        for(int i = 1;i &lt;= n;i++)<br>        {<br>            for(set<int>::iterator it = s.begin();it != s.end();++it)<br>            {<br>                if(*it &lt;= i &amp;&amp; (*it-i)%k == 0){<br>                    s.erase(it);<br>                    break;}<br>            }<br>        }<br>        if(s.empty())<br>            cout &lt;&lt; “Jerry” &lt;&lt; endl;<br>        else<br>            cout &lt;&lt; “Tom” &lt;&lt; endl;<br>        s.clear();<br>    }<br>    return 0;<br>}</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/11/%E6%95%A3%E9%A2%98-game-with-pearls/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-codeforces-round-486-div-3-c-equal-sums" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/04/codeforces-round-486-div-3-c-equal-sums/"> Codeforces Round #486 (Div. 3)  C. Equal Sums		</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/04/codeforces-round-486-div-3-c-equal-sums/" class="archive-article-date">
+  	<time datetime="2018-06-04T15:15:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上题。 <a href="http://www.ayews.com/wp-content/uploads/2018/06/TIM截图20180604225317.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/TIM%E6%88%AA%E5%9B%BE20180604225317-300x259.png" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/06/TIM截图20180604230100.png" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/06/TIM%E6%88%AA%E5%9B%BE20180604230100-276x300.png" alt=""></a> 题意:给k个序列，从每个序列中任意剔除一个元素后求所有元素的和，若存在两个相同的和，则输出”YES”与对应剔除元素的位置；若不存在，则输出”NO”。 这题我用的是set数组，数据类型为自定义的结构体，存放剔除值、所在序列、位置。输入完毕后，依次将所有剔除元素后的和、剔除元素加入到set中，一个序列对应一个set。最后查重时，以第一个set为母容器，遍历其他set。若查到则输出结果，若未查到则将对应结构体添加到母set中。贴上代码:</p>
+<p>#include <iostream><br>#include <vector><br>#include <string><br>#include <set><br>typedef struct P{<br>    int x,y,z;<br>    bool operator &lt;(const struct P&amp; b) const<br>    {<br>        if(x &lt; b.x)<br>            return true;<br>        return false;<br>    }<br>}p;<br>using namespace std;<br>int main(){<br>    ios::sync_with_stdio(false);<br>    int k,n;<br>    cin &gt;&gt; k;<br>    set<P> s[k];<br>    for(int k1 = 0;k1 &lt; k;k1++)<br>    {<br>        int sum = 0;<br>        cin &gt;&gt; n;<br>        int a[n] = {0};<br>        for(int i = 0;i &lt; n;i++)<br>        {<br>            cin &gt;&gt; a[i];<br>            sum += a[i];<br>        }<br>        p p1;<br>        for(int i = 0;i &lt; n;i++){<br>            p1 = {sum-a[i],k1+1,i+1};<br>            s[k1].insert(p1);<br>        }<br>    }<br>    for(int k2 = 1;k2 &lt; k;k2++)<br>    {<br>        for(set::iterator it = s[k2].begin();it != s[k2].end();++it)<br>        {<br>            set::iterator it1 = s[0].find(*it);<br>            if(it1 != s[0].end())<br>            {<br>                cout &lt;&lt; “YES” &lt;&lt; endl;<br>                cout &lt;&lt; it-&gt;y &lt;&lt; “ “ &lt;&lt; it-&gt;z &lt;&lt; endl;<br>                cout &lt;&lt; it1-&gt;y &lt;&lt; “ “ &lt;&lt; it1-&gt;z;<br>                return 0;<br>            }<br>            else<br>                s[0].insert(*it);<br>        }<br>    }<br>    cout &lt;&lt; “NO”;<br>    return 0;<br>}</p>
+<p>代码的思路还是比较简单的，没什么好说的。这里给一个优化思路，set可以仅设置一个，每次插入前先查找，若有重复的则直接输出，可以同时减少时间与空间的使用。 原题链接:<a href="http://codeforces.com/contest/988/problem/C" target="_blank" rel="noopener">http://codeforces.com/contest/988/problem/C</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/04/codeforces-round-486-div-3-c-equal-sums/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-codeforces-round-486-div-3-b-substrings-sort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -849,177 +1004,6 @@ this.setVisible(true);
 
 
   
-    <article id="post-计算1-n间素数个数的方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/25/%E8%AE%A1%E7%AE%971-n%E9%97%B4%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/"> 计算1-n间素数个数的方法		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/25/%E8%AE%A1%E7%AE%971-n%E9%97%B4%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2018-04-25T14:29:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>撰文动力依旧来源于每日一题。</p>
-<p>这里给3个计算1-n间所有素数的方法：</p>
-<p>#include <fstream><br>#include <iostream><br>#include <algorithm><br>#include <vector><br>using namespace std;  </p>
-<p>int main(){<br>    ofstream file_0(“1.txt”);<br>    ofstream file_1(“2.txt”);<br>    ofstream file_2(“3.txt”);<br>    int n,flag = 1;<br>    cin &gt;&gt; n;<br>    for(int i = 1;i &lt; n+1;i++)<br>    {<br>        for(int j = 2;j &lt; i;j++)<br>        {<br>            if(i%j == 0){<br>                flag = 0;<br>            break;<br>            }<br>        }<br>        if(flag)<br>            file_0 &lt;&lt; i &lt;&lt; endl;<br>        flag = 1;<br>    }<br>    file_0.close();<br>    for(int i = 1;i &lt; n+1;i++)<br>    {<br>        for(int j = 2;j*j &lt;= i;j++)<br>        {<br>            if(i%j == 0){<br>                flag = 0;<br>            break;<br>            }<br>        }<br>        if(flag)<br>        file_1 &lt;&lt; i &lt;&lt; endl;<br>        flag = 1;<br>    }<br>    file_1.close();<br>    vector<int> nums;<br>    nums.push_back(2);<br>    nums.push_back(3);<br>    nums.push_back(5);<br>    for(int i = 2;i &lt; n+1;i++)<br>    {<br>        for(unsigned j = 0;j &lt; nums.size();j++)<br>        {<br>            if(i%nums[j] == 0){<br>                flag = 0;<br>                break;<br>            }<br>        }<br>        if(flag)<br>        {<br>            file_2 &lt;&lt; i &lt;&lt; endl;<br>            nums.push_back(i);<br>        }<br>        flag = 1;<br>    }<br>    file_2.close();<br>    return 0;<br>}</p>
-<p>方法一是最基础的方法，穷举所有的可能。</p>
-<p>方法二在方法一的基础上进行了优化，对每个数的循环判断只进行到n^1/2即停止，大大优化了时间损耗。</p>
-<p>原理可以这么解释:假设数num为一个合数，num = i * j，当i &lt; n^1/2时，i  &lt; j；而i &gt; n^1/2时，i&gt;j，相当于i与j互换了位置。而此时若num不为素数，整数i与一定已找到，因此此时进行的操作皆为多余操作，可略去。</p>
-<p>方法三是笔者自己写的方法，通过自己发现的规律，大大减少了比对的次数。原以为能对方法二做出有效优化，结果发现运行时间并无较大差异。究其原因，应是对数据的存储花费了额外时间。但即便如此，对于一些需要多次查找区间内素数的情况，该方法依旧有其实用性。</p>
-<p>方法的核心在于只要整数num不为已有任意素数的倍数，num即可确定是素数，这样就能有效减少判断的次数。</p>
-<p>以下为法三完善后的代码:</p>
-<p>#include <fstream><br>#include <iostream><br>#include <algorithm><br>#include <vector><br>using namespace std;  </p>
-<p>int main(){<br>    int flag = 1,n = 0;<br>    string c;<br>    cin &gt;&gt; c;<br>    for(unsigned i = 0;i &lt; c.size();i++)<br>    {<br>        if(!isdigit(c.at(i))) //检查输入中是否含数字以外的字符<br>        {<br>            cout &lt;&lt; “输入非法。”;<br>            return 0;<br>        }<br>        n = 10*n + c.at(i)-48; //计算输入的数值<br>    }<br>    if(n &lt; 2){<br>    cout &lt;&lt; “该范围内无素数。”;<br>    return 0;<br>    }<br>    vector<int> nums; //存放所有素数的数组<br>    nums.push_back(2); //先放一个2<br>    for(int i = 2;i &lt; n+1;i++)<br>    {<br>        for(unsigned j = 0;j &lt; nums.size() &amp;&amp; nums[j]*nums[j] &lt;= i;j++)<br>        {<br>            if(i%nums[j] == 0) //数组内已有元素为i的因数，即不为素数<br>            {<br>                flag = 0;<br>                break;<br>            }<br>         }<br>        if(flag) //数组内无i的因数<br>        {<br>            nums.push_back(i); //添加该素数<br>        }<br>        flag = 1;<br>    }<br>    //迭代器输出<br>    for(vector<int>::iterator it = nums.begin();it != nums.end();++it)<br>    cout &lt;&lt; *it &lt;&lt; endl;<br>    return 0;<br>}</p>
-<p>相对之前的代码，添加了判定输入是否非法的功能。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/25/%E8%AE%A1%E7%AE%971-n%E9%97%B4%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于中文的输入输出操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/21/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%87%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%93%8D%E4%BD%9C/"> 关于中文的输入输出操作		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/21/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%87%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2018-04-21T14:32:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前两天由于每日一题的原因，玩了会中文字符的输入与输出，从中我也体会到了对中文字符操作的繁琐程度。这里分享一下我的方法。</p>
-<p>首先我们要知道计算机存储一个中文字符不同于英文字符，它需要两个字节的空间。我通过测试，发现存储的形式是两个ASCII码，比如“，”字符，两位分别为-93，-84.测试的方式如下：</p>
-<p>int main(){<br>    char a[3];<br>    scanf(“%s”,a);//输入一个中文字符<br>    for(int i = 0;i &lt; 2;i++)<br>        printf(“%d”,a[i]);//打印每位字符的整形值<br>    return 0;<br>}</p>
-<p>C++的string也可以执行一样的操作，但打印时应注意需要强转为整形。</p>
-<p>类似的，我们可以通过一位一位赋值的方式，打印出中文字符。</p>
-<p>int main(){<br>    char a[3];<br>    a[0] = -93;<br>    a[1] = -84;//需对连续的两位赋值<br>    a[2] = ‘\0’;//补结束符<br>    printf(“%s”,a);<br>    return 0;<br>}</p>
-<p>这样就能打印出中文的逗号了。</p>
-<p>另外需要注意的是对字符串的赋值必须是要对连续的两个字符赋值，否则无法打印出正常的中文字符。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/21/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%87%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%93%8D%E4%BD%9C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1040,6 +1024,8 @@ this.setVisible(true);
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
+	<script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279238870'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1279238870%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+	</script>
   </div>
 </footer>
     </div>
@@ -1117,7 +1103,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1125,11 +1115,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
+                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1141,7 +1131,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1149,7 +1139,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
+                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1157,15 +1147,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">老九学堂每日一题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">

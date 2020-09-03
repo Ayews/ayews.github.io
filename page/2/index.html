@@ -156,6 +156,163 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-c中clock函数的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/"> C++中clock函数的使用		</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2019-05-01T16:55:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在学数据结构时正好看到了这个，顺带学了一下，这里做个整理。</p>
+<blockquote>
+<p>clock()是C/C++中的计时函数，而与其相关的数据类型是clock_t。在MSDN中，查得对clock函数定义如下：</p>
+<p>clock_t clock(void) ;</p>
+<p>简单而言，就是该程序从启动到函数调用占用CPU的时间。这个函数返回从“开启这个程序进程”到“程序中调用clock()函数”时之间的CPU时钟计时单元（clock tick）数，在MSDN中称之为挂钟时间（wal-clock）；若挂钟时间不可取，则返回-1。其中clock_t是用来保存时间的数据类型。（百度百科）</p>
+</blockquote>
+<p>需要指出的是这里的“挂钟时间”并不是真实时间，而是“时钟打点数”，而对于一个机器而言每秒的时钟打点数是一个常数，即CLK_TCK。下面我们看一下它具体的应用：</p>
+<p>#include <iostream><br>#include <ctime> //包含clock()函数<br>#include &lt;windows.h&gt;<br>using namespace std;</p>
+<p>int main()<br>{<br>    clock_t start,stop;                 //clock_t是clock()函数返回的变量类型<br>    start = clock();                    //开始计时<br>    Sleep(13300);                       //调用系统api，使程序休眠13.3秒<br>    stop = clock();                     //停止计时<br>    cout &lt;&lt; CLK_TCK &lt;&lt; endl;            //输出机器每秒时钟打点数<br>    cout &lt;&lt; 1.0*(stop-start)/CLK_TCK;   //输出两次clock()返回的差值(即函数调用时间)，注意转换成double型<br>    return 0;<br>}</p>
+<p>可以看出，程序将输出两次调用clock()中间花费的时间。通过这种方法我们可以评估不同函数的时间消耗，是个非常有效的办法。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-中山大学程序设计竞赛的几道题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/"> 中山大学程序设计竞赛的几道题		</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2019-04-22T06:21:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>找到了水文章的机会。简单说一些 B <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6512" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6512</a> <a href="https://paste.ubuntu.com/p/ZJWGCjNff6/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/ZJWGCjNff6/</a> 晚点更新</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-新智认知杯上海高校程序设计竞赛暨第十七届" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -763,171 +920,6 @@
 
 
   
-    <article id="post-acm-icpc-2018-焦作赛区网络预赛-g-give-candies" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/"> ACM-ICPC 2018 焦作赛区网络预赛 G. Give Candies		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/" class="archive-article-date">
-  	<time datetime="2018-09-25T11:12:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>There are N children in kindergarten. Miss Li bought them N candies. To make the process more interesting, Miss Li comes up with the rule: All the children line up according to their student number (1…N)(1…N), and each time a child is invited, Miss Li randomly gives him some candies (at least one). The process goes on until there is no candy. Miss Li wants to know how many possible different distribution results are there. Input The first line contains an integer T, the number of test case. The next T lines, each contains an integer N. 1≤T≤100 1≤N≤10^100000 Output For each test case output the number of possible results (mod 1000000007). 样例输入 1 4 样例输出 8 题目来源 ACM-ICPC 2018 焦作赛区网络预赛 AC代码</p>
-<p>#include &lt;bits/stdc++.h&gt;</p>
-<p>#define ll long long<br>#define rep(i,a,n) for(int i=a;i&lt;n;i++)<br>#define per(i,a,n) for(int i=n-1;i&gt;=a;i–)</p>
-<p>const int N = 100000+10;<br>const int mo = 1000000007;</p>
-<p>using namespace std;</p>
-<p>ll Mode(ll a, ll b, ll mode)<br>{<br>    ll sum = 1;<br>    while (b) {<br>        if (b &amp; 1) {<br>            sum = (sum * a) % mode;<br>            b–;<br>        }<br>        b /= 2;<br>        a = a * a % mode;<br>    }<br>    return sum;<br>}</p>
-<p>int main()<br>{<br>    ios::sync_with_stdio(false);<br>    int T;<br>    cin &gt;&gt; T;<br>    while(T–)<br>    {<br>        string s;<br>        cin &gt;&gt; s;<br>        ll tmp = 0;<br>        rep(i,0,s.size())<br>        {<br>            tmp *= 10;<br>            tmp += (s[i]-‘0’);<br>            tmp%=(mo-1);<br>        }<br>        ll ret = Mode(2,tmp-1,mo);<br>        cout &lt;&lt; ret &lt;&lt; endl;<br>    }<br>    return 0;<br>}</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/25/acm-icpc-2018-%E7%84%A6%E4%BD%9C%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-g-give-candies/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-acm-icpc-2018-徐州赛区网络预赛-h-ryuji-doesnt-want-to-study" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/"> ACM-ICPC 2018 徐州赛区网络预赛 H. Ryuji doesn&#39;t want to study		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/" class="archive-article-date">
-  	<time datetime="2018-09-23T07:46:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Ryuji is not a good student, and he doesn’t want to study. But there are n books he should learn, each book has its knowledge a[i]. Unfortunately, the longer he learns, the fewer he gets. That means, if he reads books from ll to rr, he will get a[l] * L + a[l+1] *(L-1) + …… + a[r-1] *2 + a[r]（L is the length of [ l， r ] that equals to r−l+1). Now Ryuji has q questions, you should answer him: 1. If the question type is 1, you should answer how much knowledge he will get after he reads books [ l, r ]. 2. If the question type is 2, Ryuji will change the ith book’s knowledge to a new value. Input First line contains two integers n and q (n, q≤100000). The next line contains n integers represent a[i](a[i]≤1e9) . Then in next qq line each line contains three integers a, b, c, if a = 1， it means question type is 1, and b, c represents [ l, r ]. if a =2 , it means question type is 2 , and b, c means Ryuji changes the bth book’ knowledge to c. Output For each question, output one line with one integer represent the answer. 样例输入 5 3 1 2 3 4 5 1 1 3 2 5 0 1 4 5 样例输出 10 8 题目来源 ACM-ICPC 2018 徐州赛区网络预赛 <a href="https://nanti.jisuanke.com/t/31460" target="_blank" rel="noopener">原题链接</a> * 通过特殊构造线段树解决，核心是通过维护三个线段树，构造阶梯和 * 树1存放基础线段树数据，即子节点值的和 * 树2存放阶梯处理后的数据，即“ a[l] * L + a[l+1] *(L-1) + …… + a[r-1] *2 + a[r]” * 树3存放节点中存储的区间长度，即L-R，合并子节点时会用到 AC代码</p>
-<p>#include <iostream><br>#include <algorithm><br>#define rep(i,a,n) for(int i=a;i&lt;n;i++)<br>#define per(i,a,n) for(int i=n-1;i&gt;=a;i–)<br>const int MAXN = 100010;<br>using namespace std;<br>long long sum[MAXN&lt;&lt;2];    //存储阶梯处理后的结果<br>long long add[MAXN&lt;&lt;2];    //存储处理前的结果（子节点和）<br>int cnt[MAXN&lt;&lt;2];    //存储当前节点中存储区间的长度<br>long long _sum;<br>void pushup(int o){<br>    cnt[o] = cnt[o&lt;&lt;1] + cnt[o&lt;&lt;1|1];    //更新当前节点存储区间长度<br>    add[o] = add[o&lt;&lt;1] + add[o&lt;&lt;1|1];    //更新子节点和<br>    sum[o] = add[o&lt;&lt;1]*cnt[o&lt;&lt;1|1]+sum[o&lt;&lt;1]+sum[o&lt;&lt;1|1]; //更新阶梯和<br>}<br>void build(int o,int l,int r){<br>    //左开右闭<br>    if(l==r-1){<br>         cin &gt;&gt; add[o];<br>        cnt[o] = 1;<br>        sum[o] = add[o];<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        build(o&lt;&lt;1,l,mid);<br>        build(o&lt;&lt;1|1,mid,r); pushup(o); //更新存储信息<br>    }<br>    }<br>void update(int o,int l,int r,int p,int v){ if(l==r-1){<br>    //更新根节点信息<br>    add[o] = v;<br>    sum[o] = v;<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        if(p&lt;mid) update(o&lt;&lt;1,l,mid,p,v);<br>        else update(o&lt;&lt;1|1,mid,r,p,v);<br>        pushup(o);<br>    }<br>}<br>void query(int o,int l,int r,int L,int R){<br>    if(L&lt;=l&amp;&amp;r&lt;=R){<br>        //已知L&lt;=l,这里可以想象成l为左端点，l&lt;r&lt;R，那么r到R之间还有R-r的长度，因此将o表示的这一区间加上R-r个子节点和（add[o]）<br>    _sum += sum[o] + (R-r)*add[o];<br>    }else{<br>        int mid = (l+r)&gt;&gt;1;<br>        if(L&lt;mid)<br>            query(o&lt;&lt;1,l,mid,L,R);<br>        if(R&gt;mid)<br>            query(o&lt;&lt;1|1,mid,r,L,R);<br>    }<br>} </p>
-<p>int main(){ ios::sync_with_stdio(false); int n,q; cin&gt;&gt;n&gt;&gt;q;<br>    build(1,0,n);<br>    rep(i,0,q){<br>        int a,b,c;<br>        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;<br>        if(a==2){<br>            update(1,0,n,b-1,c);<br>        }else{<br>            _sum = 0;<br>            query(1,0,n,b-1,c);<br>            cout&lt;&lt;_sum&lt;&lt;endl;<br>        }<br>    }<br>    return 0;<br>}</p>
-<p>虽然是一道签到题，但对线段树的深入学习有一定帮助，这里先丢这。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/23/acm-icpc-2018-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E9%A2%84%E8%B5%9B-h-ryuji-doesnt-want-to-study/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -948,6 +940,8 @@
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
+	<script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279238870'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1279238870%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+	</script>
   </div>
 </footer>
     </div>
@@ -1025,7 +1019,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1033,11 +1031,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
+                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1049,7 +1047,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1057,7 +1055,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
+                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1065,15 +1063,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">老九学堂每日一题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">

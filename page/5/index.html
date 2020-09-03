@@ -156,6 +156,177 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算1-n间素数个数的方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/25/%E8%AE%A1%E7%AE%971-n%E9%97%B4%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/"> 计算1-n间素数个数的方法		</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/25/%E8%AE%A1%E7%AE%971-n%E9%97%B4%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2018-04-25T14:29:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>撰文动力依旧来源于每日一题。</p>
+<p>这里给3个计算1-n间所有素数的方法：</p>
+<p>#include <fstream><br>#include <iostream><br>#include <algorithm><br>#include <vector><br>using namespace std;  </p>
+<p>int main(){<br>    ofstream file_0(“1.txt”);<br>    ofstream file_1(“2.txt”);<br>    ofstream file_2(“3.txt”);<br>    int n,flag = 1;<br>    cin &gt;&gt; n;<br>    for(int i = 1;i &lt; n+1;i++)<br>    {<br>        for(int j = 2;j &lt; i;j++)<br>        {<br>            if(i%j == 0){<br>                flag = 0;<br>            break;<br>            }<br>        }<br>        if(flag)<br>            file_0 &lt;&lt; i &lt;&lt; endl;<br>        flag = 1;<br>    }<br>    file_0.close();<br>    for(int i = 1;i &lt; n+1;i++)<br>    {<br>        for(int j = 2;j*j &lt;= i;j++)<br>        {<br>            if(i%j == 0){<br>                flag = 0;<br>            break;<br>            }<br>        }<br>        if(flag)<br>        file_1 &lt;&lt; i &lt;&lt; endl;<br>        flag = 1;<br>    }<br>    file_1.close();<br>    vector<int> nums;<br>    nums.push_back(2);<br>    nums.push_back(3);<br>    nums.push_back(5);<br>    for(int i = 2;i &lt; n+1;i++)<br>    {<br>        for(unsigned j = 0;j &lt; nums.size();j++)<br>        {<br>            if(i%nums[j] == 0){<br>                flag = 0;<br>                break;<br>            }<br>        }<br>        if(flag)<br>        {<br>            file_2 &lt;&lt; i &lt;&lt; endl;<br>            nums.push_back(i);<br>        }<br>        flag = 1;<br>    }<br>    file_2.close();<br>    return 0;<br>}</p>
+<p>方法一是最基础的方法，穷举所有的可能。</p>
+<p>方法二在方法一的基础上进行了优化，对每个数的循环判断只进行到n^1/2即停止，大大优化了时间损耗。</p>
+<p>原理可以这么解释:假设数num为一个合数，num = i * j，当i &lt; n^1/2时，i  &lt; j；而i &gt; n^1/2时，i&gt;j，相当于i与j互换了位置。而此时若num不为素数，整数i与一定已找到，因此此时进行的操作皆为多余操作，可略去。</p>
+<p>方法三是笔者自己写的方法，通过自己发现的规律，大大减少了比对的次数。原以为能对方法二做出有效优化，结果发现运行时间并无较大差异。究其原因，应是对数据的存储花费了额外时间。但即便如此，对于一些需要多次查找区间内素数的情况，该方法依旧有其实用性。</p>
+<p>方法的核心在于只要整数num不为已有任意素数的倍数，num即可确定是素数，这样就能有效减少判断的次数。</p>
+<p>以下为法三完善后的代码:</p>
+<p>#include <fstream><br>#include <iostream><br>#include <algorithm><br>#include <vector><br>using namespace std;  </p>
+<p>int main(){<br>    int flag = 1,n = 0;<br>    string c;<br>    cin &gt;&gt; c;<br>    for(unsigned i = 0;i &lt; c.size();i++)<br>    {<br>        if(!isdigit(c.at(i))) //检查输入中是否含数字以外的字符<br>        {<br>            cout &lt;&lt; “输入非法。”;<br>            return 0;<br>        }<br>        n = 10*n + c.at(i)-48; //计算输入的数值<br>    }<br>    if(n &lt; 2){<br>    cout &lt;&lt; “该范围内无素数。”;<br>    return 0;<br>    }<br>    vector<int> nums; //存放所有素数的数组<br>    nums.push_back(2); //先放一个2<br>    for(int i = 2;i &lt; n+1;i++)<br>    {<br>        for(unsigned j = 0;j &lt; nums.size() &amp;&amp; nums[j]*nums[j] &lt;= i;j++)<br>        {<br>            if(i%nums[j] == 0) //数组内已有元素为i的因数，即不为素数<br>            {<br>                flag = 0;<br>                break;<br>            }<br>         }<br>        if(flag) //数组内无i的因数<br>        {<br>            nums.push_back(i); //添加该素数<br>        }<br>        flag = 1;<br>    }<br>    //迭代器输出<br>    for(vector<int>::iterator it = nums.begin();it != nums.end();++it)<br>    cout &lt;&lt; *it &lt;&lt; endl;<br>    return 0;<br>}</p>
+<p>相对之前的代码，添加了判定输入是否非法的功能。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数论</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/25/%E8%AE%A1%E7%AE%971-n%E9%97%B4%E7%B4%A0%E6%95%B0%E4%B8%AA%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-关于中文的输入输出操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%87%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%93%8D%E4%BD%9C/"> 关于中文的输入输出操作		</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/21/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%87%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  	<time datetime="2018-04-21T14:32:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前两天由于每日一题的原因，玩了会中文字符的输入与输出，从中我也体会到了对中文字符操作的繁琐程度。这里分享一下我的方法。</p>
+<p>首先我们要知道计算机存储一个中文字符不同于英文字符，它需要两个字节的空间。我通过测试，发现存储的形式是两个ASCII码，比如“，”字符，两位分别为-93，-84.测试的方式如下：</p>
+<p>int main(){<br>    char a[3];<br>    scanf(“%s”,a);//输入一个中文字符<br>    for(int i = 0;i &lt; 2;i++)<br>        printf(“%d”,a[i]);//打印每位字符的整形值<br>    return 0;<br>}</p>
+<p>C++的string也可以执行一样的操作，但打印时应注意需要强转为整形。</p>
+<p>类似的，我们可以通过一位一位赋值的方式，打印出中文字符。</p>
+<p>int main(){<br>    char a[3];<br>    a[0] = -93;<br>    a[1] = -84;//需对连续的两位赋值<br>    a[2] = ‘\0’;//补结束符<br>    printf(“%s”,a);<br>    return 0;<br>}</p>
+<p>这样就能打印出中文的逗号了。</p>
+<p>另外需要注意的是对字符串的赋值必须是要对连续的两个字符赋值，否则无法打印出正常的中文字符。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/21/%E5%85%B3%E4%BA%8E%E4%B8%AD%E6%96%87%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-wordpress搭建参考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -950,169 +1121,6 @@
 
 
   
-    <article id="post-蓝桥总结下一阶段规划" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/01/%E8%93%9D%E6%A1%A5%E6%80%BB%E7%BB%93%E4%B8%8B%E4%B8%80%E9%98%B6%E6%AE%B5%E8%A7%84%E5%88%92/"> 蓝桥总结&amp;下一阶段规划		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/01/%E8%93%9D%E6%A1%A5%E6%80%BB%E7%BB%93%E4%B8%8B%E4%B8%80%E9%98%B6%E6%AE%B5%E8%A7%84%E5%88%92/" class="archive-article-date">
-  	<time datetime="2018-04-01T08:18:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>12.45，完成最后一题的提交后，我长舒了一口气。终于可以暂时地抛开算法，放开手脚去学一些自己喜欢的东西了。 接触编程的时间不长。去年7月的时候我还对此一无所知，到现在不过也才8个月。8个月学到现在这个程度，也不知道属于什么水平。唯一明确的是，还远远不够。C会而不精，C++半途下车，C#只会皮毛，Java积累尚欠，安卓编程则是一窍不通。也不知道自己究竟学了些什么，变化的只有手指越来越快的敲击速度与日益增加的代码行。 现在想来，刚进大学时加入计协真是个无比明智的决定。在我看来，计协提供的不单单只是一个培训，更重要的是成员间的互相交流。独自摸索久了，相互交流则可以是很好的调剂。与走的远些的人交流，更能使自己少走弯路。有些纠结了很久而无果的问题，说不定别人那就有完善的方法，通过交流，很轻易就能解决。计协为我打开了一扇窗，使我看到了更多的东西，也学到了不少知识，同时还使我对自己的学习有了初步的规划。 去年11月中旬的校赛算是运气好，题目要求都没看清，用自学的C写了一堆半吊子代码传上去居然就得奖了，想来还要感谢评卷的老师。得奖后进了校队，可以说是搭上了省赛的车。那时，我还是个连暴搜都无法理解的小白，而现在我则可以算是对算法有一定了解的人了，想来也挺不容易。虽说从CF、计蒜客以及蓝桥官网上刷的那些题中所学的很多东西今天都没用到，但这些终归会积淀下来，用到时再拿出来。同时我也积累了一些比较有意思的题，明年可以拿给新生做做玩玩。 暴力杯果然是暴力杯。意料之中，十条写下来用到最多的就是循环。题目所给的数据范围基本都是万以内，跟CF上动辄10^10~20的数据范围根本不能比，很多题用暴力枚举都可以轻松解决。有些题也挺有意思的，当我把第二题最后一个字打印出来，看到那个“？”时真的是当场笑出来了。一套题做下来，发现自己基础的东西练的还是有所欠缺，很多操作函数用的还不熟练。好在已经结束了，现在可以先把它们放在一边了。 下一阶段的重心就放在Java/安卓编程上了，终于能学点比较好玩的东西了hhhh。六级也只剩两个多月了，不知道能考成什么shi样。C++的东西肯定是不会丢的，也许会写点小项目玩玩。再远些的话还没什么规划，也许搞点py学学？（笑。 至于蓝桥，今年只希望能回个本，明年就要认真对待了。 最后就贴一波扬大的图吧，校园还挺好看的。 <a href="http://www.ayews.com/wp-content/uploads/2018/04/psb.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/04/psb-300x225.jpg" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/04/psb-2.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/04/psb-2-300x225.jpg" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/04/psb-3.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/04/psb-3-300x225.jpg" alt=""></a> <a href="http://www.ayews.com/wp-content/uploads/2018/04/psb-4.jpg" target="_blank" rel="noopener"><img src="http://www.ayews.com/wp-content/uploads/2018/04/psb-4-300x225.jpg" alt=""></a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">阶段总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/01/%E8%93%9D%E6%A1%A5%E6%80%BB%E7%BB%93%E4%B8%8B%E4%B8%80%E9%98%B6%E6%AE%B5%E8%A7%84%E5%88%92/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-每日一题-3-30" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-30/"> 每日一题 3.30		</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-30/" class="archive-article-date">
-  	<time datetime="2018-03-30T13:42:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>随记生成指定范围内10个不重复的正整数。</p>
-<p>要求：</p>
-<p>1、语言不限；</p>
-<p>2、注释规范；</p>
-<p>3、提交可复制编译的代码或txt文件</p>
-<p>提交后群里@老九君即可</p>
-<p>提示： 需要用到的随机函数或方法，如果不清楚百度即可，使用还是相对简单，课程里也有讲解。</p>
-<p>源码(C实现):</p>
-<p>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt; //包含随机数生成函数<br>#include &lt;time.h&gt; //包含时间种子</p>
-<p>int isexist(int*,unsigned,int); //判定是否重复的函数,参数分别为数组名、已有元素个数-1、要判断的值<br>int main(){<br>srand(time(NULL)); //产生随机数<br>int a[10] = {-1}; //存储随机数的数组,用不可能取到的值”-1”初始化<br>int temp = -1; //存储随机数的中间变量<br>for(unsigned i = 0;i &lt; 10;i++) //产生10个不重复的随机正整数,范围为0-9<br>{<br>temp = rand()%10; //temp为0-9间的随机正整数,10为随机数区间限制,可更改以修改随机数范围<br>while(isexist(a,i,temp)) //若已存在,则重新取随机数,直至不重复<br>{<br>temp = rand()%10; //重新取随机数,随机性好,效率较低<br>//temp = ++temp%10; //在原随机数的基础上往下”跳”,效率较高,随机性差<br>}<br>a[i] = temp; //直到temp不重复,再放入数组<br>//printf(“%d “,a[i]+1); //用于查看每步打印的值<br>}<br>for(int i = 0;i &lt; 10;i++) //循环打印数组<br>printf(“%d “,a[i]+1); //根据题目要求,将每个元素+1再打印,以” “分隔<br>return 0;<br>}<br>int isexist(int* a,unsigned len,int temp)<br>{<br>//判重函数主体<br>for(unsigned i = 0;i &lt; len;i++) //遍历已存在的数组元素<br>{<br>if(a[i] == temp) //只要有一个相等,即返回真<br>return 1;<br>}<br>return 0; //无相等的元素,返回假<br>}</p>
-<p>关于随机数，老九学堂C语言基础课第24节有讲。链接:<a href="http://study.163.com/course/courseLearn.htm?courseId=1003425004#/learn/video?lessonId=1003935009&courseId=1003425004" target="_blank" rel="noopener">http://study.163.com/course/courseLearn.htm?courseId=1003425004#/learn/video?lessonId=1003935009&amp;courseId=1003425004</a></p>
-<p>针对非重复的要求，我封装了一个判重函数。若重复，则重新取随机数。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">老九学堂每日一题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/30/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98-3-30/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1133,6 +1141,8 @@
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
+	<script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279238870'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1279238870%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+	</script>
   </div>
 </footer>
     </div>
@@ -1210,7 +1220,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1218,11 +1232,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
+                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1234,7 +1248,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1242,7 +1256,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
+                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1250,15 +1264,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">老九学堂每日一题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -156,6 +156,154 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-用unique消除vector中的重复元素" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/03/%E7%94%A8unique%E6%B6%88%E9%99%A4vector%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/">用unique消除vector中的重复元素</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/03/%E7%94%A8unique%E6%B6%88%E9%99%A4vector%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" class="archive-article-date">
+  	<time datetime="2020-09-03T06:38:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/03/%E7%94%A8unique%E6%B6%88%E9%99%A4vector%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-AC自动机学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/31/AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">AC自动机学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/31/AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-08-31T07:53:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>8月的最后一天，还是完成了ac自动机的学习。在熟练掌握了kmp后，我发现ac自动机并没有想象的那么难，既不难理解，也不难实现，于是决定写点东西记录一下。<br>本篇主要谈谈ac自动机的理论，思想。</p>
+<h2 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h2><p>首先我们必须要明确一个问题，即ac自动机到底是干嘛的，我在查阅了许多文章与博客后发现他们并没有把这个问题阐释清楚，这里我解释一下。<br>我们知道，kmp算法可以在o(n)时间内进行对模式串的匹配工作，但kmp算法每次只能处理一个模式串，而ac自动机藉由字典树与fail指针(类似kmp中的next数组)，可以在o(n)时间内完成对若干模式串的匹配工作，包括检查是否存在、出现了几次等等。ac自动机有一个常见的应用，即文本词频统计。<br>想学习掌握ac自动机，必须先掌握字典树，即trie树，并理解kmp的核心思想。</p>
+<h2 id="1-字典树"><a href="#1-字典树" class="headerlink" title="1.字典树"></a>1.字典树</h2><p>字典树又称单词查找树，Trie树，是一种树形结构。典型应用是用于统计，排序和保存大量的字符串（且不仅限于字符串）。它的优点是：利用字符串的<strong>公共前缀</strong>来减少查询时间，最大限度地减少无谓的字符串比较，查询效率比哈希树高。<br>字典树的实现形式多样，用起来也很灵活，后面会给一个比较简单的板子。<br>字典树可以单独使用，也可以包含进其他复杂数据结构中。<br>在ac自动机中，我们先将需要查询的单词全部插入到字典树中，再借此构造fail指针，然后进行模式匹配。  </p>
+<h2 id="2-fail指针"><a href="#2-fail指针" class="headerlink" title="2.fail指针"></a>2.fail指针</h2><h3 id="2-1-作用"><a href="#2-1-作用" class="headerlink" title="2.1.作用"></a>2.1.作用</h3><p>我们知道，kmp的核心思想就是利用已经匹配过的部分，减少重复匹配工作，避免回溯，fail指针的作用也与此类似。如果当前点匹配失败，则将指针转移到fail指针所指向的地方继续进行匹配。fail指针依靠的是什么？是<strong>当前模式串后缀和fail指针指向的模式串部分前缀相同</strong>。是不是很像next数组？next数组的定义就是最长公共前后缀，而这里我们可以理解为当前模式串与fail指针指向的模式串的公共前后缀，而这个公共前后缀，就是我们通过fail指针可以<strong>避免重复匹配</strong>的部分,并且是<strong>最长</strong>的。这样，我们只要从头到尾遍历一遍匹配字符串，就能完成所有模式串的匹配工作(这里要注意的一点是字典树里是没有相同单词的，或者说相同单词我们通过前面代码里的cnt数组保存下来了)。</p>
+<h3 id="2-2实现"><a href="#2-2实现" class="headerlink" title="2.2实现"></a>2.2实现</h3><p>本篇不讲求fail指针的过程，因为有讲的更好的，大家可以移步<br><a href="https://bestsort.cn/2019/04/28/402/" target="_blank" rel="noopener">https://bestsort.cn/2019/04/28/402/</a><br>这篇文章配有大量图解，理解起来很方便。</p>
+<h2 id="3-模式匹配"><a href="#3-模式匹配" class="headerlink" title="3.模式匹配"></a>3.模式匹配</h2><p>匹配过程也与kmp类似。我们从匹配串的开头开始，将每个字符与字典树中的字符匹配，需要注意的是：  </p>
+<ol>
+<li>在单次匹配中，如果当前字符与字典树中的字符匹配成功，那么将答案加上字典树中在这个字符结尾的单词的数量。</li>
+<li>字典树中可能存在这样的单词，是当前模式串的后缀，因此我们还要通过fail指针找到它，将它出现的次数也统计上，直到fail指针指向根，或走到的节点已访问过。  </li>
+<li>在构建fail指针的过程中，如果当前节点不存在某个字母的儿子节点，我们会将其指向其fail指针所指向的位置。因此在单次匹配中若匹配失败，我们仍然可以顺着字典树继续匹配，实际上是完成了一次顺着fail指针转移的操作。</li>
+</ol>
+<h2 id="4-代码实现"><a href="#4-代码实现" class="headerlink" title="4.代码实现"></a>4.代码实现</h2><h3 id="4-1-字典树"><a href="#4-1-字典树" class="headerlink" title="4.1.字典树"></a>4.1.字典树</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ch[maxn][<span class="number">26</span>];<span class="comment">//字典树</span></span><br><span class="line"><span class="keyword">int</span> cnt[maxn];<span class="comment">//单词出现次数</span></span><br><span class="line"><span class="keyword">int</span> sz;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sz = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(ch[<span class="number">0</span>],<span class="number">0</span>,<span class="keyword">sizeof</span>(ch[<span class="number">0</span>]));</span><br><span class="line">    val[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    cnt[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">char</span> str[],<span class="keyword">int</span> len)</span><span class="comment">//插入字符串</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> u = <span class="number">0</span>;</span><br><span class="line">    per(i,<span class="number">0</span>,len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = str[i]-<span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span>(!ch[u][v])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memset</span>(ch[sz],<span class="number">0</span>,<span class="keyword">sizeof</span>(ch[sz]));</span><br><span class="line">            val[sz] = <span class="number">0</span>;    </span><br><span class="line">            cnt[sz] = <span class="number">0</span>;</span><br><span class="line">            ch[u][v] = sz++;</span><br><span class="line">        &#125;</span><br><span class="line">        u = ch[u][v];</span><br><span class="line">    &#125;</span><br><span class="line">    cnt[u]++;</span><br><span class="line">    <span class="comment">//在这里我们可以建立一个int-string的映射，以通过节点序号得知这个点是哪个单词的结尾</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findstr</span><span class="params">(<span class="keyword">char</span> str[],<span class="keyword">int</span> len)</span><span class="comment">//查找字符串</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> u = <span class="number">0</span>;</span><br><span class="line">    per(i,<span class="number">0</span>,len)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = str[i]-<span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span>(!ch[u][v])</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        u = ch[u][v];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt[u];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-构建fail指针"><a href="#4-2-构建fail指针" class="headerlink" title="4.2.构建fail指针"></a>4.2.构建fail指针</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fail[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getfail</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//所有模式串已插入完成</span></span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    per(i,<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ch[<span class="number">0</span>][i])</span><br><span class="line">        &#123;</span><br><span class="line">            fail[ch[<span class="number">0</span>][i]] = <span class="number">0</span>;</span><br><span class="line">            q.push(ch[<span class="number">0</span>][i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> now = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        per(i,<span class="number">0</span>,<span class="number">26</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(ch[now][i])</span><br><span class="line">            &#123;</span><br><span class="line">                fail[ch[now][i]] = ch[fail[now]][i];</span><br><span class="line">                q.push(ch[now][i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                ch[now][i] = ch[fail[now]][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-模式匹配"><a href="#4-3-模式匹配" class="headerlink" title="4.3.模式匹配"></a>4.3.模式匹配</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">char</span> str[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> now = <span class="number">0</span>,ans = <span class="number">0</span>;</span><br><span class="line">    per(i,<span class="number">0</span>,len)</span><br><span class="line">    &#123;</span><br><span class="line">        now = ch[now][str[i]-<span class="string">'a'</span>];</span><br><span class="line">        <span class="keyword">int</span> fa = now;</span><br><span class="line">        <span class="keyword">while</span>(j &amp;&amp; cnt[j]!=<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ans+=cnt[j];</span><br><span class="line">            cnt[j] = <span class="number">-1</span>;<span class="comment">//防止重复计算。这里可以将j映射到string，以具体统计每个模式串出现的次数。j即节点序号，模式串与其是一一对应的关系</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符串</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/31/AC%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Manacher学习小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -804,163 +952,6 @@
 
 
   
-    <article id="post-c中clock函数的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/"> C++中clock函数的使用		</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2019-05-01T16:55:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在学数据结构时正好看到了这个，顺带学了一下，这里做个整理。</p>
-<blockquote>
-<p>clock()是C/C++中的计时函数，而与其相关的数据类型是clock_t。在MSDN中，查得对clock函数定义如下：</p>
-<p>clock_t clock(void) ;</p>
-<p>简单而言，就是该程序从启动到函数调用占用CPU的时间。这个函数返回从“开启这个程序进程”到“程序中调用clock()函数”时之间的CPU时钟计时单元（clock tick）数，在MSDN中称之为挂钟时间（wal-clock）；若挂钟时间不可取，则返回-1。其中clock_t是用来保存时间的数据类型。（百度百科）</p>
-</blockquote>
-<p>需要指出的是这里的“挂钟时间”并不是真实时间，而是“时钟打点数”，而对于一个机器而言每秒的时钟打点数是一个常数，即CLK_TCK。下面我们看一下它具体的应用：</p>
-<p>#include <iostream><br>#include <ctime> //包含clock()函数<br>#include &lt;windows.h&gt;<br>using namespace std;</p>
-<p>int main()<br>{<br>    clock_t start,stop;                 //clock_t是clock()函数返回的变量类型<br>    start = clock();                    //开始计时<br>    Sleep(13300);                       //调用系统api，使程序休眠13.3秒<br>    stop = clock();                     //停止计时<br>    cout &lt;&lt; CLK_TCK &lt;&lt; endl;            //输出机器每秒时钟打点数<br>    cout &lt;&lt; 1.0*(stop-start)/CLK_TCK;   //输出两次clock()返回的差值(即函数调用时间)，注意转换成double型<br>    return 0;<br>}</p>
-<p>可以看出，程序将输出两次调用clock()中间花费的时间。通过这种方法我们可以评估不同函数的时间消耗，是个非常有效的办法。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/02/c%E4%B8%ADclock%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-中山大学程序设计竞赛的几道题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/"> 中山大学程序设计竞赛的几道题		</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-04-22T06:21:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>找到了水文章的机会。简单说一些 B <a href="http://acm.hdu.edu.cn/showproblem.php?pid=6512" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6512</a> <a href="https://paste.ubuntu.com/p/ZJWGCjNff6/" target="_blank" rel="noopener">https://paste.ubuntu.com/p/ZJWGCjNff6/</a> 晚点更新</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/22/%E4%B8%AD%E5%B1%B1%E5%A4%A7%E5%AD%A6%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E7%9A%84%E5%87%A0%E9%81%93%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -981,6 +972,8 @@
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
+	<script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279238870'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1279238870%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+	</script>
   </div>
 </footer>
     </div>
@@ -1058,7 +1051,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1066,11 +1063,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法题解</a>
+                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1082,7 +1079,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1090,7 +1087,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
+                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1098,15 +1095,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Just CA/AOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">老九学堂每日一题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
