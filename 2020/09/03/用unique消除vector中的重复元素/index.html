@@ -8,18 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>用unique消除vector中的重复元素 | Ayews&#39; blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="菜鸡">
+  <meta name="description" content="类属性算法unique的作用是从输入序列中“删除”所有相邻的重复元素。 该算法删除相邻的重复元素，然后重新排列输入范围内的元素，并且返回一个迭代器（容器的长度没变，只是元素顺序改变了），表示无重复的值范围得结束。 在STL中unique函数是一个去重函数， unique的功能是去除相邻的重复元素(只保留一个),其实它并不真正把重复的元素删除，是把重复的元素移到后面去了，然后依然保存到了原数组中，然">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用unique消除vector中的重复元素">
 <meta property="og:url" content="http://yoursite.com/2020/09/03/%E7%94%A8unique%E6%B6%88%E9%99%A4vector%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/index.html">
 <meta property="og:site_name" content="Ayews&#39; blog">
-<meta property="og:description" content="菜鸡">
+<meta property="og:description" content="类属性算法unique的作用是从输入序列中“删除”所有相邻的重复元素。 该算法删除相邻的重复元素，然后重新排列输入范围内的元素，并且返回一个迭代器（容器的长度没变，只是元素顺序改变了），表示无重复的值范围得结束。 在STL中unique函数是一个去重函数， unique的功能是去除相邻的重复元素(只保留一个),其实它并不真正把重复的元素删除，是把重复的元素移到后面去了，然后依然保存到了原数组中，然">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-03T06:38:30.000Z">
-<meta property="article:modified_time" content="2020-09-03T06:39:19.577Z">
+<meta property="article:modified_time" content="2020-09-03T07:04:03.290Z">
 <meta property="article:author" content="Ayews">
 <meta property="article:tag" content="ACM">
-<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Ayews&#39; blog" type="application/atom+xml">
@@ -176,7 +175,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>类属性算法unique的作用是从输入序列中“删除”所有相邻的重复元素。</p>
+<p>该算法删除相邻的重复元素，然后重新排列输入范围内的元素，并且返回一个迭代器（容器的长度没变，只是元素顺序改变了），表示无重复的值范围得结束。</p>
+<p>在STL中unique函数是一个去重函数， unique的功能是去除相邻的重复元素(只保留一个),其实它并不真正把重复的元素删除，是把重复的元素移到后面去了，然后依然保存到了原数组中，然后 返回去重后最后一个元素的地址，因为unique去除的是相邻的重复元素，所以一般用之前都会要排一下序。</p>
+<p>实例:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>);</span><br><span class="line">v.push_back(<span class="number">2</span>);</span><br><span class="line">v.push_back(<span class="number">3</span>);</span><br><span class="line">v.push_back(<span class="number">1</span>);</span><br><span class="line">v.push_back(<span class="number">2</span>);</span><br><span class="line">v.push_back(<span class="number">3</span>);</span><br><span class="line">sort(v.begin(),v.end());</span><br><span class="line">v.resize(unique(v.begin(),v.end())-v.begin());</span><br><span class="line">per(i,<span class="number">0</span>,v.size())<span class="built_in">cout</span> &lt;&lt; v[i] &lt;&lt; <span class="string">' '</span>;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -215,6 +218,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -409,6 +423,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
@@ -417,7 +435,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">技术随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">数论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -425,11 +443,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阶段总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数论</a>
+                <a href="javascript:void(0)" class="js-tag color5">技术随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -437,11 +451,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
+                <a href="javascript:void(0)" class="js-tag color4">未分类</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">未分类</a>
+                <a href="javascript:void(0)" class="js-tag color4">dijkstra</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -453,15 +467,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">老九学堂每日一题</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">深度优先搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ACM</a>
               </li>
             
             <div class="clearfix"></div>
